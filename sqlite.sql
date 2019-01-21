@@ -10,11 +10,12 @@ CREATE TABLE "Variables" (
 );
 INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (1,1,'SmtpServer','SMTP server','test',1);
 INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (2,1,'SmtpPort','SMTP port','25',2);
-INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (3,1,'SmtpLogin','SMTP login','test',3);
-INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (4,1,'SmtpPassword','SMTP password','test',4);
-INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (5,1,'SmtpSenderEmail','SMTP sender email','test',5);
-INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (6,1,'SmtpSenderName','SMTP sender name','test',6);
-INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (7,2,'SpecifyCultureInUrl','Specify culture in URL','yes',1);
+INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (3,1,'SmtpUseSsl','SMTP use SSL','no',3);
+INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (4,1,'SmtpLogin','SMTP login','test',4);
+INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (5,1,'SmtpPassword','SMTP password','test',5);
+INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (6,1,'SmtpSenderEmail','SMTP sender email','test',6);
+INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (7,1,'SmtpSenderName','SMTP sender name','test',7);
+INSERT INTO `Variables` (Id,ConfigurationId,Code,Name,Value,Position) VALUES (8,2,'SpecifyCultureInUrl','Specify culture in URL','yes',1);
 CREATE TABLE "Users" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_User" PRIMARY KEY AUTOINCREMENT,
 	"Name" TEXT NOT NULL,
@@ -38,6 +39,25 @@ CREATE TABLE "Tabs" (
 	CONSTRAINT "FK_Tab_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes" ("Id")
 );
 INSERT INTO `Tabs` (Id,ClassId,Name,Position) VALUES (1,1,'SEO',100);
+CREATE TABLE "SerializedProducts" (
+	"CultureId" INTEGER NOT NULL,
+	"ProductId" INTEGER NOT NULL,
+	"CategoryId" INTEGER NOT NULL,
+	"Url" TEXT NOT NULL,
+	"Code" TEXT NOT NULL,
+	"Name" TEXT NOT NULL,
+	"Description" TEXT,
+	"Price" REAL NOT NULL,
+	"Title" TEXT,
+	"MetaDescription" TEXT,
+	"MetaKeywords" TEXT,
+	"SerializedAttributes" TEXT,
+	"SerializedPhotos" TEXT,
+	CONSTRAINT "PK_SerializedProduct" PRIMARY KEY("CultureId","ProductId"),
+	CONSTRAINT "FK_SerializedProduct_Culture_CultureId" FOREIGN KEY("CultureId") REFERENCES "Cultures"("Id"),
+	CONSTRAINT "FK_SerializedProduct_Product_ProductId" FOREIGN KEY("ProductId") REFERENCES "Products"("Id"),
+	CONSTRAINT "FK_SerializedProduct_Category_CategoryId" FOREIGN KEY("CategoryId") REFERENCES "Categories"("Id")
+);
 CREATE TABLE "SerializedObjects" (
 	"CultureId" INTEGER NOT NULL,
 	"ObjectId" INTEGER NOT NULL,
@@ -75,14 +95,15 @@ CREATE TABLE "SerializedForms" (
 	"FormId" INTEGER NOT NULL,
 	"Code" TEXT NOT NULL,
 	"Name" TEXT NOT NULL,
+	"SubmitButtonTitle" TEXT NOT NULL,
 	"SerializedFields" TEXT,
 	CONSTRAINT "PK_SerializedForm" PRIMARY KEY("CultureId","FormId"),
 	CONSTRAINT "FK_SerializedForm_Culture_CultureId" FOREIGN KEY("CultureId") REFERENCES "Cultures"("Id"),
 	CONSTRAINT "FK_SerializedForm_Form_FormId" FOREIGN KEY("FormId") REFERENCES "Forms"("Id")
 );
-INSERT INTO `SerializedForms` (CultureId,FormId,Code,Name,SerializedFields) VALUES (2,1,'Feedback','Feedback','[{"FieldId":1,"FieldTypeCode":"TextBox","Code":"Name","Name":"Your name","IsRequired":true,"MaxLength":null,"Position":10,"SerializedFieldOptions":null},{"FieldId":2,"FieldTypeCode":"TextBox","Code":"Email","Name":"Your email","IsRequired":true,"MaxLength":null,"Position":20,"SerializedFieldOptions":null},{"FieldId":3,"FieldTypeCode":"TextArea","Code":"Message","Name":"Your message","IsRequired":true,"MaxLength":null,"Position":30,"SerializedFieldOptions":null}]');
-INSERT INTO `SerializedForms` (CultureId,FormId,Code,Name,SerializedFields) VALUES (3,1,'Feedback','Обратная связь','[{"FieldId":1,"FieldTypeCode":"TextBox","Code":"Name","Name":"Ваше имя","IsRequired":true,"MaxLength":null,"Position":10,"SerializedFieldOptions":null},{"FieldId":2,"FieldTypeCode":"TextBox","Code":"Email","Name":"Ваша электронная почта","IsRequired":true,"MaxLength":null,"Position":20,"SerializedFieldOptions":null},{"FieldId":3,"FieldTypeCode":"TextArea","Code":"Message","Name":"Ваше сообщение","IsRequired":true,"MaxLength":null,"Position":30,"SerializedFieldOptions":null}]');
-INSERT INTO `SerializedForms` (CultureId,FormId,Code,Name,SerializedFields) VALUES (4,1,'Feedback','Зворотний зв’язок','[{"FieldId":1,"FieldTypeCode":"TextBox","Code":"Name","Name":"Ваше ім’я","IsRequired":true,"MaxLength":null,"Position":10,"SerializedFieldOptions":null},{"FieldId":2,"FieldTypeCode":"TextBox","Code":"Email","Name":"Ваша електронна пошта","IsRequired":true,"MaxLength":null,"Position":20,"SerializedFieldOptions":null},{"FieldId":3,"FieldTypeCode":"TextArea","Code":"Message","Name":"Ваше повідомлення","IsRequired":true,"MaxLength":null,"Position":30,"SerializedFieldOptions":null}]');
+INSERT INTO `SerializedForms` (CultureId,FormId,Code,Name,SubmitButtonTitle,SerializedFields) VALUES (2,1,'Feedback','Feedback','Submit','[{"FieldId":1,"FieldTypeCode":"TextBox","Code":"Name","Name":"Your name","IsRequired":true,"MaxLength":null,"Position":10,"SerializedFieldOptions":null},{"FieldId":2,"FieldTypeCode":"TextBox","Code":"Email","Name":"Your email","IsRequired":true,"MaxLength":null,"Position":20,"SerializedFieldOptions":null},{"FieldId":3,"FieldTypeCode":"TextArea","Code":"Message","Name":"Your message","IsRequired":true,"MaxLength":null,"Position":30,"SerializedFieldOptions":null}]');
+INSERT INTO `SerializedForms` (CultureId,FormId,Code,Name,SubmitButtonTitle,SerializedFields) VALUES (3,1,'Feedback','Обратная связь','Отправить','[{"FieldId":1,"FieldTypeCode":"TextBox","Code":"Name","Name":"Ваше имя","IsRequired":true,"MaxLength":null,"Position":10,"SerializedFieldOptions":null},{"FieldId":2,"FieldTypeCode":"TextBox","Code":"Email","Name":"Ваша электронная почта","IsRequired":true,"MaxLength":null,"Position":20,"SerializedFieldOptions":null},{"FieldId":3,"FieldTypeCode":"TextArea","Code":"Message","Name":"Ваше сообщение","IsRequired":true,"MaxLength":null,"Position":30,"SerializedFieldOptions":null}]');
+INSERT INTO `SerializedForms` (CultureId,FormId,Code,Name,SubmitButtonTitle,SerializedFields) VALUES (4,1,'Feedback','Зворотний зв’язок','Надіслати','[{"FieldId":1,"FieldTypeCode":"TextBox","Code":"Name","Name":"Ваше ім’я","IsRequired":true,"MaxLength":null,"Position":10,"SerializedFieldOptions":null},{"FieldId":2,"FieldTypeCode":"TextBox","Code":"Email","Name":"Ваша електронна пошта","IsRequired":true,"MaxLength":null,"Position":20,"SerializedFieldOptions":null},{"FieldId":3,"FieldTypeCode":"TextArea","Code":"Message","Name":"Ваше повідомлення","IsRequired":true,"MaxLength":null,"Position":30,"SerializedFieldOptions":null}]');
 CREATE TABLE "Roles" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_Role" PRIMARY KEY AUTOINCREMENT,
 	"Code" TEXT NOT NULL,
@@ -126,21 +147,21 @@ CREATE TABLE "Properties" (
 	CONSTRAINT "FK_Property_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id"),
 	CONSTRAINT "FK_Property_Dictionary_StringValueId" FOREIGN KEY("StringValueId") REFERENCES "Dictionaries"("Id")
 );
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (1,1,1,NULL,NULL,9,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (2,1,2,NULL,NULL,10,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (3,1,3,NULL,NULL,11,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (4,1,4,NULL,NULL,12,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (5,1,5,NULL,NULL,13,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (6,2,1,NULL,NULL,14,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (7,2,2,NULL,NULL,15,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (8,2,3,NULL,NULL,16,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (9,2,4,NULL,NULL,17,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (10,2,5,NULL,NULL,18,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (11,3,1,NULL,NULL,19,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (12,3,2,NULL,NULL,20,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (13,3,3,NULL,NULL,21,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (14,3,4,NULL,NULL,22,NULL);
-INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (15,3,5,NULL,NULL,23,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (1,1,1,NULL,NULL,10,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (2,1,2,NULL,NULL,11,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (3,1,3,NULL,NULL,12,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (4,1,4,NULL,NULL,13,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (5,1,5,NULL,NULL,14,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (6,2,1,NULL,NULL,15,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (7,2,2,NULL,NULL,16,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (8,2,3,NULL,NULL,17,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (9,2,4,NULL,NULL,18,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (10,2,5,NULL,NULL,19,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (11,3,1,NULL,NULL,20,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (12,3,2,NULL,NULL,21,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (13,3,3,NULL,NULL,22,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (14,3,4,NULL,NULL,23,NULL);
+INSERT INTO `Properties` (Id,ObjectId,MemberId,IntegerValue,DecimalValue,StringValueId,DateTimeValue) VALUES (15,3,5,NULL,NULL,24,NULL);
 CREATE TABLE "Products" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_Product" PRIMARY KEY AUTOINCREMENT,
 	"CategoryId" INTEGER NOT NULL,
@@ -148,7 +169,7 @@ CREATE TABLE "Products" (
 	"Code" TEXT NOT NULL,
 	"NameId" INTEGER NOT NULL,
 	"DescriptionId" INTEGER NOT NULL,
-	"Price" REAL,
+	"Price" REAL NOT NULL,
 	"TitleId" INTEGER NOT NULL,
 	"MetaDescriptionId" INTEGER NOT NULL,
 	"MetaKeywordsId" INTEGER NOT NULL,
@@ -158,6 +179,13 @@ CREATE TABLE "Products" (
 	CONSTRAINT "FK_Product_Dictionary_TitleId" FOREIGN KEY("TitleId") REFERENCES "Dictionaries" ("Id"),
 	CONSTRAINT "FK_Product_Dictionary_MetaDescriptionId" FOREIGN KEY("MetaDescriptionId") REFERENCES "Dictionaries" ("Id"),
 	CONSTRAINT "FK_Product_Dictionary_MetaKeywordsId" FOREIGN KEY("MetaKeywordsId") REFERENCES "Dictionaries" ("Id")
+);
+CREATE TABLE "ProductAttributes" (
+	"ProductId" INTEGER NOT NULL,
+	"AttributeId" INTEGER NOT NULL,
+	CONSTRAINT "PK_ProductAttribute" PRIMARY KEY ("ProductId", "AttributeId"),
+	CONSTRAINT "FK_ProductAttribute_Product_ProductId" FOREIGN KEY ("ProductId") REFERENCES "Products" ("Id"),
+	CONSTRAINT "FK_ProductAttribute_Attribute_AttributeId" FOREIGN KEY ("AttributeId") REFERENCES "Attributes" ("Id")
 );
 CREATE TABLE "Positions" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_Position" PRIMARY KEY AUTOINCREMENT,
@@ -312,64 +340,69 @@ INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (12,4,4,'К
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (13,5,2,'Feedback');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (14,5,3,'Обратная связь');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (15,5,4,'Зворотний зв’язок');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (16,6,2,'Your name');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (17,6,3,'Ваше имя');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (18,6,4,'Ваше ім’я');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (19,7,2,'Your email');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (20,7,3,'Ваша электронная почта');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (21,7,4,'Ваша електронна пошта');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (22,8,2,'Your message');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (23,8,3,'Ваше сообщение');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (24,8,4,'Ваше повідомлення');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (25,9,1,'/');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (26,10,2,'<h1>Your Personal Website</h1><p>Hello! This is your personal website, it is based on the <a href="http://platformus.net/" target="_blank" rel="noopener">Platformus</a> content management system. You can manage it (create pages, menu items, forms and so on) using the <a href="/backend">backend</a>. Please use the username and password specified during the installation to sign in (it is &ldquo;admin@platformus.net&rdquo; and &ldquo;admin&rdquo; by default).</p><p>Please use the <a href="http://docs.platformus.net/" target="_blank" rel="noopener">documentation</a> to learn more about Platformus and how to use it. There are several examples that could be useful for the beginners. Also, you can get help in our <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">chat</a>.</p><p>Have a nice work!</p>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (27,10,3,'<h1>Ваш персональный веб-сайт</h1><p>Здравствуйте! Это ваш персональный веб-сайт, он работает на базе системы управления содержимым &laquo;<a href="http://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Вы можете управлять им (создавать страницы, элементы меню, формы и так далее) с помощью <a href="/backend">бекенда</a>. Для входа используйте, пожалуйста, имя пользователя и пароль, указанные при установке (по умолчанию это &laquo;admin@platformus.net&raquo; и &laquo;admin&raquo; соответственно).</p><p>Чтобы узнать больше о Платформусе и о том, как им пользоваться, пожалуйста, воспользуйтесь <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацией</a>, там есть несколько примеров, которые пригодятся начинающим. При возникновении сложностей или вопросов вы можете обратиться в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, где вам обязательно помогут.</p><p>Приятной работы!</p>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (28,10,4,'<h1>Ваш персональний веб-сайт</h1><p>Вітаємо! Це ваш персональний веб-сайт, він працює на базі системи керування вмістом &laquo;<a href="http://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Ви можете керувати ним (створювати сторінки, елементи меню, форми і так далі) за допомогою <a href="/backend">бекенду</a>. Для входу використовуйте, будь ласка, ім&rsquo;я користувача і пароль, вказані під час установки (за замовчуванням це &laquo;admin@platformus.net&raquo; і &laquo;admin&raquo; відповідно).</p><p>Щоб дізнатися більше про Платформус і про те, як ним користуватися, будь ласка, скористайтеся <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацією</a>, там є декілька прикладів, що стануть у нагоді початківцям. При виникненні труднощів або питань ви можете звернутися в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, де вам обов&rsquo;язково допоможуть.</p><p>Приємної роботи!</p>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (29,11,2,'Your Personal Website');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (30,11,3,'Ваш персональный веб-сайт');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (31,11,4,'Ваш персональний веб-сайт');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (32,12,2,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (33,12,3,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (34,12,4,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (16,6,2,'Submit');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (17,6,3,'Отправить');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (18,6,4,'Надіслати');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (19,7,2,'Your name');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (20,7,3,'Ваше имя');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (21,7,4,'Ваше ім’я');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (22,8,2,'Your email');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (23,8,3,'Ваша электронная почта');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (24,8,4,'Ваша електронна пошта');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (25,9,2,'Your message');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (26,9,3,'Ваше сообщение');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (27,9,4,'Ваше повідомлення');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (28,10,1,'/');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (29,11,2,'<h1>Your Personal Website</h1><p>Hello! This is your personal website, it is based on the <a href="http://platformus.net/" target="_blank" rel="noopener">Platformus</a> content management system. You can manage it (create pages, menu items, forms and so on) using the <a href="/backend">backend</a>. Please use the username and password specified during the installation to sign in (it is &ldquo;admin@platformus.net&rdquo; and &ldquo;admin&rdquo; by default).</p><p>Please use the <a href="http://docs.platformus.net/" target="_blank" rel="noopener">documentation</a> to learn more about Platformus and how to use it. There are several examples that could be useful for the beginners. Also, you can get help in our <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">chat</a>.</p><p>Have a nice work!</p>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (30,11,3,'<h1>Ваш персональный веб-сайт</h1><p>Здравствуйте! Это ваш персональный веб-сайт, он работает на базе системы управления содержимым &laquo;<a href="http://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Вы можете управлять им (создавать страницы, элементы меню, формы и так далее) с помощью <a href="/backend">бекенда</a>. Для входа используйте, пожалуйста, имя пользователя и пароль, указанные при установке (по умолчанию это &laquo;admin@platformus.net&raquo; и &laquo;admin&raquo; соответственно).</p><p>Чтобы узнать больше о Платформусе и о том, как им пользоваться, пожалуйста, воспользуйтесь <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацией</a>, там есть несколько примеров, которые пригодятся начинающим. При возникновении сложностей или вопросов вы можете обратиться в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, где вам обязательно помогут.</p><p>Приятной работы!</p>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (31,11,4,'<h1>Ваш персональний веб-сайт</h1><p>Вітаємо! Це ваш персональний веб-сайт, він працює на базі системи керування вмістом &laquo;<a href="http://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Ви можете керувати ним (створювати сторінки, елементи меню, форми і так далі) за допомогою <a href="/backend">бекенду</a>. Для входу використовуйте, будь ласка, ім&rsquo;я користувача і пароль, вказані під час установки (за замовчуванням це &laquo;admin@platformus.net&raquo; і &laquo;admin&raquo; відповідно).</p><p>Щоб дізнатися більше про Платформус і про те, як ним користуватися, будь ласка, скористайтеся <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацією</a>, там є декілька прикладів, що стануть у нагоді початківцям. При виникненні труднощів або питань ви можете звернутися в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, де вам обов&rsquo;язково допоможуть.</p><p>Приємної роботи!</p>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (32,12,2,'Your Personal Website');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (33,12,3,'Ваш персональный веб-сайт');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (34,12,4,'Ваш персональний веб-сайт');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (35,13,2,'');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (36,13,3,'');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (37,13,4,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (38,14,1,'/about-me');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (39,15,2,'<h1>About Me</h1><p>Tell us about yourself in a few words. You can add photos or videos here.</p>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (40,15,3,'<h1>Обо мне</h1><p>Расскажите о себе в нескольких словах. Вы можете добавить сюда фотографии или видео.</p>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (41,15,4,'<h1>Про мене</h1><p>Розкажіть про себе в кількох словах. Ви можете додати сюди фотографії або відео.</p>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (42,16,2,'About Me');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (43,16,3,'Обо мне');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (44,16,4,'Про мене');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (45,17,2,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (46,17,3,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (47,17,4,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (38,14,2,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (39,14,3,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (40,14,4,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (41,15,1,'/about-me');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (42,16,2,'<h1>About Me</h1><p>Tell us about yourself in a few words. You can add photos or videos here.</p>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (43,16,3,'<h1>Обо мне</h1><p>Расскажите о себе в нескольких словах. Вы можете добавить сюда фотографии или видео.</p>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (44,16,4,'<h1>Про мене</h1><p>Розкажіть про себе в кількох словах. Ви можете додати сюди фотографії або відео.</p>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (45,17,2,'About Me');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (46,17,3,'Обо мне');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (47,17,4,'Про мене');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (48,18,2,'');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (49,18,3,'');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (50,18,4,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (51,19,1,'/contacts');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (52,20,2,'<h1>Contacts</h1><p>Add your contacts on this page. Phone number, messengers, social links. The feedback form below (by the way, you can edit or move it to a different place) allows your visitors to write you directly from the website, just don&rsquo;t forget to specify the email address for the messages.</p><h2>Feedback from</h2>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (53,20,3,'<h1>Контакты</h1><p>Добавьте свои контакты на этой странице. Телефонный номер, мессенджеры, ссылки на социальные сети. Форма обратной связи, расположенная ниже (кстати, вы можете ее изменить или перенести в другое место), поможет посетителям написать вам сообщение прямо с сайта, лишь укажите для этого адрес, на который нужно присылать сообщения.</p><h2>Форма обратной связи</h2>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (54,20,4,'<h1>Контакти</h1><p>Додайте свої контакти на цій сторінці. Номер телефону, месенджери, посилання на соціальні мережі. Форма зворотного зв&rsquo;язку, розташована нижче (до речі, ви можете її змінити або перенести в інше місце), допоможе відвідувачам написати вам повідомлення прямо з сайту, лише вкажіть для цього адресу, на яку потрібно надсилати повідомлення.</p><h2>Форма зворотного зв&rsquo;язку</h2>');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (55,21,2,'Contacts');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (56,21,3,'Контакты');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (57,21,4,'Контакти');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (58,22,2,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (59,22,3,'');
-INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (60,22,4,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (51,19,2,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (52,19,3,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (53,19,4,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (54,20,1,'/contacts');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (55,21,2,'<h1>Contacts</h1><p>Add your contacts on this page. Phone number, messengers, social links. The feedback form below (by the way, you can edit or move it to a different place) allows your visitors to write you directly from the website, just don&rsquo;t forget to specify the email address for the messages.</p><h2>Feedback from</h2>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (56,21,3,'<h1>Контакты</h1><p>Добавьте свои контакты на этой странице. Телефонный номер, мессенджеры, ссылки на социальные сети. Форма обратной связи, расположенная ниже (кстати, вы можете ее изменить или перенести в другое место), поможет посетителям написать вам сообщение прямо с сайта, лишь укажите для этого адрес, на который нужно присылать сообщения.</p><h2>Форма обратной связи</h2>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (57,21,4,'<h1>Контакти</h1><p>Додайте свої контакти на цій сторінці. Номер телефону, месенджери, посилання на соціальні мережі. Форма зворотного зв&rsquo;язку, розташована нижче (до речі, ви можете її змінити або перенести в інше місце), допоможе відвідувачам написати вам повідомлення прямо з сайту, лише вкажіть для цього адресу, на яку потрібно надсилати повідомлення.</p><h2>Форма зворотного зв&rsquo;язку</h2>');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (58,22,2,'Contacts');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (59,22,3,'Контакты');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (60,22,4,'Контакти');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (61,23,2,'');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (62,23,3,'');
 INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (63,23,4,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (64,24,2,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (65,24,3,'');
+INSERT INTO `Localizations` (Id,DictionaryId,CultureId,Value) VALUES (66,24,4,'');
 CREATE TABLE "Forms" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_Form" PRIMARY KEY AUTOINCREMENT,
 	"Code" TEXT NOT NULL,
 	"NameId" INTEGER NOT NULL,
+	"SubmitButtonTitleId" INTEGER NOT NULL,
 	"ProduceCompletedForms" INTEGER NOT NULL,
 	"CSharpClassName" TEXT NOT NULL,
 	"Parameters" TEXT,
-	CONSTRAINT "FK_Form_Dictionary_NameId" FOREIGN KEY ("NameId") REFERENCES "Dictionaries" ("Id")
+	CONSTRAINT "FK_Form_Dictionary_NameId" FOREIGN KEY ("NameId") REFERENCES "Dictionaries" ("Id"),
+	CONSTRAINT "FK_Form_Dictionary_SubmitButtonTitleId" FOREIGN KEY ("SubmitButtonTitleId") REFERENCES "Dictionaries" ("Id")
 );
-INSERT INTO `Forms` (Id,Code,NameId,ProduceCompletedForms,CSharpClassName,Parameters) VALUES (1,'Feedback',5,1,'Platformus.Forms.Frontend.FormHandlers.EmailFormHandler','RecipientEmails=test@test.com;RedirectUrl=/contacts');
+INSERT INTO `Forms` (Id,Code,NameId,SubmitButtonTitleId,ProduceCompletedForms,CSharpClassName,Parameters) VALUES (1,'Feedback',5,6,1,'Platformus.Forms.Frontend.FormHandlers.EmailFormHandler','RecipientEmails=test@test.com;RedirectUrl=/contacts');
 CREATE TABLE "Files" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_File" PRIMARY KEY AUTOINCREMENT,
 	"Name" TEXT NOT NULL,
@@ -388,9 +421,9 @@ CREATE TABLE "Fields" (
 	CONSTRAINT "FK_Field_FieldType_FieldTypeId" FOREIGN KEY ("FieldTypeId") REFERENCES "FieldTypes" ("Id"),
 	CONSTRAINT "FK_Field_Dictionary_NameId" FOREIGN KEY ("NameId") REFERENCES "Dictionaries" ("Id")
 );
-INSERT INTO `Fields` (Id,FormId,FieldTypeId,Code,NameId,IsRequired,MaxLength,Position) VALUES (1,1,1,'Name',6,1,NULL,10);
-INSERT INTO `Fields` (Id,FormId,FieldTypeId,Code,NameId,IsRequired,MaxLength,Position) VALUES (2,1,1,'Email',7,1,NULL,20);
-INSERT INTO `Fields` (Id,FormId,FieldTypeId,Code,NameId,IsRequired,MaxLength,Position) VALUES (3,1,2,'Message',8,1,NULL,30);
+INSERT INTO `Fields` (Id,FormId,FieldTypeId,Code,NameId,IsRequired,MaxLength,Position) VALUES (1,1,1,'Name',7,1,NULL,10);
+INSERT INTO `Fields` (Id,FormId,FieldTypeId,Code,NameId,IsRequired,MaxLength,Position) VALUES (2,1,1,'Email',8,1,NULL,20);
+INSERT INTO `Fields` (Id,FormId,FieldTypeId,Code,NameId,IsRequired,MaxLength,Position) VALUES (3,1,2,'Message',9,1,NULL,30);
 CREATE TABLE "FieldTypes" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_FieldType" PRIMARY KEY AUTOINCREMENT,
 	"Code" TEXT NOT NULL,
@@ -410,6 +443,13 @@ CREATE TABLE "FieldOptions" (
 	"Position" INTEGER,
 	CONSTRAINT "FK_FieldOption_Field_FieldId" FOREIGN KEY ("FieldId") REFERENCES "Fields" ("Id"),
 	CONSTRAINT "FK_FieldOption_Dictionary_ValueId" FOREIGN KEY ("ValueId") REFERENCES "Dictionaries" ("Id")
+);
+CREATE TABLE "Features" (
+	"Id" INTEGER NOT NULL CONSTRAINT "PK_Feature" PRIMARY KEY AUTOINCREMENT,
+	"Code" TEXT NOT NULL,
+	"NameId" INTEGER NOT NULL,
+	"Position" INTEGER,
+	CONSTRAINT "FK_Feature_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries" ("Id")
 );
 CREATE TABLE "Endpoints" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_Endpoint" PRIMARY KEY AUTOINCREMENT,
@@ -456,6 +496,7 @@ INSERT INTO `Dictionaries` (Id) VALUES (20);
 INSERT INTO `Dictionaries` (Id) VALUES (21);
 INSERT INTO `Dictionaries` (Id) VALUES (22);
 INSERT INTO `Dictionaries` (Id) VALUES (23);
+INSERT INTO `Dictionaries` (Id) VALUES (24);
 CREATE TABLE "DeliveryMethods" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_DeliveryMethod" PRIMARY KEY AUTOINCREMENT,
 	"Code" TEXT NOT NULL,
@@ -476,8 +517,9 @@ INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Posit
 INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (4,'integer','integerNumber','Integer number',4);
 INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (5,'decimal','decimalNumber','Decimal number',5);
 INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (6,'integer','booleanFlag','Boolean flag',6);
-INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (7,'string','image','Image',7);
-INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (8,'datetime','date','Date',8);
+INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (7,'datetime','date','Date',7);
+INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (8,'string','image','Image',8);
+INSERT INTO `DataTypes` (Id,StorageDataType,JavaScriptEditorClassName,Name,Position) VALUES (9,'string','sourceCode','Source code',9);
 CREATE TABLE "DataTypeParameters" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_DataTypeParameter" PRIMARY KEY AUTOINCREMENT,
 	"DataTypeId" INT NOT NULL,
@@ -490,9 +532,10 @@ INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,N
 INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (2,1,'numericTextBox','MaxLength','Max length');
 INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (3,2,'checkbox','IsRequired','Is required');
 INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (4,2,'numericTextBox','MaxLength','Max length');
-INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (5,7,'numericTextBox','Width','Width');
-INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (6,7,'numericTextBox','Height','Height');
-INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (7,8,'checkbox','IsRequired','Is required');
+INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (5,7,'checkbox','IsRequired','Is required');
+INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (6,8,'numericTextBox','Width','Width');
+INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (7,8,'numericTextBox','Height','Height');
+INSERT INTO `DataTypeParameters` (Id,DataTypeId,JavaScriptEditorClassName,Code,Name) VALUES (8,9,'textBox','Mode','Mode');
 CREATE TABLE "DataTypeParameterValues" (
 	"Id" INTEGER NOT NULL CONSTRAINT "PK_DataTypeParameterValue" PRIMARY KEY AUTOINCREMENT,
 	"DataTypeParameterId" INT NOT NULL,
@@ -606,5 +649,13 @@ CREATE TABLE "Carts" (
 	"ClientSideId" TEXT NOT NULL,
 	"Created" TEXT NOT NULL,
 	CONSTRAINT "FK_Cart_Order_OrderId" FOREIGN KEY("OrderId") REFERENCES "Orders" ("Id")
+);
+CREATE TABLE "Attributes" (
+	"Id" INTEGER NOT NULL CONSTRAINT "PK_Attribute" PRIMARY KEY AUTOINCREMENT,
+	"FeatureId" INTEGER NOT NULL,
+	"ValueId" INTEGER NOT NULL,
+	"Position" INTEGER,
+	CONSTRAINT "FK_Attribute_Feature_FeatureId" FOREIGN KEY("FeatureId") REFERENCES "Features" ("Id"),
+	CONSTRAINT "FK_Attribute_Dictionary_NameId" FOREIGN KEY("ValueId") REFERENCES "Dictionaries" ("Id")
 );
 COMMIT;
