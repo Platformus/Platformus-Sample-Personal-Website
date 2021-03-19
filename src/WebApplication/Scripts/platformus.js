@@ -2,15 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 function getCulture() {
-  if (location.href.indexOf("/ru/") != -1) {
-    return "ru";
+  if (location.pathname == "/") {
+    return "en";
   }
 
-  if (location.href.indexOf("/uk/") != -1) {
-    return "uk";
-  }
-
-  return "en";
+  return location.pathname.split("/")[1];
 }
 
 function toggleMaster() {
