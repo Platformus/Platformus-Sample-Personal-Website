@@ -1,40 +1,6 @@
 USE [Platformus]
 GO
-/****** Object:  Table [dbo].[Carts]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Carts](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ClientSideId] [uniqueidentifier] NOT NULL,
-	[Created] [datetime] NOT NULL,
- CONSTRAINT [PK_Carts] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Categories]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Categories](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[CategoryId] [int] NULL,
-	[Url] [nvarchar](128) NOT NULL,
-	[NameId] [int] NOT NULL,
-	[CSharpClassName] [nvarchar](128) NOT NULL,
-	[Parameters] [nvarchar](1024) NULL,
-	[Position] [int] NULL,
- CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Classes]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Classes]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -52,7 +18,7 @@ CREATE TABLE [dbo].[Classes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CompletedFields]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[CompletedFields]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,7 +34,7 @@ CREATE TABLE [dbo].[CompletedFields](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CompletedForms]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[CompletedForms]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,7 +49,7 @@ CREATE TABLE [dbo].[CompletedForms](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Configurations]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Configurations]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +64,7 @@ CREATE TABLE [dbo].[Configurations](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Credentials]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Credentials]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -116,7 +82,7 @@ CREATE TABLE [dbo].[Credentials](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CredentialTypes]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[CredentialTypes]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -132,7 +98,7 @@ CREATE TABLE [dbo].[CredentialTypes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Cultures]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Cultures]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,7 +115,7 @@ CREATE TABLE [dbo].[Cultures](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DataSources]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[DataSources]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +132,7 @@ CREATE TABLE [dbo].[DataSources](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DataTypeParameters]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[DataTypeParameters]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -183,7 +149,7 @@ CREATE TABLE [dbo].[DataTypeParameters](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DataTypeParameterValues]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[DataTypeParameterValues]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +165,7 @@ CREATE TABLE [dbo].[DataTypeParameterValues](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DataTypes]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[DataTypes]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -216,23 +182,7 @@ CREATE TABLE [dbo].[DataTypes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DeliveryMethods]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[DeliveryMethods](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Code] [nvarchar](32) NOT NULL,
-	[NameId] [int] NOT NULL,
-	[Position] [int] NULL,
- CONSTRAINT [PK_DeliveryMethods] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Dictionaries]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Dictionaries]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +195,7 @@ CREATE TABLE [dbo].[Dictionaries](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EndpointPermissions]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[EndpointPermissions]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -260,7 +210,7 @@ CREATE TABLE [dbo].[EndpointPermissions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Endpoints]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Endpoints]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -281,7 +231,7 @@ CREATE TABLE [dbo].[Endpoints](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FieldOptions]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[FieldOptions]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -297,7 +247,7 @@ CREATE TABLE [dbo].[FieldOptions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Fields]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Fields]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -317,7 +267,7 @@ CREATE TABLE [dbo].[Fields](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FieldTypes]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[FieldTypes]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -334,7 +284,7 @@ CREATE TABLE [dbo].[FieldTypes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Files]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Files]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -349,7 +299,7 @@ CREATE TABLE [dbo].[Files](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Forms]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Forms]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +318,7 @@ CREATE TABLE [dbo].[Forms](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Localizations]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Localizations]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -384,7 +334,7 @@ CREATE TABLE [dbo].[Localizations](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Members]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Members]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -409,7 +359,7 @@ CREATE TABLE [dbo].[Members](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MenuItems]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[MenuItems]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -427,7 +377,7 @@ CREATE TABLE [dbo].[MenuItems](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Menus]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Menus]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -442,7 +392,7 @@ CREATE TABLE [dbo].[Menus](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Objects]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Objects]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -456,62 +406,7 @@ CREATE TABLE [dbo].[Objects](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Orders]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Orders](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[OrderStateId] [int] NOT NULL,
-	[PaymentMethodId] [int] NOT NULL,
-	[DeliveryMethodId] [int] NOT NULL,
-	[CustomerFirstName] [nvarchar](64) NOT NULL,
-	[CustomerLastName] [nvarchar](64) NULL,
-	[CustomerPhone] [nvarchar](32) NOT NULL,
-	[CustomerEmail] [nvarchar](64) NULL,
-	[CustomerAddress] [nvarchar](128) NULL,
-	[Note] [nvarchar](1024) NULL,
-	[Created] [datetime] NOT NULL,
- CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[OrderStates]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[OrderStates](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Code] [nvarchar](32) NOT NULL,
-	[NameId] [int] NOT NULL,
-	[Position] [int] NULL,
- CONSTRAINT [PK_OrderStates] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[PaymentMethods]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[PaymentMethods](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Code] [nvarchar](32) NOT NULL,
-	[NameId] [int] NOT NULL,
-	[Position] [int] NULL,
- CONSTRAINT [PK_PaymentMethods] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Permissions]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Permissions]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -527,66 +422,7 @@ CREATE TABLE [dbo].[Permissions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Photos]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Photos](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ProductId] [int] NOT NULL,
-	[Filename] [nvarchar](128) NOT NULL,
-	[IsCover] [bit] NOT NULL,
-	[Position] [int] NULL,
- CONSTRAINT [PK_Photos] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Positions]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Positions](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[CartId] [int] NULL,
-	[OrderId] [int] NULL,
-	[ProductId] [int] NOT NULL,
-	[Price] [money] NOT NULL,
-	[Quantity] [money] NOT NULL,
-	[Subtotal] [money] NOT NULL,
- CONSTRAINT [PK_Positions] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Products]    Script Date: 19.03.2021 14:37:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Products](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[CategoryId] [int] NOT NULL,
-	[Url] [nvarchar](128) NOT NULL,
-	[Code] [nvarchar](32) NOT NULL,
-	[NameId] [int] NOT NULL,
-	[DescriptionId] [int] NOT NULL,
-	[UnitsId] [int] NOT NULL,
-	[Price] [money] NOT NULL,
-	[TitleId] [int] NOT NULL,
-	[MetaDescriptionId] [int] NOT NULL,
-	[MetaKeywordsId] [int] NOT NULL,
- CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Properties]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Properties]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -605,7 +441,7 @@ CREATE TABLE [dbo].[Properties](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Relations]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Relations]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -621,7 +457,7 @@ CREATE TABLE [dbo].[Relations](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RolePermissions]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[RolePermissions]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -636,7 +472,7 @@ CREATE TABLE [dbo].[RolePermissions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -652,7 +488,7 @@ CREATE TABLE [dbo].[Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tabs]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Tabs]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -668,7 +504,7 @@ CREATE TABLE [dbo].[Tabs](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -683,7 +519,7 @@ CREATE TABLE [dbo].[UserRoles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -698,7 +534,7 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Variables]    Script Date: 19.03.2021 14:37:52 ******/
+/****** Object:  Table [dbo].[Variables]    Script Date: 24.03.2021 13:10:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1120,20 +956,6 @@ INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (12, N'Mana
 GO
 INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (13, N'ManageFileManager', N'Manage file manager', 1300)
 GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (14, N'ManageCategories', N'Manage categories', 1400)
-GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (15, N'ManageProducts', N'Manage products', 1500)
-GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (16, N'ManageOrderStates', N'Manage order states', 1600)
-GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (17, N'ManagePaymentMethods', N'Manage payment methods', 1700)
-GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (18, N'ManageDeliveryMethods', N'Manage delivery methods', 1800)
-GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (19, N'ManageCarts', N'Manage carts', 1900)
-GO
-INSERT [dbo].[Permissions] ([Id], [Code], [Name], [Position]) VALUES (20, N'ManageOrders', N'Manage orders', 2000)
-GO
 SET IDENTITY_INSERT [dbo].[Permissions] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Properties] ON 
@@ -1228,21 +1050,15 @@ INSERT [dbo].[Variables] ([Id], [ConfigurationId], [Code], [Name], [Value], [Pos
 GO
 SET IDENTITY_INSERT [dbo].[Variables] OFF
 GO
-/****** Object:  Index [IX_Categories_CategoryId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Categories_CategoryId] ON [dbo].[Categories]
-(
-	[CategoryId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Configurations_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Configurations_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Configurations_Code] ON [dbo].[Configurations]
 (
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Credentials_UserId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Credentials_UserId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Credentials_UserId] ON [dbo].[Credentials]
 (
 	[UserId] ASC
@@ -1250,37 +1066,37 @@ CREATE NONCLUSTERED INDEX [IX_Credentials_UserId] ON [dbo].[Credentials]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_CredentialTypes_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_CredentialTypes_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_CredentialTypes_Code] ON [dbo].[CredentialTypes]
 (
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_DataSources_EndpointId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_DataSources_EndpointId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_DataSources_EndpointId] ON [dbo].[DataSources]
 (
 	[EndpointId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_DataTypeParameters_DataTypeId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_DataTypeParameters_DataTypeId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_DataTypeParameters_DataTypeId] ON [dbo].[DataTypeParameters]
 (
 	[DataTypeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_DataTypeParameterValues_DataTypeParameterId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_DataTypeParameterValues_DataTypeParameterId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_DataTypeParameterValues_DataTypeParameterId] ON [dbo].[DataTypeParameterValues]
 (
 	[DataTypeParameterId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_FieldOptions_FieldId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_FieldOptions_FieldId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_FieldOptions_FieldId] ON [dbo].[FieldOptions]
 (
 	[FieldId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Fields_FieldId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Fields_FieldId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Fields_FieldId] ON [dbo].[Fields]
 (
 	[FormId] ASC
@@ -1288,7 +1104,7 @@ CREATE NONCLUSTERED INDEX [IX_Fields_FieldId] ON [dbo].[Fields]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_FieldTypes_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_FieldTypes_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_FieldTypes_Code] ON [dbo].[FieldTypes]
 (
 	[Code] ASC
@@ -1296,13 +1112,13 @@ CREATE NONCLUSTERED INDEX [IX_FieldTypes_Code] ON [dbo].[FieldTypes]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Forms_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Forms_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Forms_Code] ON [dbo].[Forms]
 (
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Localizations_DictionaryId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Localizations_DictionaryId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Localizations_DictionaryId] ON [dbo].[Localizations]
 (
 	[DictionaryId] ASC
@@ -1310,26 +1126,26 @@ CREATE NONCLUSTERED INDEX [IX_Localizations_DictionaryId] ON [dbo].[Localization
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Localizations_DictionaryId_CultureId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Localizations_DictionaryId_CultureId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Localizations_DictionaryId_CultureId] ON [dbo].[Localizations]
 (
 	[CultureId] ASC,
 	[DictionaryId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Members_ClassId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Members_ClassId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Members_ClassId] ON [dbo].[Members]
 (
 	[ClassId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_MenuItems_MenuId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_MenuItems_MenuId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_MenuItems_MenuId] ON [dbo].[MenuItems]
 (
 	[MenuId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_MenuItems_MenuItemId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_MenuItems_MenuItemId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_MenuItems_MenuItemId] ON [dbo].[MenuItems]
 (
 	[MenuItemId] ASC
@@ -1337,108 +1153,60 @@ CREATE NONCLUSTERED INDEX [IX_MenuItems_MenuItemId] ON [dbo].[MenuItems]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Menus_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Menus_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Menus_Code] ON [dbo].[Menus]
 (
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Objects_ClassId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Objects_ClassId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Objects_ClassId] ON [dbo].[Objects]
 (
 	[ClassId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Orders_DeliveryMethodId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Orders_DeliveryMethodId] ON [dbo].[Orders]
-(
-	[DeliveryMethodId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Orders_OrderStateId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Orders_OrderStateId] ON [dbo].[Orders]
-(
-	[OrderStateId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Orders_PaymentMethodId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Orders_PaymentMethodId] ON [dbo].[Orders]
-(
-	[PaymentMethodId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Permissions_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Permissions_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Permissions_Code] ON [dbo].[Permissions]
 (
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Photos_ProductId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Photos_ProductId] ON [dbo].[Photos]
-(
-	[ProductId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Positions_CartId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Positions_CartId] ON [dbo].[Positions]
-(
-	[CartId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Positions_OrderId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Positions_OrderId] ON [dbo].[Positions]
-(
-	[OrderId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Positions_ProductId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Positions_ProductId] ON [dbo].[Positions]
-(
-	[ProductId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Products_CategoryId]    Script Date: 19.03.2021 14:37:53 ******/
-CREATE NONCLUSTERED INDEX [IX_Products_CategoryId] ON [dbo].[Products]
-(
-	[CategoryId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Properties_ObjectId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Properties_ObjectId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Properties_ObjectId] ON [dbo].[Properties]
 (
 	[ObjectId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Properties_ObjectId_MemberId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Properties_ObjectId_MemberId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Properties_ObjectId_MemberId] ON [dbo].[Properties]
 (
 	[ObjectId] ASC,
 	[MemberId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Relations_ForeignId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Relations_ForeignId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Relations_ForeignId] ON [dbo].[Relations]
 (
 	[ForeignId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Relations_MemberId_ForeignId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Relations_MemberId_ForeignId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Relations_MemberId_ForeignId] ON [dbo].[Relations]
 (
 	[MemberId] ASC,
 	[ForeignId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Relations_MemberId_PrimaryId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Relations_MemberId_PrimaryId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Relations_MemberId_PrimaryId] ON [dbo].[Relations]
 (
 	[PrimaryId] ASC,
 	[MemberId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Relations_PrimaryId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Relations_PrimaryId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Relations_PrimaryId] ON [dbo].[Relations]
 (
 	[PrimaryId] ASC
@@ -1446,13 +1214,13 @@ CREATE NONCLUSTERED INDEX [IX_Relations_PrimaryId] ON [dbo].[Relations]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Roles_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Roles_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Roles_Code] ON [dbo].[Roles]
 (
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Tabs_ClassId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Tabs_ClassId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Tabs_ClassId] ON [dbo].[Tabs]
 (
 	[ClassId] ASC
@@ -1460,13 +1228,13 @@ CREATE NONCLUSTERED INDEX [IX_Tabs_ClassId] ON [dbo].[Tabs]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Users_Name]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Users_Name]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Users_Name] ON [dbo].[Users]
 (
 	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Variables_ConfigurationId]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Variables_ConfigurationId]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Variables_ConfigurationId] ON [dbo].[Variables]
 (
 	[ConfigurationId] ASC
@@ -1474,22 +1242,12 @@ CREATE NONCLUSTERED INDEX [IX_Variables_ConfigurationId] ON [dbo].[Variables]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Variables_ConfigurationId_Code]    Script Date: 19.03.2021 14:37:53 ******/
+/****** Object:  Index [IX_Variables_ConfigurationId_Code]    Script Date: 24.03.2021 13:10:06 ******/
 CREATE NONCLUSTERED INDEX [IX_Variables_ConfigurationId_Code] ON [dbo].[Variables]
 (
 	[ConfigurationId] ASC,
 	[Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[Categories]  WITH CHECK ADD  CONSTRAINT [FK_Categories_Categories] FOREIGN KEY([CategoryId])
-REFERENCES [dbo].[Categories] ([Id])
-GO
-ALTER TABLE [dbo].[Categories] CHECK CONSTRAINT [FK_Categories_Categories]
-GO
-ALTER TABLE [dbo].[Categories]  WITH CHECK ADD  CONSTRAINT [FK_Categories_Dictionaries] FOREIGN KEY([NameId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Categories] CHECK CONSTRAINT [FK_Categories_Dictionaries]
 GO
 ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [FK_Classes_Classes] FOREIGN KEY([ClassId])
 REFERENCES [dbo].[Classes] ([Id])
@@ -1548,11 +1306,6 @@ REFERENCES [dbo].[Members] ([Id])
 ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[DataTypeParameterValues] CHECK CONSTRAINT [FK_DataTypeParameterValues_Members_MemberId]
-GO
-ALTER TABLE [dbo].[DeliveryMethods]  WITH CHECK ADD  CONSTRAINT [FK_DeliveryMethods_Dictionaries] FOREIGN KEY([NameId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[DeliveryMethods] CHECK CONSTRAINT [FK_DeliveryMethods_Dictionaries]
 GO
 ALTER TABLE [dbo].[EndpointPermissions]  WITH CHECK ADD  CONSTRAINT [FK_EndpointPermissions_Permissions] FOREIGN KEY([PermissionId])
 REFERENCES [dbo].[Permissions] ([Id])
@@ -1662,94 +1415,6 @@ ALTER TABLE [dbo].[Objects]  WITH CHECK ADD  CONSTRAINT [FK_Objects_Classes] FOR
 REFERENCES [dbo].[Classes] ([Id])
 GO
 ALTER TABLE [dbo].[Objects] CHECK CONSTRAINT [FK_Objects_Classes]
-GO
-ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_DeliveryMethods] FOREIGN KEY([DeliveryMethodId])
-REFERENCES [dbo].[DeliveryMethods] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_DeliveryMethods]
-GO
-ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_OrderStates] FOREIGN KEY([OrderStateId])
-REFERENCES [dbo].[OrderStates] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_OrderStates]
-GO
-ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_PaymentMethods] FOREIGN KEY([PaymentMethodId])
-REFERENCES [dbo].[PaymentMethods] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_PaymentMethods]
-GO
-ALTER TABLE [dbo].[OrderStates]  WITH CHECK ADD  CONSTRAINT [FK_OrderStates_Dictionaries] FOREIGN KEY([NameId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[OrderStates] CHECK CONSTRAINT [FK_OrderStates_Dictionaries]
-GO
-ALTER TABLE [dbo].[PaymentMethods]  WITH CHECK ADD  CONSTRAINT [FK_PaymentMethods_Dictionaries] FOREIGN KEY([NameId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[PaymentMethods] CHECK CONSTRAINT [FK_PaymentMethods_Dictionaries]
-GO
-ALTER TABLE [dbo].[Photos]  WITH CHECK ADD  CONSTRAINT [FK_Photos_Products] FOREIGN KEY([ProductId])
-REFERENCES [dbo].[Products] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Photos] CHECK CONSTRAINT [FK_Photos_Products]
-GO
-ALTER TABLE [dbo].[Positions]  WITH CHECK ADD  CONSTRAINT [FK_Positions_Carts] FOREIGN KEY([CartId])
-REFERENCES [dbo].[Carts] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Positions] CHECK CONSTRAINT [FK_Positions_Carts]
-GO
-ALTER TABLE [dbo].[Positions]  WITH CHECK ADD  CONSTRAINT [FK_Positions_Orders] FOREIGN KEY([OrderId])
-REFERENCES [dbo].[Orders] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Positions] CHECK CONSTRAINT [FK_Positions_Orders]
-GO
-ALTER TABLE [dbo].[Positions]  WITH CHECK ADD  CONSTRAINT [FK_Positions_Products] FOREIGN KEY([ProductId])
-REFERENCES [dbo].[Products] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Positions] CHECK CONSTRAINT [FK_Positions_Products]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Categories] FOREIGN KEY([CategoryId])
-REFERENCES [dbo].[Categories] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Categories]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Dictionaries_DescriptionId] FOREIGN KEY([DescriptionId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Dictionaries_DescriptionId]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Dictionaries_MetaDescriptionId] FOREIGN KEY([MetaDescriptionId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Dictionaries_MetaDescriptionId]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Dictionaries_MetaKeywordsId] FOREIGN KEY([MetaKeywordsId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Dictionaries_MetaKeywordsId]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Dictionaries_NameId] FOREIGN KEY([NameId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Dictionaries_NameId]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Dictionaries_TitleId] FOREIGN KEY([TitleId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Dictionaries_TitleId]
-GO
-ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [FK_Products_Dictionaries_UnitsId] FOREIGN KEY([UnitsId])
-REFERENCES [dbo].[Dictionaries] ([Id])
-GO
-ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Dictionaries_UnitsId]
 GO
 ALTER TABLE [dbo].[Properties]  WITH CHECK ADD  CONSTRAINT [FK_Properties_Dictionaries] FOREIGN KEY([StringValueId])
 REFERENCES [dbo].[Dictionaries] ([Id])
