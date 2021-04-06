@@ -9,6 +9,10 @@ function getCulture() {
   return location.pathname.split("/")[1];
 }
 
+function combineLocalizedUrl(url) {
+  return "/" + getCulture() + url;
+}
+
 function toggleMaster() {
   var master = $(".master-detail__master");
   var detail = $(".master-detail__detail");

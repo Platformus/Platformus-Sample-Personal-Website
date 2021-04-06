@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS "Credentials" (
 	"Identifier"	TEXT NOT NULL,
 	"Secret"	TEXT,
 	"Extra"	TEXT,
-	CONSTRAINT "PK_Credential" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_Credential_CredentialType_CredentialTypeId" FOREIGN KEY("CredentialTypeId") REFERENCES "CredentialTypes"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Credential_User_UserId" FOREIGN KEY("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Credential_CredentialType_CredentialTypeId" FOREIGN KEY("CredentialTypeId") REFERENCES "CredentialTypes"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_Credential" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Roles" (
 	"Id"	INTEGER NOT NULL,
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS "Roles" (
 CREATE TABLE IF NOT EXISTS "UserRoles" (
 	"UserId"	INTEGER NOT NULL,
 	"RoleId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_UserRole" PRIMARY KEY("UserId","RoleId"),
 	CONSTRAINT "FK_UserRole_Role_RoleId" FOREIGN KEY("RoleId") REFERENCES "Roles"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_UserRole_User_UserId" FOREIGN KEY("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_UserRole_User_UserId" FOREIGN KEY("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_UserRole" PRIMARY KEY("UserId","RoleId")
 );
 CREATE TABLE IF NOT EXISTS "Permissions" (
 	"Id"	INTEGER NOT NULL,
@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS "Permissions" (
 CREATE TABLE IF NOT EXISTS "RolePermissions" (
 	"RoleId"	INTEGER NOT NULL,
 	"PermissionId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_RolePermission" PRIMARY KEY("RoleId","PermissionId"),
 	CONSTRAINT "FK_RolePermission_Role_RoleId" FOREIGN KEY("RoleId") REFERENCES "Roles"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_RolePermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_RolePermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_RolePermission" PRIMARY KEY("RoleId","PermissionId")
 );
 CREATE TABLE IF NOT EXISTS "Configurations" (
 	"Id"	INTEGER NOT NULL,
@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS "Variables" (
 	"Name"	TEXT NOT NULL,
 	"Value"	TEXT NOT NULL,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_Variable" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Variable_Configuration_ConfigurationId" FOREIGN KEY("ConfigurationId") REFERENCES "Configurations"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Variable_Configuration_ConfigurationId" FOREIGN KEY("ConfigurationId") REFERENCES "Configurations"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Variable" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Cultures" (
 	"Id"	TEXT NOT NULL,
@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS "Localizations" (
 	"DictionaryId"	INTEGER NOT NULL,
 	"CultureId"	TEXT NOT NULL,
 	"Value"	TEXT,
-	CONSTRAINT "PK_Localization" PRIMARY KEY("Id" AUTOINCREMENT),
 	CONSTRAINT "FK_Localization_Dictionary_DictionaryId" FOREIGN KEY("DictionaryId") REFERENCES "Dictionaries"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Localization_Culture_CultureId" FOREIGN KEY("CultureId") REFERENCES "Cultures"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Localization_Culture_CultureId" FOREIGN KEY("CultureId") REFERENCES "Cultures"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Localization" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Endpoints" (
 	"Id"	INTEGER NOT NULL,
@@ -103,9 +103,9 @@ CREATE TABLE IF NOT EXISTS "Endpoints" (
 CREATE TABLE IF NOT EXISTS "EndpointPermissions" (
 	"EndpointId"	INTEGER NOT NULL,
 	"PermissionId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_EndpointPermission" PRIMARY KEY("EndpointId","PermissionId"),
 	CONSTRAINT "FK_EndpointPermission_Endpoint_EndpointId" FOREIGN KEY("EndpointId") REFERENCES "Endpoints"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_EndpointPermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_EndpointPermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_EndpointPermission" PRIMARY KEY("EndpointId","PermissionId")
 );
 CREATE TABLE IF NOT EXISTS "DataSources" (
 	"Id"	INTEGER NOT NULL,
@@ -113,8 +113,8 @@ CREATE TABLE IF NOT EXISTS "DataSources" (
 	"Code"	TEXT NOT NULL,
 	"CSharpClassName"	TEXT NOT NULL,
 	"Parameters"	TEXT,
-	CONSTRAINT "PK_DataSource" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DataSource_Endpoint_EndpointId" FOREIGN KEY("EndpointId") REFERENCES "Endpoints"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_DataSource_Endpoint_EndpointId" FOREIGN KEY("EndpointId") REFERENCES "Endpoints"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_DataSource" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Classes" (
 	"Id"	INTEGER NOT NULL,
@@ -123,16 +123,16 @@ CREATE TABLE IF NOT EXISTS "Classes" (
 	"Name"	TEXT NOT NULL,
 	"PluralizedName"	TEXT NOT NULL,
 	"IsAbstract"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Class" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Class_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL
+	CONSTRAINT "FK_Class_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL,
+	CONSTRAINT "PK_Class" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Tabs" (
 	"Id"	INTEGER NOT NULL,
 	"ClassId"	INTEGER NOT NULL,
 	"Name"	TEXT NOT NULL,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_Tab" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Tab_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Tab_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Tab" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "DataTypes" (
 	"Id"	INTEGER NOT NULL,
@@ -148,8 +148,8 @@ CREATE TABLE IF NOT EXISTS "DataTypeParameters" (
 	"JavaScriptEditorClassName"	TEXT NOT NULL,
 	"Code"	TEXT NOT NULL,
 	"Name"	TEXT NOT NULL,
-	CONSTRAINT "PK_DataTypeParameter" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DataTypeParameter_DataType_DataTypeId" FOREIGN KEY("DataTypeId") REFERENCES "DataTypes"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_DataTypeParameter_DataType_DataTypeId" FOREIGN KEY("DataTypeId") REFERENCES "DataTypes"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_DataTypeParameter" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Members" (
 	"Id"	INTEGER NOT NULL,
@@ -165,26 +165,26 @@ CREATE TABLE IF NOT EXISTS "Members" (
 	"IsRelationSingleParent"	INTEGER,
 	"MinRelatedObjectsNumber"	INTEGER,
 	"MaxRelatedObjectsNumber"	INTEGER,
-	CONSTRAINT "PK_Member" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Member_Tab_TabId" FOREIGN KEY("TabId") REFERENCES "Tabs"("Id") ON DELETE SET NULL,
-	CONSTRAINT "FK_Member_Class_RelationClassId" FOREIGN KEY("RelationClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL,
 	CONSTRAINT "FK_Member_DataType_PropertyDataTypeId" FOREIGN KEY("PropertyDataTypeId") REFERENCES "DataTypes"("Id") ON DELETE SET NULL,
-	CONSTRAINT "FK_Member_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Member_Tab_TabId" FOREIGN KEY("TabId") REFERENCES "Tabs"("Id") ON DELETE SET NULL,
+	CONSTRAINT "FK_Member_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE,
+	CONSTRAINT "FK_Member_Class_RelationClassId" FOREIGN KEY("RelationClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL,
+	CONSTRAINT "PK_Member" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "DataTypeParameterValues" (
 	"Id"	INTEGER NOT NULL,
 	"DataTypeParameterId"	INT NOT NULL,
 	"MemberId"	INT NOT NULL,
 	"Value"	TEXT NOT NULL,
-	CONSTRAINT "PK_DataTypeParameterValue" PRIMARY KEY("Id" AUTOINCREMENT),
 	CONSTRAINT "FK_DataTypeParameterValue_DataTypeParameter_DataTypeParameterId" FOREIGN KEY("DataTypeParameterId") REFERENCES "DataTypeParameters"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_DataTypeParameterValue_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_DataTypeParameterValue_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_DataTypeParameterValue" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Objects" (
 	"Id"	INTEGER NOT NULL,
 	"ClassId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Object" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Object_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Object_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Object" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Properties" (
 	"Id"	INTEGER NOT NULL,
@@ -194,27 +194,27 @@ CREATE TABLE IF NOT EXISTS "Properties" (
 	"DecimalValue"	REAL,
 	"StringValueId"	INTEGER,
 	"DateTimeValue"	TEXT,
-	CONSTRAINT "PK_Property" PRIMARY KEY("Id" AUTOINCREMENT),
 	CONSTRAINT "FK_Property_Object_ObjectId" FOREIGN KEY("ObjectId") REFERENCES "Objects"("Id") ON DELETE CASCADE,
+	CONSTRAINT "FK_Property_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Property_Dictionary_StringValueId" FOREIGN KEY("StringValueId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Property_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_Property" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Relations" (
 	"Id"	INTEGER NOT NULL,
 	"MemberId"	INTEGER NOT NULL,
 	"PrimaryId"	INTEGER NOT NULL,
 	"ForeignId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Relation" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Relation_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Relation_Object_PrimaryId" FOREIGN KEY("PrimaryId") REFERENCES "Objects"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Relation_Object_ForeignId" FOREIGN KEY("ForeignId") REFERENCES "Objects"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Relation_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE,
+	CONSTRAINT "FK_Relation_Object_ForeignId" FOREIGN KEY("ForeignId") REFERENCES "Objects"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Relation" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Menus" (
 	"Id"	INTEGER NOT NULL,
 	"Code"	TEXT NOT NULL,
 	"NameId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Menu" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Menu_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
+	CONSTRAINT "FK_Menu_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
+	CONSTRAINT "PK_Menu" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "MenuItems" (
 	"Id"	INTEGER NOT NULL,
@@ -223,10 +223,10 @@ CREATE TABLE IF NOT EXISTS "MenuItems" (
 	"NameId"	INTEGER NOT NULL,
 	"Url"	TEXT,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_MenuItem" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_MenuItem_Menu_MenuId" FOREIGN KEY("MenuId") REFERENCES "Menus"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_MenuItem_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_MenuItem_MenuItem_MenuItemId" FOREIGN KEY("MenuItemId") REFERENCES "MenuItems"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_MenuItem_Menu_MenuId" FOREIGN KEY("MenuId") REFERENCES "Menus"("Id") ON DELETE CASCADE,
+	CONSTRAINT "FK_MenuItem_MenuItem_MenuItemId" FOREIGN KEY("MenuItemId") REFERENCES "MenuItems"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_MenuItem" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Forms" (
 	"Id"	INTEGER NOT NULL,
@@ -236,9 +236,9 @@ CREATE TABLE IF NOT EXISTS "Forms" (
 	"ProduceCompletedForms"	INTEGER NOT NULL,
 	"CSharpClassName"	TEXT NOT NULL,
 	"Parameters"	TEXT,
-	CONSTRAINT "PK_Form" PRIMARY KEY("Id" AUTOINCREMENT),
 	CONSTRAINT "FK_Form_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Form_Dictionary_SubmitButtonTitleId" FOREIGN KEY("SubmitButtonTitleId") REFERENCES "Dictionaries"("Id")
+	CONSTRAINT "FK_Form_Dictionary_SubmitButtonTitleId" FOREIGN KEY("SubmitButtonTitleId") REFERENCES "Dictionaries"("Id"),
+	CONSTRAINT "PK_Form" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "FieldTypes" (
 	"Id"	INTEGER NOT NULL,
@@ -257,143 +257,41 @@ CREATE TABLE IF NOT EXISTS "Fields" (
 	"IsRequired"	INTEGER NOT NULL,
 	"MaxLength"	INTEGER,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_Field" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_Field_FieldType_FieldTypeId" FOREIGN KEY("FieldTypeId") REFERENCES "FieldTypes"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Field_Form_FormId" FOREIGN KEY("FormId") REFERENCES "Forms"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Field_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Field_FieldType_FieldTypeId" FOREIGN KEY("FieldTypeId") REFERENCES "FieldTypes"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_Field" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "FieldOptions" (
 	"Id"	INTEGER NOT NULL,
 	"FieldId"	INTEGER NOT NULL,
 	"ValueId"	INTEGER NOT NULL,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_FieldOption" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_FieldOption_Dictionary_ValueId" FOREIGN KEY("ValueId") REFERENCES "Dictionaries"("Id"),
 	CONSTRAINT "FK_FieldOption_Field_FieldId" FOREIGN KEY("FieldId") REFERENCES "Fields"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_FieldOption_Dictionary_ValueId" FOREIGN KEY("ValueId") REFERENCES "Dictionaries"("Id")
+	CONSTRAINT "PK_FieldOption" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "CompletedForms" (
 	"Id"	INTEGER NOT NULL,
 	"FormId"	INTEGER NOT NULL,
 	"Created"	TEXT NOT NULL,
-	CONSTRAINT "PK_CompletedForm" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_CompletedForm_Form_FormId" FOREIGN KEY("FormId") REFERENCES "Forms"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_CompletedForm_Form_FormId" FOREIGN KEY("FormId") REFERENCES "Forms"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_CompletedForm" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "CompletedFields" (
 	"Id"	INTEGER NOT NULL,
 	"CompletedFormId"	INTEGER NOT NULL,
 	"FieldId"	INTEGER NOT NULL,
 	"Value"	TEXT,
-	CONSTRAINT "PK_CompletedField" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_CompletedField_CompletedForm_CompletedFormId" FOREIGN KEY("CompletedFormId") REFERENCES "CompletedForms"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_CompletedField_Field_FieldId" FOREIGN KEY("FieldId") REFERENCES "Fields"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_CompletedField_CompletedForm_CompletedFormId" FOREIGN KEY("CompletedFormId") REFERENCES "CompletedForms"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_CompletedField" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Files" (
 	"Id"	INTEGER NOT NULL,
 	"Name"	TEXT NOT NULL,
 	"Size"	INTEGER NOT NULL,
 	CONSTRAINT "PK_File" PRIMARY KEY("Id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Categories" (
-	"Id"	INTEGER NOT NULL,
-	"CategoryId"	INTEGER,
-	"Url"	TEXT,
-	"NameId"	INTEGER NOT NULL,
-	"CSharpClassName"	TEXT NOT NULL,
-	"Parameters"	TEXT,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_Category" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Category_Category_CategoryId" FOREIGN KEY("CategoryId") REFERENCES "Categories"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Category_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "Products" (
-	"Id"	INTEGER NOT NULL,
-	"CategoryId"	INTEGER NOT NULL,
-	"Url"	TEXT,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"DescriptionId"	INTEGER NOT NULL,
-	"UnitsId"	INTEGER NOT NULL,
-	"Price"	REAL NOT NULL,
-	"TitleId"	INTEGER NOT NULL,
-	"MetaDescriptionId"	INTEGER NOT NULL,
-	"MetaKeywordsId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Product" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Product_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Category_CategoryId" FOREIGN KEY("CategoryId") REFERENCES "Categories"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Product_Dictionary_DescriptionId" FOREIGN KEY("DescriptionId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_MetaKeywordsId" FOREIGN KEY("MetaKeywordsId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_UnitsId" FOREIGN KEY("UnitsId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_TitleId" FOREIGN KEY("TitleId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_MetaDescriptionId" FOREIGN KEY("MetaDescriptionId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "Photos" (
-	"Id"	INTEGER NOT NULL,
-	"ProductId"	INTEGER NOT NULL,
-	"Filename"	TEXT NOT NULL,
-	"IsCover"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_Photo" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Photo_Product_ProductId" FOREIGN KEY("ProductId") REFERENCES "Products"("Id") ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS "OrderStates" (
-	"Id"	INTEGER NOT NULL,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_OrderState" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_OrderState_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "PaymentMethods" (
-	"Id"	INTEGER NOT NULL,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_PaymentMethod" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_PaymentMethod_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "DeliveryMethods" (
-	"Id"	INTEGER NOT NULL,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_DeliveryMethod" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DeliveryMethod_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "Carts" (
-	"Id"	INTEGER NOT NULL,
-	"ClientSideId"	TEXT NOT NULL,
-	"Created"	TEXT NOT NULL,
-	CONSTRAINT "PK_Cart" PRIMARY KEY("Id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Orders" (
-	"Id"	INTEGER NOT NULL,
-	"OrderStateId"	INTEGER NOT NULL,
-	"PaymentMethodId"	INTEGER NOT NULL,
-	"DeliveryMethodId"	INTEGER NOT NULL,
-	"CustomerFirstName"	TEXT NOT NULL,
-	"CustomerLastName"	TEXT,
-	"CustomerPhone"	TEXT NOT NULL,
-	"CustomerEmail"	TEXT,
-	"CustomerAddress"	TEXT,
-	"Note"	TEXT,
-	"Created"	TEXT NOT NULL,
-	CONSTRAINT "PK_Order" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Order_OrderState_OrderStateId" FOREIGN KEY("OrderStateId") REFERENCES "OrderStates"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Order_DeliveryMethod_DeliveryMethodId" FOREIGN KEY("DeliveryMethodId") REFERENCES "DeliveryMethods"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Order_PaymentMethod_PaymentMethodId" FOREIGN KEY("PaymentMethodId") REFERENCES "PaymentMethods"("Id") ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS "Positions" (
-	"Id"	INTEGER NOT NULL,
-	"CartId"	INTEGER,
-	"OrderId"	INTEGER,
-	"ProductId"	INTEGER NOT NULL,
-	"Price"	REAL NOT NULL,
-	"Quantity"	REAL NOT NULL,
-	"Subtotal"	REAL NOT NULL,
-	CONSTRAINT "PK_Position" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Position_Cart_CartId" FOREIGN KEY("CartId") REFERENCES "Carts"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Position_Order_OrderId" FOREIGN KEY("OrderId") REFERENCES "Orders"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Position_Product_ProductId" FOREIGN KEY("ProductId") REFERENCES "Products"("Id") ON DELETE CASCADE
 );
 INSERT INTO "Users" VALUES (1,'Administrator','2017-01-01 00:00:00.0000000');
 INSERT INTO "CredentialTypes" VALUES (1,'Email','Email',1);
@@ -416,13 +314,6 @@ INSERT INTO "Permissions" VALUES (10,'ManageClasses','Manage classes',1000);
 INSERT INTO "Permissions" VALUES (11,'ManageMenus','Manage menus',1100);
 INSERT INTO "Permissions" VALUES (12,'ManageForms','Manage forms',1200);
 INSERT INTO "Permissions" VALUES (13,'ManageFileManager','Manage file manager',1300);
-INSERT INTO "Permissions" VALUES (14,'ManageCategories','Manage categories',1400);
-INSERT INTO "Permissions" VALUES (15,'ManageProducts','Manage products',1500);
-INSERT INTO "Permissions" VALUES (16,'ManageOrderStates','Manage order states',1600);
-INSERT INTO "Permissions" VALUES (17,'ManagePaymentMethods','Manage payment methods',1700);
-INSERT INTO "Permissions" VALUES (18,'ManageDeliveryMethods','Manage delivery methods',1800);
-INSERT INTO "Permissions" VALUES (19,'ManageCarts','Manage carts',1900);
-INSERT INTO "Permissions" VALUES (20,'ManageOrders','Manage orders',2000);
 INSERT INTO "RolePermissions" VALUES (1,1);
 INSERT INTO "RolePermissions" VALUES (2,1);
 INSERT INTO "RolePermissions" VALUES (3,8);
