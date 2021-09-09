@@ -5,7 +5,7 @@
 -- Dumped from database version 13.2
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-03-24 12:57:41
+-- Started on 2021-09-09 18:32:25
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,93 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 227 (class 1259 OID 18086)
+-- TOC entry 276 (class 1259 OID 21997)
+-- Name: Carts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Carts" (
+    "Id" integer NOT NULL,
+    "ClientSideId" text NOT NULL,
+    "Created" timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public."Carts" OWNER TO postgres;
+
+--
+-- TOC entry 275 (class 1259 OID 21995)
+-- Name: Carts_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Carts_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Carts_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3532 (class 0 OID 0)
+-- Dependencies: 275
+-- Name: Carts_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Carts_Id_seq" OWNED BY public."Carts"."Id";
+
+
+--
+-- TOC entry 264 (class 1259 OID 21846)
+-- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Categories" (
+    "Id" integer NOT NULL,
+    "CategoryId" integer,
+    "Url" text NOT NULL,
+    "NameId" integer NOT NULL,
+    "DescriptionId" integer NOT NULL,
+    "Position" integer,
+    "TitleId" integer NOT NULL,
+    "MetaDescriptionId" integer NOT NULL,
+    "MetaKeywordsId" integer NOT NULL,
+    "ProductProviderCSharpClassName" text NOT NULL,
+    "ProductProviderParameters" text
+);
+
+
+ALTER TABLE public."Categories" OWNER TO postgres;
+
+--
+-- TOC entry 263 (class 1259 OID 21844)
+-- Name: Categories_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Categories_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Categories_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3533 (class 0 OID 0)
+-- Dependencies: 263
+-- Name: Categories_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Categories_Id_seq" OWNED BY public."Categories"."Id";
+
+
+--
+-- TOC entry 228 (class 1259 OID 21510)
 -- Name: Classes; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -40,7 +126,7 @@ CREATE TABLE public."Classes" (
 ALTER TABLE public."Classes" OWNER TO postgres;
 
 --
--- TOC entry 226 (class 1259 OID 18084)
+-- TOC entry 227 (class 1259 OID 21508)
 -- Name: Classes_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -56,8 +142,8 @@ CREATE SEQUENCE public."Classes_Id_seq"
 ALTER TABLE public."Classes_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3393 (class 0 OID 0)
--- Dependencies: 226
+-- TOC entry 3534 (class 0 OID 0)
+-- Dependencies: 227
 -- Name: Classes_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -65,7 +151,7 @@ ALTER SEQUENCE public."Classes_Id_seq" OWNED BY public."Classes"."Id";
 
 
 --
--- TOC entry 259 (class 1259 OID 18390)
+-- TOC entry 260 (class 1259 OID 21814)
 -- Name: CompletedFields; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -80,7 +166,7 @@ CREATE TABLE public."CompletedFields" (
 ALTER TABLE public."CompletedFields" OWNER TO postgres;
 
 --
--- TOC entry 258 (class 1259 OID 18388)
+-- TOC entry 259 (class 1259 OID 21812)
 -- Name: CompletedFields_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -96,8 +182,8 @@ CREATE SEQUENCE public."CompletedFields_Id_seq"
 ALTER TABLE public."CompletedFields_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3394 (class 0 OID 0)
--- Dependencies: 258
+-- TOC entry 3535 (class 0 OID 0)
+-- Dependencies: 259
 -- Name: CompletedFields_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -105,7 +191,7 @@ ALTER SEQUENCE public."CompletedFields_Id_seq" OWNED BY public."CompletedFields"
 
 
 --
--- TOC entry 257 (class 1259 OID 18377)
+-- TOC entry 258 (class 1259 OID 21801)
 -- Name: CompletedForms; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -119,7 +205,7 @@ CREATE TABLE public."CompletedForms" (
 ALTER TABLE public."CompletedForms" OWNER TO postgres;
 
 --
--- TOC entry 256 (class 1259 OID 18375)
+-- TOC entry 257 (class 1259 OID 21799)
 -- Name: CompletedForms_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -135,8 +221,8 @@ CREATE SEQUENCE public."CompletedForms_Id_seq"
 ALTER TABLE public."CompletedForms_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3395 (class 0 OID 0)
--- Dependencies: 256
+-- TOC entry 3536 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: CompletedForms_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -144,7 +230,7 @@ ALTER SEQUENCE public."CompletedForms_Id_seq" OWNED BY public."CompletedForms"."
 
 
 --
--- TOC entry 213 (class 1259 OID 17980)
+-- TOC entry 214 (class 1259 OID 21404)
 -- Name: Configurations; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -158,7 +244,7 @@ CREATE TABLE public."Configurations" (
 ALTER TABLE public."Configurations" OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1259 OID 17978)
+-- TOC entry 213 (class 1259 OID 21402)
 -- Name: Configurations_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -174,8 +260,8 @@ CREATE SEQUENCE public."Configurations_Id_seq"
 ALTER TABLE public."Configurations_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3396 (class 0 OID 0)
--- Dependencies: 212
+-- TOC entry 3537 (class 0 OID 0)
+-- Dependencies: 213
 -- Name: Configurations_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -183,7 +269,7 @@ ALTER SEQUENCE public."Configurations_Id_seq" OWNED BY public."Configurations"."
 
 
 --
--- TOC entry 203 (class 1259 OID 17896)
+-- TOC entry 204 (class 1259 OID 21320)
 -- Name: CredentialTypes; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -198,7 +284,7 @@ CREATE TABLE public."CredentialTypes" (
 ALTER TABLE public."CredentialTypes" OWNER TO postgres;
 
 --
--- TOC entry 202 (class 1259 OID 17894)
+-- TOC entry 203 (class 1259 OID 21318)
 -- Name: CredentialTypes_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -214,8 +300,8 @@ CREATE SEQUENCE public."CredentialTypes_Id_seq"
 ALTER TABLE public."CredentialTypes_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3397 (class 0 OID 0)
--- Dependencies: 202
+-- TOC entry 3538 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: CredentialTypes_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -223,7 +309,7 @@ ALTER SEQUENCE public."CredentialTypes_Id_seq" OWNED BY public."CredentialTypes"
 
 
 --
--- TOC entry 205 (class 1259 OID 17907)
+-- TOC entry 206 (class 1259 OID 21331)
 -- Name: Credentials; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -240,7 +326,7 @@ CREATE TABLE public."Credentials" (
 ALTER TABLE public."Credentials" OWNER TO postgres;
 
 --
--- TOC entry 204 (class 1259 OID 17905)
+-- TOC entry 205 (class 1259 OID 21329)
 -- Name: Credentials_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -256,8 +342,8 @@ CREATE SEQUENCE public."Credentials_Id_seq"
 ALTER TABLE public."Credentials_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3398 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 3539 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: Credentials_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -265,7 +351,7 @@ ALTER SEQUENCE public."Credentials_Id_seq" OWNED BY public."Credentials"."Id";
 
 
 --
--- TOC entry 216 (class 1259 OID 18005)
+-- TOC entry 217 (class 1259 OID 21429)
 -- Name: Cultures; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -281,7 +367,7 @@ CREATE TABLE public."Cultures" (
 ALTER TABLE public."Cultures" OWNER TO postgres;
 
 --
--- TOC entry 225 (class 1259 OID 18070)
+-- TOC entry 226 (class 1259 OID 21494)
 -- Name: DataSources; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -289,15 +375,15 @@ CREATE TABLE public."DataSources" (
     "Id" integer NOT NULL,
     "EndpointId" integer NOT NULL,
     "Code" text NOT NULL,
-    "CSharpClassName" text NOT NULL,
-    "Parameters" text
+    "DataProviderCSharpClassName" text NOT NULL,
+    "DataProviderParameters" text
 );
 
 
 ALTER TABLE public."DataSources" OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 18068)
+-- TOC entry 225 (class 1259 OID 21492)
 -- Name: DataSources_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -313,8 +399,8 @@ CREATE SEQUENCE public."DataSources_Id_seq"
 ALTER TABLE public."DataSources_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3399 (class 0 OID 0)
--- Dependencies: 224
+-- TOC entry 3540 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: DataSources_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -322,7 +408,7 @@ ALTER SEQUENCE public."DataSources_Id_seq" OWNED BY public."DataSources"."Id";
 
 
 --
--- TOC entry 237 (class 1259 OID 18176)
+-- TOC entry 238 (class 1259 OID 21600)
 -- Name: DataTypeParameterValues; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -337,7 +423,7 @@ CREATE TABLE public."DataTypeParameterValues" (
 ALTER TABLE public."DataTypeParameterValues" OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1259 OID 18174)
+-- TOC entry 237 (class 1259 OID 21598)
 -- Name: DataTypeParameterValues_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -353,8 +439,8 @@ CREATE SEQUENCE public."DataTypeParameterValues_Id_seq"
 ALTER TABLE public."DataTypeParameterValues_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3400 (class 0 OID 0)
--- Dependencies: 236
+-- TOC entry 3541 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: DataTypeParameterValues_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -362,7 +448,7 @@ ALTER SEQUENCE public."DataTypeParameterValues_Id_seq" OWNED BY public."DataType
 
 
 --
--- TOC entry 233 (class 1259 OID 18129)
+-- TOC entry 234 (class 1259 OID 21553)
 -- Name: DataTypeParameters; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -378,7 +464,7 @@ CREATE TABLE public."DataTypeParameters" (
 ALTER TABLE public."DataTypeParameters" OWNER TO postgres;
 
 --
--- TOC entry 232 (class 1259 OID 18127)
+-- TOC entry 233 (class 1259 OID 21551)
 -- Name: DataTypeParameters_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -394,8 +480,8 @@ CREATE SEQUENCE public."DataTypeParameters_Id_seq"
 ALTER TABLE public."DataTypeParameters_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3401 (class 0 OID 0)
--- Dependencies: 232
+-- TOC entry 3542 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: DataTypeParameters_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -403,7 +489,7 @@ ALTER SEQUENCE public."DataTypeParameters_Id_seq" OWNED BY public."DataTypeParam
 
 
 --
--- TOC entry 231 (class 1259 OID 18118)
+-- TOC entry 232 (class 1259 OID 21542)
 -- Name: DataTypes; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -419,7 +505,7 @@ CREATE TABLE public."DataTypes" (
 ALTER TABLE public."DataTypes" OWNER TO postgres;
 
 --
--- TOC entry 230 (class 1259 OID 18116)
+-- TOC entry 231 (class 1259 OID 21540)
 -- Name: DataTypes_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -435,8 +521,8 @@ CREATE SEQUENCE public."DataTypes_Id_seq"
 ALTER TABLE public."DataTypes_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3402 (class 0 OID 0)
--- Dependencies: 230
+-- TOC entry 3543 (class 0 OID 0)
+-- Dependencies: 231
 -- Name: DataTypes_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -444,7 +530,47 @@ ALTER SEQUENCE public."DataTypes_Id_seq" OWNED BY public."DataTypes"."Id";
 
 
 --
--- TOC entry 218 (class 1259 OID 18015)
+-- TOC entry 274 (class 1259 OID 21981)
+-- Name: DeliveryMethods; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."DeliveryMethods" (
+    "Id" integer NOT NULL,
+    "Code" text NOT NULL,
+    "NameId" integer NOT NULL,
+    "Position" integer
+);
+
+
+ALTER TABLE public."DeliveryMethods" OWNER TO postgres;
+
+--
+-- TOC entry 273 (class 1259 OID 21979)
+-- Name: DeliveryMethods_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."DeliveryMethods_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."DeliveryMethods_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3544 (class 0 OID 0)
+-- Dependencies: 273
+-- Name: DeliveryMethods_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."DeliveryMethods_Id_seq" OWNED BY public."DeliveryMethods"."Id";
+
+
+--
+-- TOC entry 219 (class 1259 OID 21439)
 -- Name: Dictionaries; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -456,7 +582,7 @@ CREATE TABLE public."Dictionaries" (
 ALTER TABLE public."Dictionaries" OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1259 OID 18013)
+-- TOC entry 218 (class 1259 OID 21437)
 -- Name: Dictionaries_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -472,8 +598,8 @@ CREATE SEQUENCE public."Dictionaries_Id_seq"
 ALTER TABLE public."Dictionaries_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3403 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 3545 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: Dictionaries_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -481,7 +607,7 @@ ALTER SEQUENCE public."Dictionaries_Id_seq" OWNED BY public."Dictionaries"."Id";
 
 
 --
--- TOC entry 223 (class 1259 OID 18053)
+-- TOC entry 224 (class 1259 OID 21477)
 -- Name: EndpointPermissions; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -494,7 +620,7 @@ CREATE TABLE public."EndpointPermissions" (
 ALTER TABLE public."EndpointPermissions" OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 18044)
+-- TOC entry 223 (class 1259 OID 21468)
 -- Name: Endpoints; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -505,16 +631,17 @@ CREATE TABLE public."Endpoints" (
     "Position" integer,
     "DisallowAnonymous" boolean NOT NULL,
     "SignInUrl" text,
+    "RequestProcessorCSharpClassName" text NOT NULL,
+    "RequestProcessorParameters" text,
     "ResponseCacheCSharpClassName" text,
-    "CSharpClassName" text NOT NULL,
-    "Parameters" text
+    "ResponseCacheParameters" text
 );
 
 
 ALTER TABLE public."Endpoints" OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 18042)
+-- TOC entry 222 (class 1259 OID 21466)
 -- Name: Endpoints_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -530,8 +657,8 @@ CREATE SEQUENCE public."Endpoints_Id_seq"
 ALTER TABLE public."Endpoints_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3404 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3546 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: Endpoints_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -539,7 +666,7 @@ ALTER SEQUENCE public."Endpoints_Id_seq" OWNED BY public."Endpoints"."Id";
 
 
 --
--- TOC entry 255 (class 1259 OID 18359)
+-- TOC entry 256 (class 1259 OID 21783)
 -- Name: FieldOptions; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -554,7 +681,7 @@ CREATE TABLE public."FieldOptions" (
 ALTER TABLE public."FieldOptions" OWNER TO postgres;
 
 --
--- TOC entry 254 (class 1259 OID 18357)
+-- TOC entry 255 (class 1259 OID 21781)
 -- Name: FieldOptions_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -570,8 +697,8 @@ CREATE SEQUENCE public."FieldOptions_Id_seq"
 ALTER TABLE public."FieldOptions_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3405 (class 0 OID 0)
--- Dependencies: 254
+-- TOC entry 3547 (class 0 OID 0)
+-- Dependencies: 255
 -- Name: FieldOptions_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -579,7 +706,7 @@ ALTER SEQUENCE public."FieldOptions_Id_seq" OWNED BY public."FieldOptions"."Id";
 
 
 --
--- TOC entry 251 (class 1259 OID 18322)
+-- TOC entry 252 (class 1259 OID 21746)
 -- Name: FieldTypes; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -595,7 +722,7 @@ CREATE TABLE public."FieldTypes" (
 ALTER TABLE public."FieldTypes" OWNER TO postgres;
 
 --
--- TOC entry 250 (class 1259 OID 18320)
+-- TOC entry 251 (class 1259 OID 21744)
 -- Name: FieldTypes_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -611,8 +738,8 @@ CREATE SEQUENCE public."FieldTypes_Id_seq"
 ALTER TABLE public."FieldTypes_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3406 (class 0 OID 0)
--- Dependencies: 250
+-- TOC entry 3548 (class 0 OID 0)
+-- Dependencies: 251
 -- Name: FieldTypes_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -620,7 +747,7 @@ ALTER SEQUENCE public."FieldTypes_Id_seq" OWNED BY public."FieldTypes"."Id";
 
 
 --
--- TOC entry 253 (class 1259 OID 18333)
+-- TOC entry 254 (class 1259 OID 21757)
 -- Name: Fields; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -639,7 +766,7 @@ CREATE TABLE public."Fields" (
 ALTER TABLE public."Fields" OWNER TO postgres;
 
 --
--- TOC entry 252 (class 1259 OID 18331)
+-- TOC entry 253 (class 1259 OID 21755)
 -- Name: Fields_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -655,8 +782,8 @@ CREATE SEQUENCE public."Fields_Id_seq"
 ALTER TABLE public."Fields_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3407 (class 0 OID 0)
--- Dependencies: 252
+-- TOC entry 3549 (class 0 OID 0)
+-- Dependencies: 253
 -- Name: Fields_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -664,7 +791,7 @@ ALTER SEQUENCE public."Fields_Id_seq" OWNED BY public."Fields"."Id";
 
 
 --
--- TOC entry 261 (class 1259 OID 18411)
+-- TOC entry 262 (class 1259 OID 21835)
 -- Name: Files; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -678,7 +805,7 @@ CREATE TABLE public."Files" (
 ALTER TABLE public."Files" OWNER TO postgres;
 
 --
--- TOC entry 260 (class 1259 OID 18409)
+-- TOC entry 261 (class 1259 OID 21833)
 -- Name: Files_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -694,8 +821,8 @@ CREATE SEQUENCE public."Files_Id_seq"
 ALTER TABLE public."Files_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3408 (class 0 OID 0)
--- Dependencies: 260
+-- TOC entry 3550 (class 0 OID 0)
+-- Dependencies: 261
 -- Name: Files_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -703,7 +830,7 @@ ALTER SEQUENCE public."Files_Id_seq" OWNED BY public."Files"."Id";
 
 
 --
--- TOC entry 249 (class 1259 OID 18301)
+-- TOC entry 250 (class 1259 OID 21725)
 -- Name: Forms; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -713,15 +840,15 @@ CREATE TABLE public."Forms" (
     "NameId" integer NOT NULL,
     "SubmitButtonTitleId" integer NOT NULL,
     "ProduceCompletedForms" boolean NOT NULL,
-    "CSharpClassName" text NOT NULL,
-    "Parameters" text
+    "FormHandlerCSharpClassName" text NOT NULL,
+    "FormHandlerParameters" text
 );
 
 
 ALTER TABLE public."Forms" OWNER TO postgres;
 
 --
--- TOC entry 248 (class 1259 OID 18299)
+-- TOC entry 249 (class 1259 OID 21723)
 -- Name: Forms_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -737,8 +864,8 @@ CREATE SEQUENCE public."Forms_Id_seq"
 ALTER TABLE public."Forms_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3409 (class 0 OID 0)
--- Dependencies: 248
+-- TOC entry 3551 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: Forms_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -746,7 +873,7 @@ ALTER SEQUENCE public."Forms_Id_seq" OWNED BY public."Forms"."Id";
 
 
 --
--- TOC entry 220 (class 1259 OID 18023)
+-- TOC entry 221 (class 1259 OID 21447)
 -- Name: Localizations; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -761,7 +888,7 @@ CREATE TABLE public."Localizations" (
 ALTER TABLE public."Localizations" OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 18021)
+-- TOC entry 220 (class 1259 OID 21445)
 -- Name: Localizations_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -777,8 +904,8 @@ CREATE SEQUENCE public."Localizations_Id_seq"
 ALTER TABLE public."Localizations_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3410 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 3552 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: Localizations_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -786,7 +913,7 @@ ALTER SEQUENCE public."Localizations_Id_seq" OWNED BY public."Localizations"."Id
 
 
 --
--- TOC entry 235 (class 1259 OID 18145)
+-- TOC entry 236 (class 1259 OID 21569)
 -- Name: Members; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -810,7 +937,7 @@ CREATE TABLE public."Members" (
 ALTER TABLE public."Members" OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 18143)
+-- TOC entry 235 (class 1259 OID 21567)
 -- Name: Members_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -826,8 +953,8 @@ CREATE SEQUENCE public."Members_Id_seq"
 ALTER TABLE public."Members_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3411 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3553 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: Members_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -835,7 +962,7 @@ ALTER SEQUENCE public."Members_Id_seq" OWNED BY public."Members"."Id";
 
 
 --
--- TOC entry 247 (class 1259 OID 18275)
+-- TOC entry 248 (class 1259 OID 21699)
 -- Name: MenuItems; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -852,7 +979,7 @@ CREATE TABLE public."MenuItems" (
 ALTER TABLE public."MenuItems" OWNER TO postgres;
 
 --
--- TOC entry 246 (class 1259 OID 18273)
+-- TOC entry 247 (class 1259 OID 21697)
 -- Name: MenuItems_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -868,8 +995,8 @@ CREATE SEQUENCE public."MenuItems_Id_seq"
 ALTER TABLE public."MenuItems_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3412 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 3554 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: MenuItems_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -877,7 +1004,7 @@ ALTER SEQUENCE public."MenuItems_Id_seq" OWNED BY public."MenuItems"."Id";
 
 
 --
--- TOC entry 245 (class 1259 OID 18259)
+-- TOC entry 246 (class 1259 OID 21683)
 -- Name: Menus; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -891,7 +1018,7 @@ CREATE TABLE public."Menus" (
 ALTER TABLE public."Menus" OWNER TO postgres;
 
 --
--- TOC entry 244 (class 1259 OID 18257)
+-- TOC entry 245 (class 1259 OID 21681)
 -- Name: Menus_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -907,8 +1034,8 @@ CREATE SEQUENCE public."Menus_Id_seq"
 ALTER TABLE public."Menus_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3413 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 3555 (class 0 OID 0)
+-- Dependencies: 245
 -- Name: Menus_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -916,7 +1043,21 @@ ALTER SEQUENCE public."Menus_Id_seq" OWNED BY public."Menus"."Id";
 
 
 --
--- TOC entry 239 (class 1259 OID 18197)
+-- TOC entry 200 (class 1259 OID 21299)
+-- Name: ModelStates; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ModelStates" (
+    "Id" text NOT NULL,
+    "Value" text NOT NULL,
+    "Created" timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public."ModelStates" OWNER TO postgres;
+
+--
+-- TOC entry 240 (class 1259 OID 21621)
 -- Name: Objects; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -929,7 +1070,7 @@ CREATE TABLE public."Objects" (
 ALTER TABLE public."Objects" OWNER TO postgres;
 
 --
--- TOC entry 238 (class 1259 OID 18195)
+-- TOC entry 239 (class 1259 OID 21619)
 -- Name: Objects_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -945,8 +1086,8 @@ CREATE SEQUENCE public."Objects_Id_seq"
 ALTER TABLE public."Objects_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3414 (class 0 OID 0)
--- Dependencies: 238
+-- TOC entry 3556 (class 0 OID 0)
+-- Dependencies: 239
 -- Name: Objects_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -954,7 +1095,134 @@ ALTER SEQUENCE public."Objects_Id_seq" OWNED BY public."Objects"."Id";
 
 
 --
--- TOC entry 210 (class 1259 OID 17954)
+-- TOC entry 270 (class 1259 OID 21949)
+-- Name: OrderStates; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."OrderStates" (
+    "Id" integer NOT NULL,
+    "Code" text NOT NULL,
+    "NameId" integer NOT NULL,
+    "Position" integer
+);
+
+
+ALTER TABLE public."OrderStates" OWNER TO postgres;
+
+--
+-- TOC entry 269 (class 1259 OID 21947)
+-- Name: OrderStates_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."OrderStates_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."OrderStates_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3557 (class 0 OID 0)
+-- Dependencies: 269
+-- Name: OrderStates_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."OrderStates_Id_seq" OWNED BY public."OrderStates"."Id";
+
+
+--
+-- TOC entry 278 (class 1259 OID 22008)
+-- Name: Orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Orders" (
+    "Id" integer NOT NULL,
+    "OrderStateId" integer NOT NULL,
+    "PaymentMethodId" integer NOT NULL,
+    "DeliveryMethodId" integer NOT NULL,
+    "CustomerFirstName" text NOT NULL,
+    "CustomerLastName" text,
+    "CustomerPhone" text NOT NULL,
+    "CustomerEmail" text,
+    "CustomerAddress" text,
+    "Note" text,
+    "Created" timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public."Orders" OWNER TO postgres;
+
+--
+-- TOC entry 277 (class 1259 OID 22006)
+-- Name: Orders_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Orders_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Orders_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3558 (class 0 OID 0)
+-- Dependencies: 277
+-- Name: Orders_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Orders_Id_seq" OWNED BY public."Orders"."Id";
+
+
+--
+-- TOC entry 272 (class 1259 OID 21965)
+-- Name: PaymentMethods; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."PaymentMethods" (
+    "Id" integer NOT NULL,
+    "Code" text NOT NULL,
+    "NameId" integer NOT NULL,
+    "Position" integer
+);
+
+
+ALTER TABLE public."PaymentMethods" OWNER TO postgres;
+
+--
+-- TOC entry 271 (class 1259 OID 21963)
+-- Name: PaymentMethods_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."PaymentMethods_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."PaymentMethods_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3559 (class 0 OID 0)
+-- Dependencies: 271
+-- Name: PaymentMethods_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."PaymentMethods_Id_seq" OWNED BY public."PaymentMethods"."Id";
+
+
+--
+-- TOC entry 211 (class 1259 OID 21378)
 -- Name: Permissions; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -969,7 +1237,7 @@ CREATE TABLE public."Permissions" (
 ALTER TABLE public."Permissions" OWNER TO postgres;
 
 --
--- TOC entry 209 (class 1259 OID 17952)
+-- TOC entry 210 (class 1259 OID 21376)
 -- Name: Permissions_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -985,8 +1253,8 @@ CREATE SEQUENCE public."Permissions_Id_seq"
 ALTER TABLE public."Permissions_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3415 (class 0 OID 0)
--- Dependencies: 209
+-- TOC entry 3560 (class 0 OID 0)
+-- Dependencies: 210
 -- Name: Permissions_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -994,7 +1262,138 @@ ALTER SEQUENCE public."Permissions_Id_seq" OWNED BY public."Permissions"."Id";
 
 
 --
--- TOC entry 241 (class 1259 OID 18210)
+-- TOC entry 268 (class 1259 OID 21933)
+-- Name: Photos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Photos" (
+    "Id" integer NOT NULL,
+    "ProductId" integer NOT NULL,
+    "Filename" text NOT NULL,
+    "IsCover" boolean NOT NULL,
+    "Position" integer
+);
+
+
+ALTER TABLE public."Photos" OWNER TO postgres;
+
+--
+-- TOC entry 267 (class 1259 OID 21931)
+-- Name: Photos_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Photos_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Photos_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3561 (class 0 OID 0)
+-- Dependencies: 267
+-- Name: Photos_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Photos_Id_seq" OWNED BY public."Photos"."Id";
+
+
+--
+-- TOC entry 280 (class 1259 OID 22034)
+-- Name: Positions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Positions" (
+    "Id" integer NOT NULL,
+    "CartId" integer,
+    "OrderId" integer,
+    "ProductId" integer NOT NULL,
+    "Price" numeric NOT NULL,
+    "Quantity" numeric NOT NULL,
+    "Subtotal" numeric NOT NULL
+);
+
+
+ALTER TABLE public."Positions" OWNER TO postgres;
+
+--
+-- TOC entry 279 (class 1259 OID 22032)
+-- Name: Positions_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Positions_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Positions_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3562 (class 0 OID 0)
+-- Dependencies: 279
+-- Name: Positions_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Positions_Id_seq" OWNED BY public."Positions"."Id";
+
+
+--
+-- TOC entry 266 (class 1259 OID 21887)
+-- Name: Products; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Products" (
+    "Id" integer NOT NULL,
+    "CategoryId" integer NOT NULL,
+    "Url" text NOT NULL,
+    "Code" text NOT NULL,
+    "NameId" integer NOT NULL,
+    "DescriptionId" integer NOT NULL,
+    "UnitsId" integer NOT NULL,
+    "Price" numeric NOT NULL,
+    "TitleId" integer NOT NULL,
+    "MetaDescriptionId" integer NOT NULL,
+    "MetaKeywordsId" integer NOT NULL
+);
+
+
+ALTER TABLE public."Products" OWNER TO postgres;
+
+--
+-- TOC entry 265 (class 1259 OID 21885)
+-- Name: Products_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Products_Id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Products_Id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3563 (class 0 OID 0)
+-- Dependencies: 265
+-- Name: Products_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Products_Id_seq" OWNED BY public."Products"."Id";
+
+
+--
+-- TOC entry 242 (class 1259 OID 21634)
 -- Name: Properties; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1012,7 +1411,7 @@ CREATE TABLE public."Properties" (
 ALTER TABLE public."Properties" OWNER TO postgres;
 
 --
--- TOC entry 240 (class 1259 OID 18208)
+-- TOC entry 241 (class 1259 OID 21632)
 -- Name: Properties_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1028,8 +1427,8 @@ CREATE SEQUENCE public."Properties_Id_seq"
 ALTER TABLE public."Properties_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3416 (class 0 OID 0)
--- Dependencies: 240
+-- TOC entry 3564 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: Properties_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1037,7 +1436,7 @@ ALTER SEQUENCE public."Properties_Id_seq" OWNED BY public."Properties"."Id";
 
 
 --
--- TOC entry 243 (class 1259 OID 18236)
+-- TOC entry 244 (class 1259 OID 21660)
 -- Name: Relations; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1052,7 +1451,7 @@ CREATE TABLE public."Relations" (
 ALTER TABLE public."Relations" OWNER TO postgres;
 
 --
--- TOC entry 242 (class 1259 OID 18234)
+-- TOC entry 243 (class 1259 OID 21658)
 -- Name: Relations_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1068,8 +1467,8 @@ CREATE SEQUENCE public."Relations_Id_seq"
 ALTER TABLE public."Relations_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3417 (class 0 OID 0)
--- Dependencies: 242
+-- TOC entry 3565 (class 0 OID 0)
+-- Dependencies: 243
 -- Name: Relations_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1077,7 +1476,7 @@ ALTER SEQUENCE public."Relations_Id_seq" OWNED BY public."Relations"."Id";
 
 
 --
--- TOC entry 211 (class 1259 OID 17963)
+-- TOC entry 212 (class 1259 OID 21387)
 -- Name: RolePermissions; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1090,7 +1489,7 @@ CREATE TABLE public."RolePermissions" (
 ALTER TABLE public."RolePermissions" OWNER TO postgres;
 
 --
--- TOC entry 207 (class 1259 OID 17928)
+-- TOC entry 208 (class 1259 OID 21352)
 -- Name: Roles; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1105,7 +1504,7 @@ CREATE TABLE public."Roles" (
 ALTER TABLE public."Roles" OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 17926)
+-- TOC entry 207 (class 1259 OID 21350)
 -- Name: Roles_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1121,8 +1520,8 @@ CREATE SEQUENCE public."Roles_Id_seq"
 ALTER TABLE public."Roles_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3418 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 3566 (class 0 OID 0)
+-- Dependencies: 207
 -- Name: Roles_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1130,7 +1529,7 @@ ALTER SEQUENCE public."Roles_Id_seq" OWNED BY public."Roles"."Id";
 
 
 --
--- TOC entry 229 (class 1259 OID 18102)
+-- TOC entry 230 (class 1259 OID 21526)
 -- Name: Tabs; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1145,7 +1544,7 @@ CREATE TABLE public."Tabs" (
 ALTER TABLE public."Tabs" OWNER TO postgres;
 
 --
--- TOC entry 228 (class 1259 OID 18100)
+-- TOC entry 229 (class 1259 OID 21524)
 -- Name: Tabs_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1161,8 +1560,8 @@ CREATE SEQUENCE public."Tabs_Id_seq"
 ALTER TABLE public."Tabs_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3419 (class 0 OID 0)
--- Dependencies: 228
+-- TOC entry 3567 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: Tabs_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1170,7 +1569,7 @@ ALTER SEQUENCE public."Tabs_Id_seq" OWNED BY public."Tabs"."Id";
 
 
 --
--- TOC entry 208 (class 1259 OID 17937)
+-- TOC entry 209 (class 1259 OID 21361)
 -- Name: UserRoles; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1183,7 +1582,7 @@ CREATE TABLE public."UserRoles" (
 ALTER TABLE public."UserRoles" OWNER TO postgres;
 
 --
--- TOC entry 201 (class 1259 OID 17885)
+-- TOC entry 202 (class 1259 OID 21309)
 -- Name: Users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1197,7 +1596,7 @@ CREATE TABLE public."Users" (
 ALTER TABLE public."Users" OWNER TO postgres;
 
 --
--- TOC entry 200 (class 1259 OID 17883)
+-- TOC entry 201 (class 1259 OID 21307)
 -- Name: Users_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1213,8 +1612,8 @@ CREATE SEQUENCE public."Users_Id_seq"
 ALTER TABLE public."Users_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3420 (class 0 OID 0)
--- Dependencies: 200
+-- TOC entry 3568 (class 0 OID 0)
+-- Dependencies: 201
 -- Name: Users_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1222,7 +1621,7 @@ ALTER SEQUENCE public."Users_Id_seq" OWNED BY public."Users"."Id";
 
 
 --
--- TOC entry 215 (class 1259 OID 17991)
+-- TOC entry 216 (class 1259 OID 21415)
 -- Name: Variables; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1239,7 +1638,7 @@ CREATE TABLE public."Variables" (
 ALTER TABLE public."Variables" OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1259 OID 17989)
+-- TOC entry 215 (class 1259 OID 21413)
 -- Name: Variables_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1255,8 +1654,8 @@ CREATE SEQUENCE public."Variables_Id_seq"
 ALTER TABLE public."Variables_Id_seq" OWNER TO postgres;
 
 --
--- TOC entry 3421 (class 0 OID 0)
--- Dependencies: 214
+-- TOC entry 3569 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: Variables_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1264,7 +1663,23 @@ ALTER SEQUENCE public."Variables_Id_seq" OWNED BY public."Variables"."Id";
 
 
 --
--- TOC entry 3070 (class 2604 OID 18089)
+-- TOC entry 3162 (class 2604 OID 22000)
+-- Name: Carts Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Carts" ALTER COLUMN "Id" SET DEFAULT nextval('public."Carts_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3156 (class 2604 OID 21849)
+-- Name: Categories Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories" ALTER COLUMN "Id" SET DEFAULT nextval('public."Categories_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3138 (class 2604 OID 21513)
 -- Name: Classes Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1272,7 +1687,7 @@ ALTER TABLE ONLY public."Classes" ALTER COLUMN "Id" SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3086 (class 2604 OID 18393)
+-- TOC entry 3154 (class 2604 OID 21817)
 -- Name: CompletedFields Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1280,7 +1695,7 @@ ALTER TABLE ONLY public."CompletedFields" ALTER COLUMN "Id" SET DEFAULT nextval(
 
 
 --
--- TOC entry 3085 (class 2604 OID 18380)
+-- TOC entry 3153 (class 2604 OID 21804)
 -- Name: CompletedForms Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1288,7 +1703,7 @@ ALTER TABLE ONLY public."CompletedForms" ALTER COLUMN "Id" SET DEFAULT nextval('
 
 
 --
--- TOC entry 3064 (class 2604 OID 17983)
+-- TOC entry 3132 (class 2604 OID 21407)
 -- Name: Configurations Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1296,7 +1711,7 @@ ALTER TABLE ONLY public."Configurations" ALTER COLUMN "Id" SET DEFAULT nextval('
 
 
 --
--- TOC entry 3060 (class 2604 OID 17899)
+-- TOC entry 3128 (class 2604 OID 21323)
 -- Name: CredentialTypes Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1304,7 +1719,7 @@ ALTER TABLE ONLY public."CredentialTypes" ALTER COLUMN "Id" SET DEFAULT nextval(
 
 
 --
--- TOC entry 3061 (class 2604 OID 17910)
+-- TOC entry 3129 (class 2604 OID 21334)
 -- Name: Credentials Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1312,7 +1727,7 @@ ALTER TABLE ONLY public."Credentials" ALTER COLUMN "Id" SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3069 (class 2604 OID 18073)
+-- TOC entry 3137 (class 2604 OID 21497)
 -- Name: DataSources Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1320,7 +1735,7 @@ ALTER TABLE ONLY public."DataSources" ALTER COLUMN "Id" SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3075 (class 2604 OID 18179)
+-- TOC entry 3143 (class 2604 OID 21603)
 -- Name: DataTypeParameterValues Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1328,7 +1743,7 @@ ALTER TABLE ONLY public."DataTypeParameterValues" ALTER COLUMN "Id" SET DEFAULT 
 
 
 --
--- TOC entry 3073 (class 2604 OID 18132)
+-- TOC entry 3141 (class 2604 OID 21556)
 -- Name: DataTypeParameters Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1336,7 +1751,7 @@ ALTER TABLE ONLY public."DataTypeParameters" ALTER COLUMN "Id" SET DEFAULT nextv
 
 
 --
--- TOC entry 3072 (class 2604 OID 18121)
+-- TOC entry 3140 (class 2604 OID 21545)
 -- Name: DataTypes Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1344,7 +1759,15 @@ ALTER TABLE ONLY public."DataTypes" ALTER COLUMN "Id" SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3066 (class 2604 OID 18018)
+-- TOC entry 3161 (class 2604 OID 21984)
+-- Name: DeliveryMethods Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DeliveryMethods" ALTER COLUMN "Id" SET DEFAULT nextval('public."DeliveryMethods_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3134 (class 2604 OID 21442)
 -- Name: Dictionaries Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1352,7 +1775,7 @@ ALTER TABLE ONLY public."Dictionaries" ALTER COLUMN "Id" SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3068 (class 2604 OID 18047)
+-- TOC entry 3136 (class 2604 OID 21471)
 -- Name: Endpoints Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1360,7 +1783,7 @@ ALTER TABLE ONLY public."Endpoints" ALTER COLUMN "Id" SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3084 (class 2604 OID 18362)
+-- TOC entry 3152 (class 2604 OID 21786)
 -- Name: FieldOptions Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1368,7 +1791,7 @@ ALTER TABLE ONLY public."FieldOptions" ALTER COLUMN "Id" SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3082 (class 2604 OID 18325)
+-- TOC entry 3150 (class 2604 OID 21749)
 -- Name: FieldTypes Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1376,7 +1799,7 @@ ALTER TABLE ONLY public."FieldTypes" ALTER COLUMN "Id" SET DEFAULT nextval('publ
 
 
 --
--- TOC entry 3083 (class 2604 OID 18336)
+-- TOC entry 3151 (class 2604 OID 21760)
 -- Name: Fields Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1384,7 +1807,7 @@ ALTER TABLE ONLY public."Fields" ALTER COLUMN "Id" SET DEFAULT nextval('public."
 
 
 --
--- TOC entry 3087 (class 2604 OID 18414)
+-- TOC entry 3155 (class 2604 OID 21838)
 -- Name: Files Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1392,7 +1815,7 @@ ALTER TABLE ONLY public."Files" ALTER COLUMN "Id" SET DEFAULT nextval('public."F
 
 
 --
--- TOC entry 3081 (class 2604 OID 18304)
+-- TOC entry 3149 (class 2604 OID 21728)
 -- Name: Forms Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1400,7 +1823,7 @@ ALTER TABLE ONLY public."Forms" ALTER COLUMN "Id" SET DEFAULT nextval('public."F
 
 
 --
--- TOC entry 3067 (class 2604 OID 18026)
+-- TOC entry 3135 (class 2604 OID 21450)
 -- Name: Localizations Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1408,7 +1831,7 @@ ALTER TABLE ONLY public."Localizations" ALTER COLUMN "Id" SET DEFAULT nextval('p
 
 
 --
--- TOC entry 3074 (class 2604 OID 18148)
+-- TOC entry 3142 (class 2604 OID 21572)
 -- Name: Members Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1416,7 +1839,7 @@ ALTER TABLE ONLY public."Members" ALTER COLUMN "Id" SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3080 (class 2604 OID 18278)
+-- TOC entry 3148 (class 2604 OID 21702)
 -- Name: MenuItems Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1424,7 +1847,7 @@ ALTER TABLE ONLY public."MenuItems" ALTER COLUMN "Id" SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3079 (class 2604 OID 18262)
+-- TOC entry 3147 (class 2604 OID 21686)
 -- Name: Menus Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1432,7 +1855,7 @@ ALTER TABLE ONLY public."Menus" ALTER COLUMN "Id" SET DEFAULT nextval('public."M
 
 
 --
--- TOC entry 3076 (class 2604 OID 18200)
+-- TOC entry 3144 (class 2604 OID 21624)
 -- Name: Objects Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1440,7 +1863,31 @@ ALTER TABLE ONLY public."Objects" ALTER COLUMN "Id" SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3063 (class 2604 OID 17957)
+-- TOC entry 3159 (class 2604 OID 21952)
+-- Name: OrderStates Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."OrderStates" ALTER COLUMN "Id" SET DEFAULT nextval('public."OrderStates_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3163 (class 2604 OID 22011)
+-- Name: Orders Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Orders" ALTER COLUMN "Id" SET DEFAULT nextval('public."Orders_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3160 (class 2604 OID 21968)
+-- Name: PaymentMethods Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PaymentMethods" ALTER COLUMN "Id" SET DEFAULT nextval('public."PaymentMethods_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3131 (class 2604 OID 21381)
 -- Name: Permissions Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1448,7 +1895,31 @@ ALTER TABLE ONLY public."Permissions" ALTER COLUMN "Id" SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3077 (class 2604 OID 18213)
+-- TOC entry 3158 (class 2604 OID 21936)
+-- Name: Photos Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Photos" ALTER COLUMN "Id" SET DEFAULT nextval('public."Photos_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3164 (class 2604 OID 22037)
+-- Name: Positions Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Positions" ALTER COLUMN "Id" SET DEFAULT nextval('public."Positions_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3157 (class 2604 OID 21890)
+-- Name: Products Id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products" ALTER COLUMN "Id" SET DEFAULT nextval('public."Products_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 3145 (class 2604 OID 21637)
 -- Name: Properties Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1456,7 +1927,7 @@ ALTER TABLE ONLY public."Properties" ALTER COLUMN "Id" SET DEFAULT nextval('publ
 
 
 --
--- TOC entry 3078 (class 2604 OID 18239)
+-- TOC entry 3146 (class 2604 OID 21663)
 -- Name: Relations Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1464,7 +1935,7 @@ ALTER TABLE ONLY public."Relations" ALTER COLUMN "Id" SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3062 (class 2604 OID 17931)
+-- TOC entry 3130 (class 2604 OID 21355)
 -- Name: Roles Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1472,7 +1943,7 @@ ALTER TABLE ONLY public."Roles" ALTER COLUMN "Id" SET DEFAULT nextval('public."R
 
 
 --
--- TOC entry 3071 (class 2604 OID 18105)
+-- TOC entry 3139 (class 2604 OID 21529)
 -- Name: Tabs Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1480,7 +1951,7 @@ ALTER TABLE ONLY public."Tabs" ALTER COLUMN "Id" SET DEFAULT nextval('public."Ta
 
 
 --
--- TOC entry 3059 (class 2604 OID 17888)
+-- TOC entry 3127 (class 2604 OID 21312)
 -- Name: Users Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1488,7 +1959,7 @@ ALTER TABLE ONLY public."Users" ALTER COLUMN "Id" SET DEFAULT nextval('public."U
 
 
 --
--- TOC entry 3065 (class 2604 OID 17994)
+-- TOC entry 3133 (class 2604 OID 21418)
 -- Name: Variables Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1496,8 +1967,24 @@ ALTER TABLE ONLY public."Variables" ALTER COLUMN "Id" SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3353 (class 0 OID 18086)
--- Dependencies: 227
+-- TOC entry 3522 (class 0 OID 21997)
+-- Dependencies: 276
+-- Data for Name: Carts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3510 (class 0 OID 21846)
+-- Dependencies: 264
+-- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3474 (class 0 OID 21510)
+-- Dependencies: 228
 -- Data for Name: Classes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1506,24 +1993,24 @@ INSERT INTO public."Classes" ("Id", "ClassId", "Code", "Name", "PluralizedName",
 
 
 --
--- TOC entry 3385 (class 0 OID 18390)
--- Dependencies: 259
+-- TOC entry 3506 (class 0 OID 21814)
+-- Dependencies: 260
 -- Data for Name: CompletedFields; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3383 (class 0 OID 18377)
--- Dependencies: 257
+-- TOC entry 3504 (class 0 OID 21801)
+-- Dependencies: 258
 -- Data for Name: CompletedForms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3339 (class 0 OID 17980)
--- Dependencies: 213
+-- TOC entry 3460 (class 0 OID 21404)
+-- Dependencies: 214
 -- Data for Name: Configurations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1532,8 +2019,8 @@ INSERT INTO public."Configurations" ("Id", "Code", "Name") VALUES (2, 'Globaliza
 
 
 --
--- TOC entry 3329 (class 0 OID 17896)
--- Dependencies: 203
+-- TOC entry 3450 (class 0 OID 21320)
+-- Dependencies: 204
 -- Data for Name: CredentialTypes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1541,8 +2028,8 @@ INSERT INTO public."CredentialTypes" ("Id", "Code", "Name", "Position") VALUES (
 
 
 --
--- TOC entry 3331 (class 0 OID 17907)
--- Dependencies: 205
+-- TOC entry 3452 (class 0 OID 21331)
+-- Dependencies: 206
 -- Data for Name: Credentials; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1550,8 +2037,8 @@ INSERT INTO public."Credentials" ("Id", "UserId", "CredentialTypeId", "Identifie
 
 
 --
--- TOC entry 3342 (class 0 OID 18005)
--- Dependencies: 216
+-- TOC entry 3463 (class 0 OID 21429)
+-- Dependencies: 217
 -- Data for Name: Cultures; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1562,18 +2049,18 @@ INSERT INTO public."Cultures" ("Id", "Name", "IsNeutral", "IsFrontendDefault", "
 
 
 --
--- TOC entry 3351 (class 0 OID 18070)
--- Dependencies: 225
+-- TOC entry 3472 (class 0 OID 21494)
+-- Dependencies: 226
 -- Data for Name: DataSources; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."DataSources" ("Id", "EndpointId", "Code", "CSharpClassName", "Parameters") VALUES (1, 1, 'Page', 'Platformus.Website.Frontend.DataSources.PageObjectDataSource', NULL);
-INSERT INTO public."DataSources" ("Id", "EndpointId", "Code", "CSharpClassName", "Parameters") VALUES (2, 2, 'Page', 'Platformus.Website.Frontend.DataSources.PageObjectDataSource', NULL);
+INSERT INTO public."DataSources" ("Id", "EndpointId", "Code", "DataProviderCSharpClassName", "DataProviderParameters") VALUES (1, 1, 'Page', 'Platformus.Website.Frontend.DataProviders.PageObjectDataProvider', NULL);
+INSERT INTO public."DataSources" ("Id", "EndpointId", "Code", "DataProviderCSharpClassName", "DataProviderParameters") VALUES (2, 2, 'Page', 'Platformus.Website.Frontend.DataProviders.PageObjectDataProvider', NULL);
 
 
 --
--- TOC entry 3363 (class 0 OID 18176)
--- Dependencies: 237
+-- TOC entry 3484 (class 0 OID 21600)
+-- Dependencies: 238
 -- Data for Name: DataTypeParameterValues; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1588,8 +2075,8 @@ INSERT INTO public."DataTypeParameterValues" ("Id", "DataTypeParameterId", "Memb
 
 
 --
--- TOC entry 3359 (class 0 OID 18129)
--- Dependencies: 233
+-- TOC entry 3480 (class 0 OID 21553)
+-- Dependencies: 234
 -- Data for Name: DataTypeParameters; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1597,15 +2084,21 @@ INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorCl
 INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (2, 1, 'numericTextBox', 'MaxLength', 'Max length');
 INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (3, 2, 'checkbox', 'IsRequired', 'Is required');
 INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (4, 2, 'numericTextBox', 'MaxLength', 'Max length');
-INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (5, 7, 'checkbox', 'IsRequired', 'Is required');
-INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (6, 8, 'numericTextBox', 'Width', 'Width');
-INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (7, 8, 'numericTextBox', 'Height', 'Height');
-INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (8, 9, 'textBox', 'Mode', 'Mode');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (5, 4, 'checkbox', 'IsRequired', 'Is required');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (6, 4, 'numericTextBox', 'MinValue', 'Min value');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (7, 4, 'numericTextBox', 'MaxValue', 'Max value');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (8, 5, 'checkbox', 'IsRequired', 'Is required');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (9, 5, 'numericTextBox', 'MinValue', 'Min value');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (10, 5, 'numericTextBox', 'MaxValue', 'Max value');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (11, 7, 'checkbox', 'IsRequired', 'Is required');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (12, 8, 'numericTextBox', 'Width', 'Width');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (13, 8, 'numericTextBox', 'Height', 'Height');
+INSERT INTO public."DataTypeParameters" ("Id", "DataTypeId", "JavaScriptEditorClassName", "Code", "Name") VALUES (14, 9, 'textBox', 'Mode', 'Mode');
 
 
 --
--- TOC entry 3357 (class 0 OID 18118)
--- Dependencies: 231
+-- TOC entry 3478 (class 0 OID 21542)
+-- Dependencies: 232
 -- Data for Name: DataTypes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1616,13 +2109,22 @@ INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassN
 INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (5, 'decimal', 'decimalNumber', 'Decimal number', 5);
 INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (6, 'integer', 'booleanFlag', 'Boolean flag', 6);
 INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (7, 'datetime', 'date', 'Date', 7);
-INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (8, 'string', 'image', 'Image', 8);
-INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (9, 'string', 'sourceCode', 'Source code', 9);
+INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (8, 'datetime', 'dateTime', 'DateTime', 8);
+INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (9, 'string', 'image', 'Image', 9);
+INSERT INTO public."DataTypes" ("Id", "StorageDataType", "JavaScriptEditorClassName", "Name", "Position") VALUES (10, 'string', 'sourceCode', 'Source code', 10);
 
 
 --
--- TOC entry 3344 (class 0 OID 18015)
--- Dependencies: 218
+-- TOC entry 3520 (class 0 OID 21981)
+-- Dependencies: 274
+-- Data for Name: DeliveryMethods; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3465 (class 0 OID 21439)
+-- Dependencies: 219
 -- Data for Name: Dictionaries; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1653,34 +2155,34 @@ INSERT INTO public."Dictionaries" ("Id") VALUES (24);
 
 
 --
--- TOC entry 3349 (class 0 OID 18053)
--- Dependencies: 223
+-- TOC entry 3470 (class 0 OID 21477)
+-- Dependencies: 224
 -- Data for Name: EndpointPermissions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3348 (class 0 OID 18044)
--- Dependencies: 222
+-- TOC entry 3469 (class 0 OID 21468)
+-- Dependencies: 223
 -- Data for Name: Endpoints; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Endpoints" ("Id", "Name", "UrlTemplate", "Position", "DisallowAnonymous", "SignInUrl", "ResponseCacheCSharpClassName", "CSharpClassName", "Parameters") VALUES (1, 'Default', '{*url}', 1000, false, NULL, NULL, 'Platformus.Website.Frontend.DefaultEndpoint', 'ViewName=RegularPage');
-INSERT INTO public."Endpoints" ("Id", "Name", "UrlTemplate", "Position", "DisallowAnonymous", "SignInUrl", "ResponseCacheCSharpClassName", "CSharpClassName", "Parameters") VALUES (2, 'Contacts', 'contacts', 10, false, NULL, NULL, 'Platformus.Website.Frontend.DefaultEndpoint', 'ViewName=ContactsPage');
+INSERT INTO public."Endpoints" ("Id", "Name", "UrlTemplate", "Position", "DisallowAnonymous", "SignInUrl", "RequestProcessorCSharpClassName", "RequestProcessorParameters", "ResponseCacheCSharpClassName", "ResponseCacheParameters") VALUES (1, 'Default', '{*url}', 1000, false, NULL, 'Platformus.Website.Frontend.RequestProcessors.DefaultRequestProcessor', 'ViewName=RegularPage', NULL, NULL);
+INSERT INTO public."Endpoints" ("Id", "Name", "UrlTemplate", "Position", "DisallowAnonymous", "SignInUrl", "RequestProcessorCSharpClassName", "RequestProcessorParameters", "ResponseCacheCSharpClassName", "ResponseCacheParameters") VALUES (2, 'Contacts', 'contacts', 10, false, NULL, 'Platformus.Website.Frontend.RequestProcessors.DefaultRequestProcessor', 'ViewName=ContactsPage', NULL, NULL);
 
 
 --
--- TOC entry 3381 (class 0 OID 18359)
--- Dependencies: 255
+-- TOC entry 3502 (class 0 OID 21783)
+-- Dependencies: 256
 -- Data for Name: FieldOptions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3377 (class 0 OID 18322)
--- Dependencies: 251
+-- TOC entry 3498 (class 0 OID 21746)
+-- Dependencies: 252
 -- Data for Name: FieldTypes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1690,12 +2192,12 @@ INSERT INTO public."FieldTypes" ("Id", "Code", "Name", "Position", "ValidatorCSh
 INSERT INTO public."FieldTypes" ("Id", "Code", "Name", "Position", "ValidatorCSharpClassName") VALUES (4, 'RadioButtonList', 'Radio button list', 4, NULL);
 INSERT INTO public."FieldTypes" ("Id", "Code", "Name", "Position", "ValidatorCSharpClassName") VALUES (5, 'DropDownList', 'Drop down list', 5, NULL);
 INSERT INTO public."FieldTypes" ("Id", "Code", "Name", "Position", "ValidatorCSharpClassName") VALUES (6, 'FileUpload', 'File upload', 6, NULL);
-INSERT INTO public."FieldTypes" ("Id", "Code", "Name", "Position", "ValidatorCSharpClassName") VALUES (7, 'ReCAPTCHA', 'ReCAPTCHA', 7, 'Platformus.Website.Frontend.FormHandlers.ReCaptchaFieldValidator');
+INSERT INTO public."FieldTypes" ("Id", "Code", "Name", "Position", "ValidatorCSharpClassName") VALUES (7, 'ReCAPTCHA', 'ReCAPTCHA', 7, 'Platformus.Website.Frontend.FieldValidators.ReCaptchaFieldValidator');
 
 
 --
--- TOC entry 3379 (class 0 OID 18333)
--- Dependencies: 253
+-- TOC entry 3500 (class 0 OID 21757)
+-- Dependencies: 254
 -- Data for Name: Fields; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1705,25 +2207,25 @@ INSERT INTO public."Fields" ("Id", "FormId", "FieldTypeId", "Code", "NameId", "I
 
 
 --
--- TOC entry 3387 (class 0 OID 18411)
--- Dependencies: 261
+-- TOC entry 3508 (class 0 OID 21835)
+-- Dependencies: 262
 -- Data for Name: Files; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3375 (class 0 OID 18301)
--- Dependencies: 249
+-- TOC entry 3496 (class 0 OID 21725)
+-- Dependencies: 250
 -- Data for Name: Forms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Forms" ("Id", "Code", "NameId", "SubmitButtonTitleId", "ProduceCompletedForms", "CSharpClassName", "Parameters") VALUES (1, 'Feedback', 5, 6, true, 'Platformus.Website.Frontend.FormHandlers.EmailFormHandler', 'RecipientEmails=test@test.com;RedirectUrl=/contacts');
+INSERT INTO public."Forms" ("Id", "Code", "NameId", "SubmitButtonTitleId", "ProduceCompletedForms", "FormHandlerCSharpClassName", "FormHandlerParameters") VALUES (1, 'Feedback', 5, 6, true, 'Platformus.Website.Frontend.FormHandlers.EmailFormHandler', 'RecipientEmails=test@test.com;RedirectUrl=/contacts');
 
 
 --
--- TOC entry 3346 (class 0 OID 18023)
--- Dependencies: 220
+-- TOC entry 3467 (class 0 OID 21447)
+-- Dependencies: 221
 -- Data for Name: Localizations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1796,8 +2298,8 @@ INSERT INTO public."Localizations" ("Id", "DictionaryId", "CultureId", "Value") 
 
 
 --
--- TOC entry 3361 (class 0 OID 18145)
--- Dependencies: 235
+-- TOC entry 3482 (class 0 OID 21569)
+-- Dependencies: 236
 -- Data for Name: Members; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1809,8 +2311,8 @@ INSERT INTO public."Members" ("Id", "ClassId", "TabId", "Code", "Name", "Positio
 
 
 --
--- TOC entry 3373 (class 0 OID 18275)
--- Dependencies: 247
+-- TOC entry 3494 (class 0 OID 21699)
+-- Dependencies: 248
 -- Data for Name: MenuItems; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1820,8 +2322,8 @@ INSERT INTO public."MenuItems" ("Id", "MenuId", "MenuItemId", "NameId", "Url", "
 
 
 --
--- TOC entry 3371 (class 0 OID 18259)
--- Dependencies: 245
+-- TOC entry 3492 (class 0 OID 21683)
+-- Dependencies: 246
 -- Data for Name: Menus; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1829,8 +2331,16 @@ INSERT INTO public."Menus" ("Id", "Code", "NameId") VALUES (1, 'Main', 1);
 
 
 --
--- TOC entry 3365 (class 0 OID 18197)
--- Dependencies: 239
+-- TOC entry 3446 (class 0 OID 21299)
+-- Dependencies: 200
+-- Data for Name: ModelStates; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3486 (class 0 OID 21621)
+-- Dependencies: 240
 -- Data for Name: Objects; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1840,8 +2350,32 @@ INSERT INTO public."Objects" ("Id", "ClassId") VALUES (3, 2);
 
 
 --
--- TOC entry 3336 (class 0 OID 17954)
--- Dependencies: 210
+-- TOC entry 3516 (class 0 OID 21949)
+-- Dependencies: 270
+-- Data for Name: OrderStates; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3524 (class 0 OID 22008)
+-- Dependencies: 278
+-- Data for Name: Orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3518 (class 0 OID 21965)
+-- Dependencies: 272
+-- Data for Name: PaymentMethods; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3457 (class 0 OID 21378)
+-- Dependencies: 211
 -- Data for Name: Permissions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1858,11 +2392,42 @@ INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (10, 
 INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (11, 'ManageMenus', 'Manage menus', 1100);
 INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (12, 'ManageForms', 'Manage forms', 1200);
 INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (13, 'ManageFileManager', 'Manage file manager', 1300);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (14, 'ManageCategories', 'Manage categories', 1400);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (15, 'ManageProducts', 'Manage products', 1500);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (16, 'ManageOrderStates', 'Manage order states', 1600);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (17, 'ManagePaymentMethods', 'Manage payment methods', 1700);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (18, 'ManageDeliveryMethods', 'Manage delivery methods', 1800);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (19, 'ManageCarts', 'Manage carts', 1900);
+INSERT INTO public."Permissions" ("Id", "Code", "Name", "Position") VALUES (20, 'ManageOrders', 'Manage orders', 2000);
 
 
 --
--- TOC entry 3367 (class 0 OID 18210)
--- Dependencies: 241
+-- TOC entry 3514 (class 0 OID 21933)
+-- Dependencies: 268
+-- Data for Name: Photos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3526 (class 0 OID 22034)
+-- Dependencies: 280
+-- Data for Name: Positions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3512 (class 0 OID 21887)
+-- Dependencies: 266
+-- Data for Name: Products; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3488 (class 0 OID 21634)
+-- Dependencies: 242
 -- Data for Name: Properties; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1884,16 +2449,16 @@ INSERT INTO public."Properties" ("Id", "ObjectId", "MemberId", "IntegerValue", "
 
 
 --
--- TOC entry 3369 (class 0 OID 18236)
--- Dependencies: 243
+-- TOC entry 3490 (class 0 OID 21660)
+-- Dependencies: 244
 -- Data for Name: Relations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3337 (class 0 OID 17963)
--- Dependencies: 211
+-- TOC entry 3458 (class 0 OID 21387)
+-- Dependencies: 212
 -- Data for Name: RolePermissions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1906,8 +2471,8 @@ INSERT INTO public."RolePermissions" ("RoleId", "PermissionId") VALUES (3, 13);
 
 
 --
--- TOC entry 3333 (class 0 OID 17928)
--- Dependencies: 207
+-- TOC entry 3454 (class 0 OID 21352)
+-- Dependencies: 208
 -- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1917,8 +2482,8 @@ INSERT INTO public."Roles" ("Id", "Code", "Name", "Position") VALUES (3, 'Conten
 
 
 --
--- TOC entry 3355 (class 0 OID 18102)
--- Dependencies: 229
+-- TOC entry 3476 (class 0 OID 21526)
+-- Dependencies: 230
 -- Data for Name: Tabs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1926,8 +2491,8 @@ INSERT INTO public."Tabs" ("Id", "ClassId", "Name", "Position") VALUES (1, 1, 'S
 
 
 --
--- TOC entry 3334 (class 0 OID 17937)
--- Dependencies: 208
+-- TOC entry 3455 (class 0 OID 21361)
+-- Dependencies: 209
 -- Data for Name: UserRoles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1936,8 +2501,8 @@ INSERT INTO public."UserRoles" ("UserId", "RoleId") VALUES (1, 2);
 
 
 --
--- TOC entry 3327 (class 0 OID 17885)
--- Dependencies: 201
+-- TOC entry 3448 (class 0 OID 21309)
+-- Dependencies: 202
 -- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1945,8 +2510,8 @@ INSERT INTO public."Users" ("Id", "Name", "Created") VALUES (1, 'Administrator',
 
 
 --
--- TOC entry 3341 (class 0 OID 17991)
--- Dependencies: 215
+-- TOC entry 3462 (class 0 OID 21415)
+-- Dependencies: 216
 -- Data for Name: Variables; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1961,8 +2526,26 @@ INSERT INTO public."Variables" ("Id", "ConfigurationId", "Code", "Name", "Value"
 
 
 --
--- TOC entry 3422 (class 0 OID 0)
--- Dependencies: 226
+-- TOC entry 3570 (class 0 OID 0)
+-- Dependencies: 275
+-- Name: Carts_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Carts_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3571 (class 0 OID 0)
+-- Dependencies: 263
+-- Name: Categories_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Categories_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3572 (class 0 OID 0)
+-- Dependencies: 227
 -- Name: Classes_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1970,8 +2553,8 @@ SELECT pg_catalog.setval('public."Classes_Id_seq"', 2, true);
 
 
 --
--- TOC entry 3423 (class 0 OID 0)
--- Dependencies: 258
+-- TOC entry 3573 (class 0 OID 0)
+-- Dependencies: 259
 -- Name: CompletedFields_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1979,8 +2562,8 @@ SELECT pg_catalog.setval('public."CompletedFields_Id_seq"', 1, false);
 
 
 --
--- TOC entry 3424 (class 0 OID 0)
--- Dependencies: 256
+-- TOC entry 3574 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: CompletedForms_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1988,8 +2571,8 @@ SELECT pg_catalog.setval('public."CompletedForms_Id_seq"', 1, false);
 
 
 --
--- TOC entry 3425 (class 0 OID 0)
--- Dependencies: 212
+-- TOC entry 3575 (class 0 OID 0)
+-- Dependencies: 213
 -- Name: Configurations_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1997,8 +2580,8 @@ SELECT pg_catalog.setval('public."Configurations_Id_seq"', 3, false);
 
 
 --
--- TOC entry 3426 (class 0 OID 0)
--- Dependencies: 202
+-- TOC entry 3576 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: CredentialTypes_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2006,8 +2589,8 @@ SELECT pg_catalog.setval('public."CredentialTypes_Id_seq"', 2, false);
 
 
 --
--- TOC entry 3427 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 3577 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: Credentials_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2015,8 +2598,8 @@ SELECT pg_catalog.setval('public."Credentials_Id_seq"', 2, false);
 
 
 --
--- TOC entry 3428 (class 0 OID 0)
--- Dependencies: 224
+-- TOC entry 3578 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: DataSources_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2024,8 +2607,8 @@ SELECT pg_catalog.setval('public."DataSources_Id_seq"', 2, true);
 
 
 --
--- TOC entry 3429 (class 0 OID 0)
--- Dependencies: 236
+-- TOC entry 3579 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: DataTypeParameterValues_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2033,8 +2616,8 @@ SELECT pg_catalog.setval('public."DataTypeParameterValues_Id_seq"', 8, true);
 
 
 --
--- TOC entry 3430 (class 0 OID 0)
--- Dependencies: 232
+-- TOC entry 3580 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: DataTypeParameters_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2042,8 +2625,8 @@ SELECT pg_catalog.setval('public."DataTypeParameters_Id_seq"', 8, false);
 
 
 --
--- TOC entry 3431 (class 0 OID 0)
--- Dependencies: 230
+-- TOC entry 3581 (class 0 OID 0)
+-- Dependencies: 231
 -- Name: DataTypes_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2051,8 +2634,17 @@ SELECT pg_catalog.setval('public."DataTypes_Id_seq"', 9, false);
 
 
 --
--- TOC entry 3432 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 3582 (class 0 OID 0)
+-- Dependencies: 273
+-- Name: DeliveryMethods_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."DeliveryMethods_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3583 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: Dictionaries_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2060,8 +2652,8 @@ SELECT pg_catalog.setval('public."Dictionaries_Id_seq"', 24, true);
 
 
 --
--- TOC entry 3433 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3584 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: Endpoints_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2069,8 +2661,8 @@ SELECT pg_catalog.setval('public."Endpoints_Id_seq"', 2, true);
 
 
 --
--- TOC entry 3434 (class 0 OID 0)
--- Dependencies: 254
+-- TOC entry 3585 (class 0 OID 0)
+-- Dependencies: 255
 -- Name: FieldOptions_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2078,8 +2670,8 @@ SELECT pg_catalog.setval('public."FieldOptions_Id_seq"', 1, false);
 
 
 --
--- TOC entry 3435 (class 0 OID 0)
--- Dependencies: 250
+-- TOC entry 3586 (class 0 OID 0)
+-- Dependencies: 251
 -- Name: FieldTypes_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2087,8 +2679,8 @@ SELECT pg_catalog.setval('public."FieldTypes_Id_seq"', 8, false);
 
 
 --
--- TOC entry 3436 (class 0 OID 0)
--- Dependencies: 252
+-- TOC entry 3587 (class 0 OID 0)
+-- Dependencies: 253
 -- Name: Fields_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2096,8 +2688,8 @@ SELECT pg_catalog.setval('public."Fields_Id_seq"', 3, true);
 
 
 --
--- TOC entry 3437 (class 0 OID 0)
--- Dependencies: 260
+-- TOC entry 3588 (class 0 OID 0)
+-- Dependencies: 261
 -- Name: Files_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2105,8 +2697,8 @@ SELECT pg_catalog.setval('public."Files_Id_seq"', 1, false);
 
 
 --
--- TOC entry 3438 (class 0 OID 0)
--- Dependencies: 248
+-- TOC entry 3589 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: Forms_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2114,8 +2706,8 @@ SELECT pg_catalog.setval('public."Forms_Id_seq"', 1, true);
 
 
 --
--- TOC entry 3439 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 3590 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: Localizations_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2123,8 +2715,8 @@ SELECT pg_catalog.setval('public."Localizations_Id_seq"', 66, true);
 
 
 --
--- TOC entry 3440 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3591 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: Members_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2132,8 +2724,8 @@ SELECT pg_catalog.setval('public."Members_Id_seq"', 5, true);
 
 
 --
--- TOC entry 3441 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 3592 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: MenuItems_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2141,8 +2733,8 @@ SELECT pg_catalog.setval('public."MenuItems_Id_seq"', 3, true);
 
 
 --
--- TOC entry 3442 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 3593 (class 0 OID 0)
+-- Dependencies: 245
 -- Name: Menus_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2150,8 +2742,8 @@ SELECT pg_catalog.setval('public."Menus_Id_seq"', 1, true);
 
 
 --
--- TOC entry 3443 (class 0 OID 0)
--- Dependencies: 238
+-- TOC entry 3594 (class 0 OID 0)
+-- Dependencies: 239
 -- Name: Objects_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2159,8 +2751,35 @@ SELECT pg_catalog.setval('public."Objects_Id_seq"', 3, true);
 
 
 --
--- TOC entry 3444 (class 0 OID 0)
--- Dependencies: 209
+-- TOC entry 3595 (class 0 OID 0)
+-- Dependencies: 269
+-- Name: OrderStates_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."OrderStates_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3596 (class 0 OID 0)
+-- Dependencies: 277
+-- Name: Orders_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Orders_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3597 (class 0 OID 0)
+-- Dependencies: 271
+-- Name: PaymentMethods_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."PaymentMethods_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3598 (class 0 OID 0)
+-- Dependencies: 210
 -- Name: Permissions_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2168,8 +2787,35 @@ SELECT pg_catalog.setval('public."Permissions_Id_seq"', 27, false);
 
 
 --
--- TOC entry 3445 (class 0 OID 0)
--- Dependencies: 240
+-- TOC entry 3599 (class 0 OID 0)
+-- Dependencies: 267
+-- Name: Photos_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Photos_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3600 (class 0 OID 0)
+-- Dependencies: 279
+-- Name: Positions_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Positions_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3601 (class 0 OID 0)
+-- Dependencies: 265
+-- Name: Products_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Products_Id_seq"', 1, false);
+
+
+--
+-- TOC entry 3602 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: Properties_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2177,8 +2823,8 @@ SELECT pg_catalog.setval('public."Properties_Id_seq"', 15, true);
 
 
 --
--- TOC entry 3446 (class 0 OID 0)
--- Dependencies: 242
+-- TOC entry 3603 (class 0 OID 0)
+-- Dependencies: 243
 -- Name: Relations_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2186,8 +2832,8 @@ SELECT pg_catalog.setval('public."Relations_Id_seq"', 1, false);
 
 
 --
--- TOC entry 3447 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 3604 (class 0 OID 0)
+-- Dependencies: 207
 -- Name: Roles_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2195,8 +2841,8 @@ SELECT pg_catalog.setval('public."Roles_Id_seq"', 4, false);
 
 
 --
--- TOC entry 3448 (class 0 OID 0)
--- Dependencies: 228
+-- TOC entry 3605 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: Tabs_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2204,8 +2850,8 @@ SELECT pg_catalog.setval('public."Tabs_Id_seq"', 1, true);
 
 
 --
--- TOC entry 3449 (class 0 OID 0)
--- Dependencies: 200
+-- TOC entry 3606 (class 0 OID 0)
+-- Dependencies: 201
 -- Name: Users_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2213,8 +2859,8 @@ SELECT pg_catalog.setval('public."Users_Id_seq"', 2, false);
 
 
 --
--- TOC entry 3450 (class 0 OID 0)
--- Dependencies: 214
+-- TOC entry 3607 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: Variables_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2222,7 +2868,25 @@ SELECT pg_catalog.setval('public."Variables_Id_seq"', 8, false);
 
 
 --
--- TOC entry 3119 (class 2606 OID 18094)
+-- TOC entry 3246 (class 2606 OID 22005)
+-- Name: Carts PK_Carts; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Carts"
+    ADD CONSTRAINT "PK_Carts" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3234 (class 2606 OID 21854)
+-- Name: Categories PK_Categories; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "PK_Categories" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3198 (class 2606 OID 21518)
 -- Name: Classes PK_Classes; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2231,7 +2895,7 @@ ALTER TABLE ONLY public."Classes"
 
 
 --
--- TOC entry 3151 (class 2606 OID 18398)
+-- TOC entry 3230 (class 2606 OID 21822)
 -- Name: CompletedFields PK_CompletedFields; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2240,7 +2904,7 @@ ALTER TABLE ONLY public."CompletedFields"
 
 
 --
--- TOC entry 3149 (class 2606 OID 18382)
+-- TOC entry 3228 (class 2606 OID 21806)
 -- Name: CompletedForms PK_CompletedForms; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2249,7 +2913,7 @@ ALTER TABLE ONLY public."CompletedForms"
 
 
 --
--- TOC entry 3103 (class 2606 OID 17988)
+-- TOC entry 3182 (class 2606 OID 21412)
 -- Name: Configurations PK_Configurations; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2258,7 +2922,7 @@ ALTER TABLE ONLY public."Configurations"
 
 
 --
--- TOC entry 3091 (class 2606 OID 17904)
+-- TOC entry 3170 (class 2606 OID 21328)
 -- Name: CredentialTypes PK_CredentialTypes; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2267,7 +2931,7 @@ ALTER TABLE ONLY public."CredentialTypes"
 
 
 --
--- TOC entry 3093 (class 2606 OID 17915)
+-- TOC entry 3172 (class 2606 OID 21339)
 -- Name: Credentials PK_Credentials; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2276,7 +2940,7 @@ ALTER TABLE ONLY public."Credentials"
 
 
 --
--- TOC entry 3107 (class 2606 OID 18012)
+-- TOC entry 3186 (class 2606 OID 21436)
 -- Name: Cultures PK_Cultures; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2285,7 +2949,7 @@ ALTER TABLE ONLY public."Cultures"
 
 
 --
--- TOC entry 3117 (class 2606 OID 18078)
+-- TOC entry 3196 (class 2606 OID 21502)
 -- Name: DataSources PK_DataSources; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2294,7 +2958,7 @@ ALTER TABLE ONLY public."DataSources"
 
 
 --
--- TOC entry 3129 (class 2606 OID 18184)
+-- TOC entry 3208 (class 2606 OID 21608)
 -- Name: DataTypeParameterValues PK_DataTypeParameterValues; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2303,7 +2967,7 @@ ALTER TABLE ONLY public."DataTypeParameterValues"
 
 
 --
--- TOC entry 3125 (class 2606 OID 18137)
+-- TOC entry 3204 (class 2606 OID 21561)
 -- Name: DataTypeParameters PK_DataTypeParameters; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2312,7 +2976,7 @@ ALTER TABLE ONLY public."DataTypeParameters"
 
 
 --
--- TOC entry 3123 (class 2606 OID 18126)
+-- TOC entry 3202 (class 2606 OID 21550)
 -- Name: DataTypes PK_DataTypes; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2321,7 +2985,16 @@ ALTER TABLE ONLY public."DataTypes"
 
 
 --
--- TOC entry 3109 (class 2606 OID 18020)
+-- TOC entry 3244 (class 2606 OID 21989)
+-- Name: DeliveryMethods PK_DeliveryMethods; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DeliveryMethods"
+    ADD CONSTRAINT "PK_DeliveryMethods" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3188 (class 2606 OID 21444)
 -- Name: Dictionaries PK_Dictionaries; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2330,7 +3003,7 @@ ALTER TABLE ONLY public."Dictionaries"
 
 
 --
--- TOC entry 3115 (class 2606 OID 18057)
+-- TOC entry 3194 (class 2606 OID 21481)
 -- Name: EndpointPermissions PK_EndpointPermissions; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2339,7 +3012,7 @@ ALTER TABLE ONLY public."EndpointPermissions"
 
 
 --
--- TOC entry 3113 (class 2606 OID 18052)
+-- TOC entry 3192 (class 2606 OID 21476)
 -- Name: Endpoints PK_Endpoints; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2348,7 +3021,7 @@ ALTER TABLE ONLY public."Endpoints"
 
 
 --
--- TOC entry 3147 (class 2606 OID 18364)
+-- TOC entry 3226 (class 2606 OID 21788)
 -- Name: FieldOptions PK_FieldOptions; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2357,7 +3030,7 @@ ALTER TABLE ONLY public."FieldOptions"
 
 
 --
--- TOC entry 3143 (class 2606 OID 18330)
+-- TOC entry 3222 (class 2606 OID 21754)
 -- Name: FieldTypes PK_FieldTypes; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2366,7 +3039,7 @@ ALTER TABLE ONLY public."FieldTypes"
 
 
 --
--- TOC entry 3145 (class 2606 OID 18341)
+-- TOC entry 3224 (class 2606 OID 21765)
 -- Name: Fields PK_Fields; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2375,7 +3048,7 @@ ALTER TABLE ONLY public."Fields"
 
 
 --
--- TOC entry 3153 (class 2606 OID 18419)
+-- TOC entry 3232 (class 2606 OID 21843)
 -- Name: Files PK_Files; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2384,7 +3057,7 @@ ALTER TABLE ONLY public."Files"
 
 
 --
--- TOC entry 3141 (class 2606 OID 18309)
+-- TOC entry 3220 (class 2606 OID 21733)
 -- Name: Forms PK_Forms; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2393,7 +3066,7 @@ ALTER TABLE ONLY public."Forms"
 
 
 --
--- TOC entry 3111 (class 2606 OID 18031)
+-- TOC entry 3190 (class 2606 OID 21455)
 -- Name: Localizations PK_Localizations; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2402,7 +3075,7 @@ ALTER TABLE ONLY public."Localizations"
 
 
 --
--- TOC entry 3127 (class 2606 OID 18153)
+-- TOC entry 3206 (class 2606 OID 21577)
 -- Name: Members PK_Members; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2411,7 +3084,7 @@ ALTER TABLE ONLY public."Members"
 
 
 --
--- TOC entry 3139 (class 2606 OID 18283)
+-- TOC entry 3218 (class 2606 OID 21707)
 -- Name: MenuItems PK_MenuItems; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2420,7 +3093,7 @@ ALTER TABLE ONLY public."MenuItems"
 
 
 --
--- TOC entry 3137 (class 2606 OID 18267)
+-- TOC entry 3216 (class 2606 OID 21691)
 -- Name: Menus PK_Menus; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2429,7 +3102,16 @@ ALTER TABLE ONLY public."Menus"
 
 
 --
--- TOC entry 3131 (class 2606 OID 18202)
+-- TOC entry 3166 (class 2606 OID 21306)
+-- Name: ModelStates PK_ModelStates; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ModelStates"
+    ADD CONSTRAINT "PK_ModelStates" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3210 (class 2606 OID 21626)
 -- Name: Objects PK_Objects; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2438,7 +3120,34 @@ ALTER TABLE ONLY public."Objects"
 
 
 --
--- TOC entry 3099 (class 2606 OID 17962)
+-- TOC entry 3240 (class 2606 OID 21957)
+-- Name: OrderStates PK_OrderStates; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."OrderStates"
+    ADD CONSTRAINT "PK_OrderStates" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3248 (class 2606 OID 22016)
+-- Name: Orders PK_Orders; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Orders"
+    ADD CONSTRAINT "PK_Orders" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3242 (class 2606 OID 21973)
+-- Name: PaymentMethods PK_PaymentMethods; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PaymentMethods"
+    ADD CONSTRAINT "PK_PaymentMethods" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3178 (class 2606 OID 21386)
 -- Name: Permissions PK_Permissions; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2447,7 +3156,34 @@ ALTER TABLE ONLY public."Permissions"
 
 
 --
--- TOC entry 3133 (class 2606 OID 18218)
+-- TOC entry 3238 (class 2606 OID 21941)
+-- Name: Photos PK_Photos; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Photos"
+    ADD CONSTRAINT "PK_Photos" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3250 (class 2606 OID 22042)
+-- Name: Positions PK_Positions; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Positions"
+    ADD CONSTRAINT "PK_Positions" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3236 (class 2606 OID 21895)
+-- Name: Products PK_Products; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "PK_Products" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 3212 (class 2606 OID 21642)
 -- Name: Properties PK_Properties; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2456,7 +3192,7 @@ ALTER TABLE ONLY public."Properties"
 
 
 --
--- TOC entry 3135 (class 2606 OID 18241)
+-- TOC entry 3214 (class 2606 OID 21665)
 -- Name: Relations PK_Relations; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2465,7 +3201,7 @@ ALTER TABLE ONLY public."Relations"
 
 
 --
--- TOC entry 3101 (class 2606 OID 17967)
+-- TOC entry 3180 (class 2606 OID 21391)
 -- Name: RolePermissions PK_RolePermissions; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2474,7 +3210,7 @@ ALTER TABLE ONLY public."RolePermissions"
 
 
 --
--- TOC entry 3095 (class 2606 OID 17936)
+-- TOC entry 3174 (class 2606 OID 21360)
 -- Name: Roles PK_Roles; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2483,7 +3219,7 @@ ALTER TABLE ONLY public."Roles"
 
 
 --
--- TOC entry 3121 (class 2606 OID 18110)
+-- TOC entry 3200 (class 2606 OID 21534)
 -- Name: Tabs PK_Tabs; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2492,7 +3228,7 @@ ALTER TABLE ONLY public."Tabs"
 
 
 --
--- TOC entry 3097 (class 2606 OID 17941)
+-- TOC entry 3176 (class 2606 OID 21365)
 -- Name: UserRoles PK_UserRoles; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2501,7 +3237,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3089 (class 2606 OID 17893)
+-- TOC entry 3168 (class 2606 OID 21317)
 -- Name: Users PK_Users; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2510,7 +3246,7 @@ ALTER TABLE ONLY public."Users"
 
 
 --
--- TOC entry 3105 (class 2606 OID 17999)
+-- TOC entry 3184 (class 2606 OID 21423)
 -- Name: Variables PK_Variable; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2519,7 +3255,61 @@ ALTER TABLE ONLY public."Variables"
 
 
 --
--- TOC entry 3166 (class 2606 OID 18095)
+-- TOC entry 3293 (class 2606 OID 21855)
+-- Name: Categories FK_Categories_Categories; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "FK_Categories_Categories" FOREIGN KEY ("CategoryId") REFERENCES public."Categories"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3294 (class 2606 OID 21860)
+-- Name: Categories FK_Categories_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "FK_Categories_Dictionaries" FOREIGN KEY ("NameId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3295 (class 2606 OID 21865)
+-- Name: Categories FK_Categories_Dictionaries_DescriptionId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "FK_Categories_Dictionaries_DescriptionId" FOREIGN KEY ("DescriptionId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3297 (class 2606 OID 21875)
+-- Name: Categories FK_Categories_Dictionaries_MetaDescriptionId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "FK_Categories_Dictionaries_MetaDescriptionId" FOREIGN KEY ("MetaDescriptionId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3298 (class 2606 OID 21880)
+-- Name: Categories FK_Categories_Dictionaries_MetaKeywordsId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "FK_Categories_Dictionaries_MetaKeywordsId" FOREIGN KEY ("MetaKeywordsId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3296 (class 2606 OID 21870)
+-- Name: Categories FK_Categories_Dictionaries_TitleId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Categories"
+    ADD CONSTRAINT "FK_Categories_Dictionaries_TitleId" FOREIGN KEY ("TitleId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3263 (class 2606 OID 21519)
 -- Name: Classes FK_Classes_Classes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2528,7 +3318,7 @@ ALTER TABLE ONLY public."Classes"
 
 
 --
--- TOC entry 3194 (class 2606 OID 18399)
+-- TOC entry 3291 (class 2606 OID 21823)
 -- Name: CompletedFields FK_CompletedFields_CompletedForms; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2537,7 +3327,7 @@ ALTER TABLE ONLY public."CompletedFields"
 
 
 --
--- TOC entry 3195 (class 2606 OID 18404)
+-- TOC entry 3292 (class 2606 OID 21828)
 -- Name: CompletedFields FK_CompletedFields_Fields; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2546,7 +3336,7 @@ ALTER TABLE ONLY public."CompletedFields"
 
 
 --
--- TOC entry 3193 (class 2606 OID 18383)
+-- TOC entry 3290 (class 2606 OID 21807)
 -- Name: CompletedForms FK_CompletedForms_Forms; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2555,7 +3345,7 @@ ALTER TABLE ONLY public."CompletedForms"
 
 
 --
--- TOC entry 3155 (class 2606 OID 17921)
+-- TOC entry 3252 (class 2606 OID 21345)
 -- Name: Credentials FK_Credentials_CredentialTypes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2564,7 +3354,7 @@ ALTER TABLE ONLY public."Credentials"
 
 
 --
--- TOC entry 3154 (class 2606 OID 17916)
+-- TOC entry 3251 (class 2606 OID 21340)
 -- Name: Credentials FK_Credentials_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2573,7 +3363,7 @@ ALTER TABLE ONLY public."Credentials"
 
 
 --
--- TOC entry 3165 (class 2606 OID 18079)
+-- TOC entry 3262 (class 2606 OID 21503)
 -- Name: DataSources FK_DataSources_Endpoints; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2582,7 +3372,7 @@ ALTER TABLE ONLY public."DataSources"
 
 
 --
--- TOC entry 3173 (class 2606 OID 18185)
+-- TOC entry 3270 (class 2606 OID 21609)
 -- Name: DataTypeParameterValues FK_DataTypeParameterValues_DataTypeParameters_DataTypeParameter; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2591,7 +3381,7 @@ ALTER TABLE ONLY public."DataTypeParameterValues"
 
 
 --
--- TOC entry 3174 (class 2606 OID 18190)
+-- TOC entry 3271 (class 2606 OID 21614)
 -- Name: DataTypeParameterValues FK_DataTypeParameterValues_Members_MemberId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2600,7 +3390,7 @@ ALTER TABLE ONLY public."DataTypeParameterValues"
 
 
 --
--- TOC entry 3168 (class 2606 OID 18138)
+-- TOC entry 3265 (class 2606 OID 21562)
 -- Name: DataTypeParameters FK_DataTypeParameters_DataTypes_DataTypeId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2609,7 +3399,16 @@ ALTER TABLE ONLY public."DataTypeParameters"
 
 
 --
--- TOC entry 3163 (class 2606 OID 18058)
+-- TOC entry 3309 (class 2606 OID 21990)
+-- Name: DeliveryMethods FK_DeliveryMethods_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DeliveryMethods"
+    ADD CONSTRAINT "FK_DeliveryMethods_Dictionaries" FOREIGN KEY ("NameId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3260 (class 2606 OID 21482)
 -- Name: EndpointPermissions FK_EndpointPermissions_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2618,7 +3417,7 @@ ALTER TABLE ONLY public."EndpointPermissions"
 
 
 --
--- TOC entry 3192 (class 2606 OID 18370)
+-- TOC entry 3289 (class 2606 OID 21794)
 -- Name: FieldOptions FK_FieldOptions_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2627,7 +3426,7 @@ ALTER TABLE ONLY public."FieldOptions"
 
 
 --
--- TOC entry 3191 (class 2606 OID 18365)
+-- TOC entry 3288 (class 2606 OID 21789)
 -- Name: FieldOptions FK_FieldOptions_Fields; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2636,7 +3435,7 @@ ALTER TABLE ONLY public."FieldOptions"
 
 
 --
--- TOC entry 3190 (class 2606 OID 18352)
+-- TOC entry 3287 (class 2606 OID 21776)
 -- Name: Fields FK_Fields_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2645,7 +3444,7 @@ ALTER TABLE ONLY public."Fields"
 
 
 --
--- TOC entry 3189 (class 2606 OID 18347)
+-- TOC entry 3286 (class 2606 OID 21771)
 -- Name: Fields FK_Fields_FieldTypes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2654,7 +3453,7 @@ ALTER TABLE ONLY public."Fields"
 
 
 --
--- TOC entry 3188 (class 2606 OID 18342)
+-- TOC entry 3285 (class 2606 OID 21766)
 -- Name: Fields FK_Fields_Forms; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2663,7 +3462,7 @@ ALTER TABLE ONLY public."Fields"
 
 
 --
--- TOC entry 3186 (class 2606 OID 18310)
+-- TOC entry 3283 (class 2606 OID 21734)
 -- Name: Forms FK_Forms_Dictionaries_NameId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2672,7 +3471,7 @@ ALTER TABLE ONLY public."Forms"
 
 
 --
--- TOC entry 3187 (class 2606 OID 18315)
+-- TOC entry 3284 (class 2606 OID 21739)
 -- Name: Forms FK_Forms_Dictionaries_SubmitButtonTitleId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2681,7 +3480,7 @@ ALTER TABLE ONLY public."Forms"
 
 
 --
--- TOC entry 3162 (class 2606 OID 18037)
+-- TOC entry 3259 (class 2606 OID 21461)
 -- Name: Localizations FK_Localizations_Cultures; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2690,7 +3489,7 @@ ALTER TABLE ONLY public."Localizations"
 
 
 --
--- TOC entry 3161 (class 2606 OID 18032)
+-- TOC entry 3258 (class 2606 OID 21456)
 -- Name: Localizations FK_Localizations_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2699,7 +3498,7 @@ ALTER TABLE ONLY public."Localizations"
 
 
 --
--- TOC entry 3169 (class 2606 OID 18154)
+-- TOC entry 3266 (class 2606 OID 21578)
 -- Name: Members FK_Members_Classes_ClassId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2708,7 +3507,7 @@ ALTER TABLE ONLY public."Members"
 
 
 --
--- TOC entry 3172 (class 2606 OID 18169)
+-- TOC entry 3269 (class 2606 OID 21593)
 -- Name: Members FK_Members_Classes_RelationClassId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2717,7 +3516,7 @@ ALTER TABLE ONLY public."Members"
 
 
 --
--- TOC entry 3171 (class 2606 OID 18164)
+-- TOC entry 3268 (class 2606 OID 21588)
 -- Name: Members FK_Members_DataTypes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2726,7 +3525,7 @@ ALTER TABLE ONLY public."Members"
 
 
 --
--- TOC entry 3170 (class 2606 OID 18159)
+-- TOC entry 3267 (class 2606 OID 21583)
 -- Name: Members FK_Members_Tabs; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2735,7 +3534,7 @@ ALTER TABLE ONLY public."Members"
 
 
 --
--- TOC entry 3185 (class 2606 OID 18294)
+-- TOC entry 3282 (class 2606 OID 21718)
 -- Name: MenuItems FK_MenuItems_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2744,7 +3543,7 @@ ALTER TABLE ONLY public."MenuItems"
 
 
 --
--- TOC entry 3184 (class 2606 OID 18289)
+-- TOC entry 3281 (class 2606 OID 21713)
 -- Name: MenuItems FK_MenuItems_MenuItems; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2753,7 +3552,7 @@ ALTER TABLE ONLY public."MenuItems"
 
 
 --
--- TOC entry 3183 (class 2606 OID 18284)
+-- TOC entry 3280 (class 2606 OID 21708)
 -- Name: MenuItems FK_MenuItems_Menus; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2762,7 +3561,7 @@ ALTER TABLE ONLY public."MenuItems"
 
 
 --
--- TOC entry 3182 (class 2606 OID 18268)
+-- TOC entry 3279 (class 2606 OID 21692)
 -- Name: Menus FK_Menus_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2771,7 +3570,7 @@ ALTER TABLE ONLY public."Menus"
 
 
 --
--- TOC entry 3175 (class 2606 OID 18203)
+-- TOC entry 3272 (class 2606 OID 21627)
 -- Name: Objects FK_Objects_Classes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2780,7 +3579,151 @@ ALTER TABLE ONLY public."Objects"
 
 
 --
--- TOC entry 3178 (class 2606 OID 18229)
+-- TOC entry 3307 (class 2606 OID 21958)
+-- Name: OrderStates FK_OrderStates_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."OrderStates"
+    ADD CONSTRAINT "FK_OrderStates_Dictionaries" FOREIGN KEY ("NameId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3312 (class 2606 OID 22027)
+-- Name: Orders FK_Orders_DeliveryMethods; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Orders"
+    ADD CONSTRAINT "FK_Orders_DeliveryMethods" FOREIGN KEY ("DeliveryMethodId") REFERENCES public."DeliveryMethods"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3310 (class 2606 OID 22017)
+-- Name: Orders FK_Orders_OrderStates; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Orders"
+    ADD CONSTRAINT "FK_Orders_OrderStates" FOREIGN KEY ("OrderStateId") REFERENCES public."OrderStates"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3311 (class 2606 OID 22022)
+-- Name: Orders FK_Orders_PaymentMethods; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Orders"
+    ADD CONSTRAINT "FK_Orders_PaymentMethods" FOREIGN KEY ("PaymentMethodId") REFERENCES public."PaymentMethods"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3308 (class 2606 OID 21974)
+-- Name: PaymentMethods FK_PaymentMethods_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PaymentMethods"
+    ADD CONSTRAINT "FK_PaymentMethods_Dictionaries" FOREIGN KEY ("NameId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3306 (class 2606 OID 21942)
+-- Name: Photos FK_Photos_Products; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Photos"
+    ADD CONSTRAINT "FK_Photos_Products" FOREIGN KEY ("ProductId") REFERENCES public."Products"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3313 (class 2606 OID 22043)
+-- Name: Positions FK_Positions_Carts; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Positions"
+    ADD CONSTRAINT "FK_Positions_Carts" FOREIGN KEY ("CartId") REFERENCES public."Carts"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3314 (class 2606 OID 22048)
+-- Name: Positions FK_Positions_Orders; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Positions"
+    ADD CONSTRAINT "FK_Positions_Orders" FOREIGN KEY ("OrderId") REFERENCES public."Orders"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3315 (class 2606 OID 22053)
+-- Name: Positions FK_Positions_Products; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Positions"
+    ADD CONSTRAINT "FK_Positions_Products" FOREIGN KEY ("ProductId") REFERENCES public."Products"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3299 (class 2606 OID 21896)
+-- Name: Products FK_Products_Categories; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Categories" FOREIGN KEY ("CategoryId") REFERENCES public."Categories"("Id") ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3301 (class 2606 OID 21906)
+-- Name: Products FK_Products_Dictionaries_DescriptionId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Dictionaries_DescriptionId" FOREIGN KEY ("DescriptionId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3304 (class 2606 OID 21921)
+-- Name: Products FK_Products_Dictionaries_MetaDescriptionId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Dictionaries_MetaDescriptionId" FOREIGN KEY ("MetaDescriptionId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3305 (class 2606 OID 21926)
+-- Name: Products FK_Products_Dictionaries_MetaKeywordsId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Dictionaries_MetaKeywordsId" FOREIGN KEY ("MetaKeywordsId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3300 (class 2606 OID 21901)
+-- Name: Products FK_Products_Dictionaries_NameId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Dictionaries_NameId" FOREIGN KEY ("NameId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3303 (class 2606 OID 21916)
+-- Name: Products FK_Products_Dictionaries_TitleId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Dictionaries_TitleId" FOREIGN KEY ("TitleId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3302 (class 2606 OID 21911)
+-- Name: Products FK_Products_Dictionaries_UnitsId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Products"
+    ADD CONSTRAINT "FK_Products_Dictionaries_UnitsId" FOREIGN KEY ("UnitsId") REFERENCES public."Dictionaries"("Id");
+
+
+--
+-- TOC entry 3275 (class 2606 OID 21653)
 -- Name: Properties FK_Properties_Dictionaries; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2789,7 +3732,7 @@ ALTER TABLE ONLY public."Properties"
 
 
 --
--- TOC entry 3177 (class 2606 OID 18224)
+-- TOC entry 3274 (class 2606 OID 21648)
 -- Name: Properties FK_Properties_Members; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2798,7 +3741,7 @@ ALTER TABLE ONLY public."Properties"
 
 
 --
--- TOC entry 3176 (class 2606 OID 18219)
+-- TOC entry 3273 (class 2606 OID 21643)
 -- Name: Properties FK_Properties_Objects; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2807,7 +3750,7 @@ ALTER TABLE ONLY public."Properties"
 
 
 --
--- TOC entry 3179 (class 2606 OID 18242)
+-- TOC entry 3276 (class 2606 OID 21666)
 -- Name: Relations FK_Relations_Members; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2816,7 +3759,7 @@ ALTER TABLE ONLY public."Relations"
 
 
 --
--- TOC entry 3181 (class 2606 OID 18252)
+-- TOC entry 3278 (class 2606 OID 21676)
 -- Name: Relations FK_Relations_Objects_ForeignId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2825,7 +3768,7 @@ ALTER TABLE ONLY public."Relations"
 
 
 --
--- TOC entry 3180 (class 2606 OID 18247)
+-- TOC entry 3277 (class 2606 OID 21671)
 -- Name: Relations FK_Relations_Objects_PrimaryId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2834,7 +3777,7 @@ ALTER TABLE ONLY public."Relations"
 
 
 --
--- TOC entry 3159 (class 2606 OID 17973)
+-- TOC entry 3256 (class 2606 OID 21397)
 -- Name: RolePermissions FK_RolePermissions_Permissions; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2843,7 +3786,7 @@ ALTER TABLE ONLY public."RolePermissions"
 
 
 --
--- TOC entry 3164 (class 2606 OID 18063)
+-- TOC entry 3261 (class 2606 OID 21487)
 -- Name: EndpointPermissions FK_RolePermissions_Permissions; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2852,7 +3795,7 @@ ALTER TABLE ONLY public."EndpointPermissions"
 
 
 --
--- TOC entry 3158 (class 2606 OID 17968)
+-- TOC entry 3255 (class 2606 OID 21392)
 -- Name: RolePermissions FK_RolePermissions_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2861,7 +3804,7 @@ ALTER TABLE ONLY public."RolePermissions"
 
 
 --
--- TOC entry 3167 (class 2606 OID 18111)
+-- TOC entry 3264 (class 2606 OID 21535)
 -- Name: Tabs FK_Tabs_Classes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2870,7 +3813,7 @@ ALTER TABLE ONLY public."Tabs"
 
 
 --
--- TOC entry 3157 (class 2606 OID 17947)
+-- TOC entry 3254 (class 2606 OID 21371)
 -- Name: UserRoles FK_UserRoles_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2879,7 +3822,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3156 (class 2606 OID 17942)
+-- TOC entry 3253 (class 2606 OID 21366)
 -- Name: UserRoles FK_UserRoles_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2888,7 +3831,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3160 (class 2606 OID 18000)
+-- TOC entry 3257 (class 2606 OID 21424)
 -- Name: Variables FK_Variables_Configurations; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2896,7 +3839,7 @@ ALTER TABLE ONLY public."Variables"
     ADD CONSTRAINT "FK_Variables_Configurations" FOREIGN KEY ("ConfigurationId") REFERENCES public."Configurations"("Id") ON DELETE CASCADE;
 
 
--- Completed on 2021-03-24 12:57:41
+-- Completed on 2021-09-09 18:32:25
 
 --
 -- PostgreSQL database dump complete
