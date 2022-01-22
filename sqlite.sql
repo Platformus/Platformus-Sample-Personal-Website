@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS "Credentials" (
 	"Identifier"	TEXT NOT NULL,
 	"Secret"	TEXT,
 	"Extra"	TEXT,
-	CONSTRAINT "PK_Credential" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_Credential_CredentialType_CredentialTypeId" FOREIGN KEY("CredentialTypeId") REFERENCES "CredentialTypes"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Credential_User_UserId" FOREIGN KEY("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Credential_CredentialType_CredentialTypeId" FOREIGN KEY("CredentialTypeId") REFERENCES "CredentialTypes"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_Credential" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Roles" (
 	"Id"	INTEGER NOT NULL,
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS "Roles" (
 CREATE TABLE IF NOT EXISTS "UserRoles" (
 	"UserId"	INTEGER NOT NULL,
 	"RoleId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_UserRole" PRIMARY KEY("UserId","RoleId"),
+	CONSTRAINT "FK_UserRole_User_UserId" FOREIGN KEY("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_UserRole_Role_RoleId" FOREIGN KEY("RoleId") REFERENCES "Roles"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_UserRole_User_UserId" FOREIGN KEY("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_UserRole" PRIMARY KEY("UserId","RoleId")
 );
 CREATE TABLE IF NOT EXISTS "Permissions" (
 	"Id"	INTEGER NOT NULL,
@@ -53,9 +53,9 @@ CREATE TABLE IF NOT EXISTS "Permissions" (
 CREATE TABLE IF NOT EXISTS "RolePermissions" (
 	"RoleId"	INTEGER NOT NULL,
 	"PermissionId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_RolePermission" PRIMARY KEY("RoleId","PermissionId"),
+	CONSTRAINT "FK_RolePermission_Role_RoleId" FOREIGN KEY("RoleId") REFERENCES "Roles"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_RolePermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_RolePermission_Role_RoleId" FOREIGN KEY("RoleId") REFERENCES "Roles"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_RolePermission" PRIMARY KEY("RoleId","PermissionId")
 );
 CREATE TABLE IF NOT EXISTS "Configurations" (
 	"Id"	INTEGER NOT NULL,
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS "Variables" (
 	"Name"	TEXT NOT NULL,
 	"Value"	TEXT NOT NULL,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_Variable" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Variable_Configuration_ConfigurationId" FOREIGN KEY("ConfigurationId") REFERENCES "Configurations"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Variable_Configuration_ConfigurationId" FOREIGN KEY("ConfigurationId") REFERENCES "Configurations"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Variable" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Cultures" (
 	"Id"	TEXT NOT NULL,
@@ -90,9 +90,9 @@ CREATE TABLE IF NOT EXISTS "Localizations" (
 	"DictionaryId"	INTEGER NOT NULL,
 	"CultureId"	TEXT NOT NULL,
 	"Value"	TEXT,
-	CONSTRAINT "PK_Localization" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_Localization_Dictionary_DictionaryId" FOREIGN KEY("DictionaryId") REFERENCES "Dictionaries"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Localization_Culture_CultureId" FOREIGN KEY("CultureId") REFERENCES "Cultures"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Localization_Dictionary_DictionaryId" FOREIGN KEY("DictionaryId") REFERENCES "Dictionaries"("Id") ON DELETE CASCADE
+	CONSTRAINT "PK_Localization" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Endpoints" (
 	"Id"	INTEGER NOT NULL,
@@ -110,9 +110,9 @@ CREATE TABLE IF NOT EXISTS "Endpoints" (
 CREATE TABLE IF NOT EXISTS "EndpointPermissions" (
 	"EndpointId"	INTEGER NOT NULL,
 	"PermissionId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_EndpointPermission" PRIMARY KEY("EndpointId","PermissionId"),
 	CONSTRAINT "FK_EndpointPermission_Endpoint_EndpointId" FOREIGN KEY("EndpointId") REFERENCES "Endpoints"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_EndpointPermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_EndpointPermission_Permission_PermissionId" FOREIGN KEY("PermissionId") REFERENCES "Permissions"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_EndpointPermission" PRIMARY KEY("EndpointId","PermissionId")
 );
 CREATE TABLE IF NOT EXISTS "DataSources" (
 	"Id"	INTEGER NOT NULL,
@@ -120,8 +120,8 @@ CREATE TABLE IF NOT EXISTS "DataSources" (
 	"Code"	TEXT NOT NULL,
 	"DataProviderCSharpClassName"	TEXT NOT NULL,
 	"DataProviderParameters"	TEXT,
-	CONSTRAINT "PK_DataSource" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DataSource_Endpoint_EndpointId" FOREIGN KEY("EndpointId") REFERENCES "Endpoints"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_DataSource_Endpoint_EndpointId" FOREIGN KEY("EndpointId") REFERENCES "Endpoints"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_DataSource" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Classes" (
 	"Id"	INTEGER NOT NULL,
@@ -130,21 +130,21 @@ CREATE TABLE IF NOT EXISTS "Classes" (
 	"Name"	TEXT NOT NULL,
 	"PluralizedName"	TEXT NOT NULL,
 	"IsAbstract"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Class" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Class_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL
+	CONSTRAINT "FK_Class_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL,
+	CONSTRAINT "PK_Class" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Tabs" (
 	"Id"	INTEGER NOT NULL,
 	"ClassId"	INTEGER NOT NULL,
 	"Name"	TEXT NOT NULL,
 	"Position"	INTEGER,
-	CONSTRAINT "PK_Tab" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Tab_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Tab_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_Tab" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "DataTypes" (
 	"Id"	INTEGER NOT NULL,
 	"StorageDataType"	TEXT NOT NULL,
-	"JavaScriptEditorClassName"	TEXT NOT NULL,
+	"ParameterEditorCode"	TEXT NOT NULL,
 	"Name"	TEXT NOT NULL,
 	"Position"	INTEGER,
 	CONSTRAINT "PK_DataType" PRIMARY KEY("Id" AUTOINCREMENT)
@@ -152,11 +152,18 @@ CREATE TABLE IF NOT EXISTS "DataTypes" (
 CREATE TABLE IF NOT EXISTS "DataTypeParameters" (
 	"Id"	INTEGER NOT NULL,
 	"DataTypeId"	INT NOT NULL,
-	"JavaScriptEditorClassName"	TEXT NOT NULL,
+	"ParameterEditorCode"	TEXT NOT NULL,
 	"Code"	TEXT NOT NULL,
 	"Name"	TEXT NOT NULL,
-	CONSTRAINT "PK_DataTypeParameter" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DataTypeParameter_DataType_DataTypeId" FOREIGN KEY("DataTypeId") REFERENCES "DataTypes"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_DataTypeParameter_DataType_DataTypeId" FOREIGN KEY("DataTypeId") REFERENCES "DataTypes"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_DataTypeParameter" PRIMARY KEY("Id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "DataTypeParameterOptions" (
+	"Id"	INTEGER NOT NULL,
+	"DataTypeParameterId"	INT NOT NULL,
+	"Value"	TEXT NOT NULL,
+	CONSTRAINT "FK_DataTypeParameterOption_DataTypeParameter_DataTypeParameterId" FOREIGN KEY("DataTypeParameterId") REFERENCES "DataTypeParameters"("Id") ON DELETE CASCADE,
+	CONSTRAINT "PK_DataTypeParameterOption" PRIMARY KEY("Id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "Members" (
 	"Id"	INTEGER NOT NULL,
@@ -168,6 +175,7 @@ CREATE TABLE IF NOT EXISTS "Members" (
 	"PropertyDataTypeId"	INTEGER,
 	"IsPropertyLocalizable"	INTEGER,
 	"IsPropertyVisibleInList"	INTEGER,
+	"PropertyDataTypeParameters"	TEXT,
 	"RelationClassId"	INTEGER,
 	"IsRelationSingleParent"	INTEGER,
 	"MinRelatedObjectsNumber"	INTEGER,
@@ -175,17 +183,8 @@ CREATE TABLE IF NOT EXISTS "Members" (
 	CONSTRAINT "PK_Member" PRIMARY KEY("Id" AUTOINCREMENT),
 	CONSTRAINT "FK_Member_Class_ClassId" FOREIGN KEY("ClassId") REFERENCES "Classes"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Member_Tab_TabId" FOREIGN KEY("TabId") REFERENCES "Tabs"("Id") ON DELETE SET NULL,
-	CONSTRAINT "FK_Member_Class_RelationClassId" FOREIGN KEY("RelationClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL,
-	CONSTRAINT "FK_Member_DataType_PropertyDataTypeId" FOREIGN KEY("PropertyDataTypeId") REFERENCES "DataTypes"("Id") ON DELETE SET NULL
-);
-CREATE TABLE IF NOT EXISTS "DataTypeParameterValues" (
-	"Id"	INTEGER NOT NULL,
-	"DataTypeParameterId"	INT NOT NULL,
-	"MemberId"	INT NOT NULL,
-	"Value"	TEXT NOT NULL,
-	CONSTRAINT "PK_DataTypeParameterValue" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DataTypeParameterValue_DataTypeParameter_DataTypeParameterId" FOREIGN KEY("DataTypeParameterId") REFERENCES "DataTypeParameters"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_DataTypeParameterValue_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Member_DataType_PropertyDataTypeId" FOREIGN KEY("PropertyDataTypeId") REFERENCES "DataTypes"("Id") ON DELETE SET NULL,
+	CONSTRAINT "FK_Member_Class_RelationClassId" FOREIGN KEY("RelationClassId") REFERENCES "Classes"("Id") ON DELETE SET NULL
 );
 CREATE TABLE IF NOT EXISTS "Objects" (
 	"Id"	INTEGER NOT NULL,
@@ -202,9 +201,9 @@ CREATE TABLE IF NOT EXISTS "Properties" (
 	"StringValueId"	INTEGER,
 	"DateTimeValue"	TEXT,
 	CONSTRAINT "PK_Property" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_Property_Dictionary_StringValueId" FOREIGN KEY("StringValueId") REFERENCES "Dictionaries"("Id"),
 	CONSTRAINT "FK_Property_Object_ObjectId" FOREIGN KEY("ObjectId") REFERENCES "Objects"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Property_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Property_Dictionary_StringValueId" FOREIGN KEY("StringValueId") REFERENCES "Dictionaries"("Id")
+	CONSTRAINT "FK_Property_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "Relations" (
 	"Id"	INTEGER NOT NULL,
@@ -212,9 +211,9 @@ CREATE TABLE IF NOT EXISTS "Relations" (
 	"PrimaryId"	INTEGER NOT NULL,
 	"ForeignId"	INTEGER NOT NULL,
 	CONSTRAINT "PK_Relation" PRIMARY KEY("Id" AUTOINCREMENT),
+	CONSTRAINT "FK_Relation_Object_ForeignId" FOREIGN KEY("ForeignId") REFERENCES "Objects"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_Relation_Member_MemberId" FOREIGN KEY("MemberId") REFERENCES "Members"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Relation_Object_PrimaryId" FOREIGN KEY("PrimaryId") REFERENCES "Objects"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Relation_Object_ForeignId" FOREIGN KEY("ForeignId") REFERENCES "Objects"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Relation_Object_PrimaryId" FOREIGN KEY("PrimaryId") REFERENCES "Objects"("Id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "Menus" (
 	"Id"	INTEGER NOT NULL,
@@ -231,9 +230,9 @@ CREATE TABLE IF NOT EXISTS "MenuItems" (
 	"Url"	TEXT,
 	"Position"	INTEGER,
 	CONSTRAINT "PK_MenuItem" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_MenuItem_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
+	CONSTRAINT "FK_MenuItem_MenuItem_MenuItemId" FOREIGN KEY("MenuItemId") REFERENCES "MenuItems"("Id") ON DELETE CASCADE,
 	CONSTRAINT "FK_MenuItem_Menu_MenuId" FOREIGN KEY("MenuId") REFERENCES "Menus"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_MenuItem_MenuItem_MenuItemId" FOREIGN KEY("MenuItemId") REFERENCES "MenuItems"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_MenuItem_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
 );
 CREATE TABLE IF NOT EXISTS "Forms" (
 	"Id"	INTEGER NOT NULL,
@@ -265,9 +264,9 @@ CREATE TABLE IF NOT EXISTS "Fields" (
 	"MaxLength"	INTEGER,
 	"Position"	INTEGER,
 	CONSTRAINT "PK_Field" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Field_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
 	CONSTRAINT "FK_Field_FieldType_FieldTypeId" FOREIGN KEY("FieldTypeId") REFERENCES "FieldTypes"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Field_Form_FormId" FOREIGN KEY("FormId") REFERENCES "Forms"("Id") ON DELETE CASCADE
+	CONSTRAINT "FK_Field_Form_FormId" FOREIGN KEY("FormId") REFERENCES "Forms"("Id") ON DELETE CASCADE,
+	CONSTRAINT "FK_Field_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
 );
 CREATE TABLE IF NOT EXISTS "FieldOptions" (
 	"Id"	INTEGER NOT NULL,
@@ -300,116 +299,6 @@ CREATE TABLE IF NOT EXISTS "Files" (
 	"Size"	INTEGER NOT NULL,
 	CONSTRAINT "PK_File" PRIMARY KEY("Id" AUTOINCREMENT)
 );
-CREATE TABLE IF NOT EXISTS "Categories" (
-	"Id"	INTEGER NOT NULL,
-	"CategoryId"	INTEGER,
-	"Url"	TEXT,
-	"NameId"	INTEGER NOT NULL,
-	"DescriptionId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	"TitleId"	INTEGER NOT NULL,
-	"MetaDescriptionId"	INTEGER NOT NULL,
-	"MetaKeywordsId"	INTEGER NOT NULL,
-	"ProductProviderCSharpClassName"	TEXT NOT NULL,
-	"ProductProviderParameters"	TEXT,
-	CONSTRAINT "PK_Category" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Category_Category_CategoryId" FOREIGN KEY("CategoryId") REFERENCES "Categories"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Category_Dictionary_DescriptionId" FOREIGN KEY("DescriptionId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Category_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Category_Dictionary_MetaDescriptionId" FOREIGN KEY("MetaDescriptionId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Category_Dictionary_MetaKeywordsId" FOREIGN KEY("MetaKeywordsId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Category_Dictionary_TitleId" FOREIGN KEY("TitleId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "Products" (
-	"Id"	INTEGER NOT NULL,
-	"CategoryId"	INTEGER NOT NULL,
-	"Url"	TEXT,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"DescriptionId"	INTEGER NOT NULL,
-	"UnitsId"	INTEGER NOT NULL,
-	"Price"	REAL NOT NULL,
-	"TitleId"	INTEGER NOT NULL,
-	"MetaDescriptionId"	INTEGER NOT NULL,
-	"MetaKeywordsId"	INTEGER NOT NULL,
-	CONSTRAINT "PK_Product" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Product_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_DescriptionId" FOREIGN KEY("DescriptionId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_UnitsId" FOREIGN KEY("UnitsId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_TitleId" FOREIGN KEY("TitleId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_MetaKeywordsId" FOREIGN KEY("MetaKeywordsId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Dictionary_MetaDescriptionId" FOREIGN KEY("MetaDescriptionId") REFERENCES "Dictionaries"("Id"),
-	CONSTRAINT "FK_Product_Category_CategoryId" FOREIGN KEY("CategoryId") REFERENCES "Categories"("Id") ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS "Photos" (
-	"Id"	INTEGER NOT NULL,
-	"ProductId"	INTEGER NOT NULL,
-	"Filename"	TEXT NOT NULL,
-	"IsCover"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_Photo" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Photo_Product_ProductId" FOREIGN KEY("ProductId") REFERENCES "Products"("Id") ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS "OrderStates" (
-	"Id"	INTEGER NOT NULL,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_OrderState" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_OrderState_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "PaymentMethods" (
-	"Id"	INTEGER NOT NULL,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_PaymentMethod" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_PaymentMethod_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "DeliveryMethods" (
-	"Id"	INTEGER NOT NULL,
-	"Code"	TEXT NOT NULL,
-	"NameId"	INTEGER NOT NULL,
-	"Position"	INTEGER,
-	CONSTRAINT "PK_DeliveryMethod" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_DeliveryMethod_Dictionary_NameId" FOREIGN KEY("NameId") REFERENCES "Dictionaries"("Id")
-);
-CREATE TABLE IF NOT EXISTS "Carts" (
-	"Id"	INTEGER NOT NULL,
-	"ClientSideId"	TEXT NOT NULL,
-	"Created"	TEXT NOT NULL,
-	CONSTRAINT "PK_Cart" PRIMARY KEY("Id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Orders" (
-	"Id"	INTEGER NOT NULL,
-	"OrderStateId"	INTEGER NOT NULL,
-	"PaymentMethodId"	INTEGER NOT NULL,
-	"DeliveryMethodId"	INTEGER NOT NULL,
-	"CustomerFirstName"	TEXT NOT NULL,
-	"CustomerLastName"	TEXT,
-	"CustomerPhone"	TEXT NOT NULL,
-	"CustomerEmail"	TEXT,
-	"CustomerAddress"	TEXT,
-	"Note"	TEXT,
-	"Created"	TEXT NOT NULL,
-	CONSTRAINT "PK_Order" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Order_OrderState_OrderStateId" FOREIGN KEY("OrderStateId") REFERENCES "OrderStates"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Order_PaymentMethod_PaymentMethodId" FOREIGN KEY("PaymentMethodId") REFERENCES "PaymentMethods"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Order_DeliveryMethod_DeliveryMethodId" FOREIGN KEY("DeliveryMethodId") REFERENCES "DeliveryMethods"("Id") ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS "Positions" (
-	"Id"	INTEGER NOT NULL,
-	"CartId"	INTEGER,
-	"OrderId"	INTEGER,
-	"ProductId"	INTEGER NOT NULL,
-	"Price"	REAL NOT NULL,
-	"Quantity"	REAL NOT NULL,
-	"Subtotal"	REAL NOT NULL,
-	CONSTRAINT "PK_Position" PRIMARY KEY("Id" AUTOINCREMENT),
-	CONSTRAINT "FK_Position_Order_OrderId" FOREIGN KEY("OrderId") REFERENCES "Orders"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Position_Cart_CartId" FOREIGN KEY("CartId") REFERENCES "Carts"("Id") ON DELETE CASCADE,
-	CONSTRAINT "FK_Position_Product_ProductId" FOREIGN KEY("ProductId") REFERENCES "Products"("Id") ON DELETE CASCADE
-);
 INSERT INTO "Users" VALUES (1,'Administrator','2017-01-01 00:00:00.0000000');
 INSERT INTO "CredentialTypes" VALUES (1,'Email','Email',1);
 INSERT INTO "Credentials" VALUES (1,1,1,'admin@platformus.net','8lE3xN2Ijiv/Y/aIGwaZLrbcqrt/1jDmzPTdudKbVD0=','0O/ZGwhScZRGbsmiUEckOg==');
@@ -426,24 +315,16 @@ INSERT INTO "Permissions" VALUES (5,'ManageConfigurations','Manage configuration
 INSERT INTO "Permissions" VALUES (6,'ManageCultures','Manage cultures',600);
 INSERT INTO "Permissions" VALUES (7,'ManageEndpoints','Manage endpoints',700);
 INSERT INTO "Permissions" VALUES (8,'ManageObjects','Manage objects',800);
-INSERT INTO "Permissions" VALUES (9,'ManageDataTypes','Manage data types',900);
-INSERT INTO "Permissions" VALUES (10,'ManageClasses','Manage classes',1000);
-INSERT INTO "Permissions" VALUES (11,'ManageMenus','Manage menus',1100);
-INSERT INTO "Permissions" VALUES (12,'ManageForms','Manage forms',1200);
-INSERT INTO "Permissions" VALUES (13,'ManageFileManager','Manage file manager',1300);
-INSERT INTO "Permissions" VALUES (14,'ManageCategories','Manage categories',1400);
-INSERT INTO "Permissions" VALUES (15,'ManageProducts','Manage products',1500);
-INSERT INTO "Permissions" VALUES (16,'ManageOrderStates','Manage order states',1600);
-INSERT INTO "Permissions" VALUES (17,'ManagePaymentMethods','Manage payment methods',1700);
-INSERT INTO "Permissions" VALUES (18,'ManageDeliveryMethods','Manage delivery methods',1800);
-INSERT INTO "Permissions" VALUES (19,'ManageCarts','Manage carts',1900);
-INSERT INTO "Permissions" VALUES (20,'ManageOrders','Manage orders',2000);
+INSERT INTO "Permissions" VALUES (9,'ManageClasses','Manage classes',900);
+INSERT INTO "Permissions" VALUES (10,'ManageMenus','Manage menus',1000);
+INSERT INTO "Permissions" VALUES (11,'ManageForms','Manage forms',1100);
+INSERT INTO "Permissions" VALUES (12,'ManageFileManager','Manage file manager',1200);
 INSERT INTO "RolePermissions" VALUES (1,1);
 INSERT INTO "RolePermissions" VALUES (2,1);
 INSERT INTO "RolePermissions" VALUES (3,8);
+INSERT INTO "RolePermissions" VALUES (3,10);
 INSERT INTO "RolePermissions" VALUES (3,11);
 INSERT INTO "RolePermissions" VALUES (3,12);
-INSERT INTO "RolePermissions" VALUES (3,13);
 INSERT INTO "Configurations" VALUES (1,'Email','Email');
 INSERT INTO "Configurations" VALUES (2,'Globalization','Globalization');
 INSERT INTO "Variables" VALUES (1,1,'SmtpServer','SMTP server','test',1);
@@ -485,69 +366,69 @@ INSERT INTO "Dictionaries" VALUES (24);
 INSERT INTO "Localizations" VALUES (1,1,'en','Main');
 INSERT INTO "Localizations" VALUES (2,1,'ru','Главное');
 INSERT INTO "Localizations" VALUES (3,1,'uk','Головне');
-INSERT INTO "Localizations" VALUES (4,2,'uk','Головна');
+INSERT INTO "Localizations" VALUES (4,2,'en','Home');
 INSERT INTO "Localizations" VALUES (5,2,'ru','Главная');
-INSERT INTO "Localizations" VALUES (6,2,'en','Home');
-INSERT INTO "Localizations" VALUES (7,3,'uk','Про мене');
+INSERT INTO "Localizations" VALUES (6,2,'uk','Головна');
+INSERT INTO "Localizations" VALUES (7,3,'en','About me');
 INSERT INTO "Localizations" VALUES (8,3,'ru','Обо мне');
-INSERT INTO "Localizations" VALUES (9,3,'en','About me');
-INSERT INTO "Localizations" VALUES (10,4,'uk','Контакти');
+INSERT INTO "Localizations" VALUES (9,3,'uk','Про мене');
+INSERT INTO "Localizations" VALUES (10,4,'en','Contacts');
 INSERT INTO "Localizations" VALUES (11,4,'ru','Контакты');
-INSERT INTO "Localizations" VALUES (12,4,'en','Contacts');
-INSERT INTO "Localizations" VALUES (13,5,'uk','Зворотний зв’язок');
+INSERT INTO "Localizations" VALUES (12,4,'uk','Контакти');
+INSERT INTO "Localizations" VALUES (13,5,'en','Feedback');
 INSERT INTO "Localizations" VALUES (14,5,'ru','Обратная связь');
-INSERT INTO "Localizations" VALUES (15,5,'en','Feedback');
+INSERT INTO "Localizations" VALUES (15,5,'uk','Зворотний зв’язок');
 INSERT INTO "Localizations" VALUES (16,6,'en','Submit');
 INSERT INTO "Localizations" VALUES (17,6,'ru','Отправить');
 INSERT INTO "Localizations" VALUES (18,6,'uk','Надіслати');
-INSERT INTO "Localizations" VALUES (19,7,'uk','Ваше ім’я');
+INSERT INTO "Localizations" VALUES (19,7,'en','Your name');
 INSERT INTO "Localizations" VALUES (20,7,'ru','Ваше имя');
-INSERT INTO "Localizations" VALUES (21,7,'en','Your name');
-INSERT INTO "Localizations" VALUES (22,8,'uk','Ваша електронна пошта');
+INSERT INTO "Localizations" VALUES (21,7,'uk','Ваше ім’я');
+INSERT INTO "Localizations" VALUES (22,8,'en','Your email');
 INSERT INTO "Localizations" VALUES (23,8,'ru','Ваша электронная почта');
-INSERT INTO "Localizations" VALUES (24,8,'en','Your email');
-INSERT INTO "Localizations" VALUES (25,9,'uk','Ваше повідомлення');
+INSERT INTO "Localizations" VALUES (24,8,'uk','Ваша електронна пошта');
+INSERT INTO "Localizations" VALUES (25,9,'en','Your message');
 INSERT INTO "Localizations" VALUES (26,9,'ru','Ваше сообщение');
-INSERT INTO "Localizations" VALUES (27,9,'en','Your message');
+INSERT INTO "Localizations" VALUES (27,9,'uk','Ваше повідомлення');
 INSERT INTO "Localizations" VALUES (28,10,'__','/');
-INSERT INTO "Localizations" VALUES (29,11,'uk','<h1>Ваш персональний веб-сайт</h1><p>Вітаємо! Це ваш персональний веб-сайт, він працює на базі системи керування вмістом &laquo;<a href="http://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Ви можете керувати ним (створювати сторінки, елементи меню, форми і так далі) за допомогою <a href="/backend">бекенду</a>. Для входу використовуйте, будь ласка, ім&rsquo;я користувача і пароль, вказані під час установки (за замовчуванням це &laquo;admin@platformus.net&raquo; і &laquo;admin&raquo; відповідно).</p><p>Щоб дізнатися більше про Платформус і про те, як ним користуватися, будь ласка, скористайтеся <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацією</a>, там є декілька прикладів, що стануть у нагоді початківцям. При виникненні труднощів або питань ви можете звернутися в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, де вам обов&rsquo;язково допоможуть.</p><p>Приємної роботи!</p>');
-INSERT INTO "Localizations" VALUES (30,11,'ru','<h1>Ваш персональный веб-сайт</h1><p>Здравствуйте! Это ваш персональный веб-сайт, он работает на базе системы управления содержимым &laquo;<a href="http://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Вы можете управлять им (создавать страницы, элементы меню, формы и так далее) с помощью <a href="/backend">бекенда</a>. Для входа используйте, пожалуйста, имя пользователя и пароль, указанные при установке (по умолчанию это &laquo;admin@platformus.net&raquo; и &laquo;admin&raquo; соответственно).</p><p>Чтобы узнать больше о Платформусе и о том, как им пользоваться, пожалуйста, воспользуйтесь <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацией</a>, там есть несколько примеров, которые пригодятся начинающим. При возникновении сложностей или вопросов вы можете обратиться в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, где вам обязательно помогут.</p><p>Приятной работы!</p>');
-INSERT INTO "Localizations" VALUES (31,11,'en','<h1>Your Personal Website</h1><p>Hello! This is your personal website, it is based on the <a href="http://platformus.net/" target="_blank" rel="noopener">Platformus</a> content management system. You can manage it (create pages, menu items, forms and so on) using the <a href="/backend">backend</a>. Please use the username and password specified during the installation to sign in (it is &ldquo;admin@platformus.net&rdquo; and &ldquo;admin&rdquo; by default).</p><p>Please use the <a href="http://docs.platformus.net/" target="_blank" rel="noopener">documentation</a> to learn more about Platformus and how to use it. There are several examples that could be useful for the beginners. Also, you can get help in our <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">chat</a>.</p><p>Have a nice work!</p>');
-INSERT INTO "Localizations" VALUES (32,12,'uk','Ваш персональний веб-сайт');
+INSERT INTO "Localizations" VALUES (29,11,'en','<h1>Your Personal Website</h1><p>Hello! This is your personal website, it is based on the <a href="https://platformus.net/" target="_blank" rel="noopener">Platformus</a> content management system. You can manage it (create pages, menu items, forms and so on) using the <a href="/backend">backend</a>. Please use the username and password specified during the installation to sign in (it is &ldquo;admin@platformus.net&rdquo; and &ldquo;admin&rdquo; by default).</p><p>Please use the <a href="http://docs.platformus.net/" target="_blank" rel="noopener">documentation</a> to learn more about Platformus and how to use it. There are several examples that could be useful for the beginners. Also, you can get help in our <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">chat</a>.</p><p>Have a nice work!</p>');
+INSERT INTO "Localizations" VALUES (30,11,'ru','<h1>Ваш персональный веб-сайт</h1><p>Здравствуйте! Это ваш персональный веб-сайт, он работает на базе системы управления содержимым &laquo;<a href="https://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Вы можете управлять им (создавать страницы, элементы меню, формы и так далее) с помощью <a href="/backend">бекенда</a>. Для входа используйте, пожалуйста, имя пользователя и пароль, указанные при установке (по умолчанию это &laquo;admin@platformus.net&raquo; и &laquo;admin&raquo; соответственно).</p><p>Чтобы узнать больше о Платформусе и о том, как им пользоваться, пожалуйста, воспользуйтесь <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацией</a>, там есть несколько примеров, которые пригодятся начинающим. При возникновении сложностей или вопросов вы можете обратиться в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, где вам обязательно помогут.</p><p>Приятной работы!</p>');
+INSERT INTO "Localizations" VALUES (31,11,'uk','<h1>Ваш персональний веб-сайт</h1><p>Вітаємо! Це ваш персональний веб-сайт, він працює на базі системи керування вмістом &laquo;<a href="https://platformus.net/" target="_blank" rel="noopener">Платформус</a>&raquo;. Ви можете керувати ним (створювати сторінки, елементи меню, форми і так далі) за допомогою <a href="/backend">бекенду</a>. Для входу використовуйте, будь ласка, ім&rsquo;я користувача і пароль, вказані під час установки (за замовчуванням це &laquo;admin@platformus.net&raquo; і &laquo;admin&raquo; відповідно).</p><p>Щоб дізнатися більше про Платформус і про те, як ним користуватися, будь ласка, скористайтеся <a href="http://docs.platformus.net/" target="_blank" rel="noopener">документацією</a>, там є декілька прикладів, що стануть у нагоді початківцям. При виникненні труднощів або питань ви можете звернутися в наш <a href="https://gitter.im/Platformus/Platformus" target="_blank" rel="noopener">чат</a>, де вам обов&rsquo;язково допоможуть.</p><p>Приємної роботи!</p>');
+INSERT INTO "Localizations" VALUES (32,12,'en','Your Personal Website');
 INSERT INTO "Localizations" VALUES (33,12,'ru','Ваш персональный веб-сайт');
-INSERT INTO "Localizations" VALUES (34,12,'en','Your Personal Website');
-INSERT INTO "Localizations" VALUES (35,13,'uk','');
+INSERT INTO "Localizations" VALUES (34,12,'uk','Ваш персональний веб-сайт');
+INSERT INTO "Localizations" VALUES (35,13,'en','');
 INSERT INTO "Localizations" VALUES (36,13,'ru','');
-INSERT INTO "Localizations" VALUES (37,13,'en','');
-INSERT INTO "Localizations" VALUES (38,14,'uk','');
+INSERT INTO "Localizations" VALUES (37,13,'uk','');
+INSERT INTO "Localizations" VALUES (38,14,'en','');
 INSERT INTO "Localizations" VALUES (39,14,'ru','');
-INSERT INTO "Localizations" VALUES (40,14,'en','');
+INSERT INTO "Localizations" VALUES (40,14,'uk','');
 INSERT INTO "Localizations" VALUES (41,15,'__','/about-me');
-INSERT INTO "Localizations" VALUES (42,16,'uk','<h1>Про мене</h1><p>Розкажіть про себе в кількох словах. Ви можете додати сюди фотографії або відео.</p>');
+INSERT INTO "Localizations" VALUES (42,16,'en','<h1>About Me</h1><p>Tell us about yourself in a few words. You can add photos or videos here.</p>');
 INSERT INTO "Localizations" VALUES (43,16,'ru','<h1>Обо мне</h1><p>Расскажите о себе в нескольких словах. Вы можете добавить сюда фотографии или видео.</p>');
-INSERT INTO "Localizations" VALUES (44,16,'en','<h1>About Me</h1><p>Tell us about yourself in a few words. You can add photos or videos here.</p>');
-INSERT INTO "Localizations" VALUES (45,17,'uk','Про мене');
+INSERT INTO "Localizations" VALUES (44,16,'uk','<h1>Про мене</h1><p>Розкажіть про себе в кількох словах. Ви можете додати сюди фотографії або відео.</p>');
+INSERT INTO "Localizations" VALUES (45,17,'en','About Me');
 INSERT INTO "Localizations" VALUES (46,17,'ru','Обо мне');
-INSERT INTO "Localizations" VALUES (47,17,'en','About Me');
-INSERT INTO "Localizations" VALUES (48,18,'uk','');
+INSERT INTO "Localizations" VALUES (47,17,'uk','Про мене');
+INSERT INTO "Localizations" VALUES (48,18,'en','');
 INSERT INTO "Localizations" VALUES (49,18,'ru','');
-INSERT INTO "Localizations" VALUES (50,18,'en','');
-INSERT INTO "Localizations" VALUES (51,19,'uk','');
+INSERT INTO "Localizations" VALUES (50,18,'uk','');
+INSERT INTO "Localizations" VALUES (51,19,'en','');
 INSERT INTO "Localizations" VALUES (52,19,'ru','');
-INSERT INTO "Localizations" VALUES (53,19,'en','');
+INSERT INTO "Localizations" VALUES (53,19,'uk','');
 INSERT INTO "Localizations" VALUES (54,20,'__','/contacts');
-INSERT INTO "Localizations" VALUES (55,21,'uk','<h1>Контакти</h1><p>Додайте свої контакти на цій сторінці. Номер телефону, месенджери, посилання на соціальні мережі. Форма зворотного зв&rsquo;язку, розташована нижче (до речі, ви можете її змінити або перенести в інше місце), допоможе відвідувачам написати вам повідомлення прямо з сайту, лише вкажіть для цього адресу, на яку потрібно надсилати повідомлення.</p><h2>Форма зворотного зв&rsquo;язку</h2>');
+INSERT INTO "Localizations" VALUES (55,21,'en','<h1>Contacts</h1><p>Add your contacts on this page. Phone number, messengers, social links. The feedback form below (by the way, you can edit or move it to a different place) allows your visitors to write you directly from the website, just don&rsquo;t forget to specify the email address for the messages.</p><h2>Feedback from</h2>');
 INSERT INTO "Localizations" VALUES (56,21,'ru','<h1>Контакты</h1><p>Добавьте свои контакты на этой странице. Телефонный номер, мессенджеры, ссылки на социальные сети. Форма обратной связи, расположенная ниже (кстати, вы можете ее изменить или перенести в другое место), поможет посетителям написать вам сообщение прямо с сайта, лишь укажите для этого адрес, на который нужно присылать сообщения.</p><h2>Форма обратной связи</h2>');
-INSERT INTO "Localizations" VALUES (57,21,'en','<h1>Contacts</h1><p>Add your contacts on this page. Phone number, messengers, social links. The feedback form below (by the way, you can edit or move it to a different place) allows your visitors to write you directly from the website, just don&rsquo;t forget to specify the email address for the messages.</p><h2>Feedback from</h2>');
-INSERT INTO "Localizations" VALUES (58,22,'uk','Контакти');
+INSERT INTO "Localizations" VALUES (57,21,'uk','<h1>Контакти</h1><p>Додайте свої контакти на цій сторінці. Номер телефону, месенджери, посилання на соціальні мережі. Форма зворотного зв&rsquo;язку, розташована нижче (до речі, ви можете її змінити або перенести в інше місце), допоможе відвідувачам написати вам повідомлення прямо з сайту, лише вкажіть для цього адресу, на яку потрібно надсилати повідомлення.</p><h2>Форма зворотного зв&rsquo;язку</h2>');
+INSERT INTO "Localizations" VALUES (58,22,'en','Contacts');
 INSERT INTO "Localizations" VALUES (59,22,'ru','Контакты');
-INSERT INTO "Localizations" VALUES (60,22,'en','Contacts');
-INSERT INTO "Localizations" VALUES (61,23,'uk','');
+INSERT INTO "Localizations" VALUES (60,22,'uk','Контакти');
+INSERT INTO "Localizations" VALUES (61,23,'en','');
 INSERT INTO "Localizations" VALUES (62,23,'ru','');
-INSERT INTO "Localizations" VALUES (63,23,'en','');
-INSERT INTO "Localizations" VALUES (64,24,'uk','');
+INSERT INTO "Localizations" VALUES (63,23,'uk','');
+INSERT INTO "Localizations" VALUES (64,24,'en','');
 INSERT INTO "Localizations" VALUES (65,24,'ru','');
-INSERT INTO "Localizations" VALUES (66,24,'en','');
+INSERT INTO "Localizations" VALUES (66,24,'uk','');
 INSERT INTO "Endpoints" VALUES (1,'Default','{*url}',1000,0,NULL,'Platformus.Website.Frontend.RequestProcessors.DefaultRequestProcessor','ViewName=RegularPage',NULL,NULL);
 INSERT INTO "Endpoints" VALUES (2,'Contacts','contacts',10,0,NULL,'Platformus.Website.Frontend.RequestProcessors.DefaultRequestProcessor','ViewName=ContactsPage',NULL,NULL);
 INSERT INTO "DataSources" VALUES (1,1,'Page','Platformus.Website.Frontend.DataProviders.PageObjectDataProvider',NULL);
@@ -566,32 +447,25 @@ INSERT INTO "DataTypes" VALUES (8,'datetime','dateTime','DateTime',8);
 INSERT INTO "DataTypes" VALUES (9,'string','image','Image',9);
 INSERT INTO "DataTypes" VALUES (10,'string','sourceCode','Source code',10);
 INSERT INTO "DataTypeParameters" VALUES (1,1,'checkbox','IsRequired','Is required');
-INSERT INTO "DataTypeParameters" VALUES (2,1,'numericTextBox','MaxLength','Max length');
+INSERT INTO "DataTypeParameters" VALUES (2,1,'integerBox','MaxLength','Max length');
 INSERT INTO "DataTypeParameters" VALUES (3,2,'checkbox','IsRequired','Is required');
-INSERT INTO "DataTypeParameters" VALUES (4,2,'numericTextBox','MaxLength','Max length');
+INSERT INTO "DataTypeParameters" VALUES (4,2,'integerBox','MaxLength','Max length');
 INSERT INTO "DataTypeParameters" VALUES (5,4,'checkbox','IsRequired','Is required');
-INSERT INTO "DataTypeParameters" VALUES (6,4,'numericTextBox','MinValue','Min value');
-INSERT INTO "DataTypeParameters" VALUES (7,4,'numericTextBox','MaxValue','Max value');
+INSERT INTO "DataTypeParameters" VALUES (6,4,'integerBox','MinValue','Min value');
+INSERT INTO "DataTypeParameters" VALUES (7,4,'integerBox','MaxValue','Max value');
 INSERT INTO "DataTypeParameters" VALUES (8,5,'checkbox','IsRequired','Is required');
-INSERT INTO "DataTypeParameters" VALUES (9,5,'numericTextBox','MinValue','Min value');
-INSERT INTO "DataTypeParameters" VALUES (10,5,'numericTextBox','MaxValue','Max value');
+INSERT INTO "DataTypeParameters" VALUES (9,5,'integerBox','MinValue','Min value');
+INSERT INTO "DataTypeParameters" VALUES (10,5,'integerBox','MaxValue','Max value');
 INSERT INTO "DataTypeParameters" VALUES (11,7,'checkbox','IsRequired','Is required');
-INSERT INTO "DataTypeParameters" VALUES (12,8,'numericTextBox','Width','Width');
-INSERT INTO "DataTypeParameters" VALUES (13,8,'numericTextBox','Height','Height');
-INSERT INTO "DataTypeParameters" VALUES (14,9,'textBox','Mode','Mode');
-INSERT INTO "Members" VALUES (1,1,NULL,'Url','URL',1,1,0,1,NULL,NULL,NULL,NULL);
-INSERT INTO "Members" VALUES (2,1,NULL,'Content','Content',10,3,1,0,NULL,NULL,NULL,NULL);
-INSERT INTO "Members" VALUES (3,1,1,'Title','Title',1000,1,1,0,NULL,NULL,NULL,NULL);
-INSERT INTO "Members" VALUES (4,1,1,'MetaDescription','META description',1010,1,1,0,NULL,NULL,NULL,NULL);
-INSERT INTO "Members" VALUES (5,1,1,'MetaKeywords','META keywords',1020,1,1,0,NULL,NULL,NULL,NULL);
-INSERT INTO "DataTypeParameterValues" VALUES (1,1,1,'true');
-INSERT INTO "DataTypeParameterValues" VALUES (2,2,1,'128');
-INSERT INTO "DataTypeParameterValues" VALUES (3,1,3,'false');
-INSERT INTO "DataTypeParameterValues" VALUES (4,2,3,'128');
-INSERT INTO "DataTypeParameterValues" VALUES (5,1,4,'false');
-INSERT INTO "DataTypeParameterValues" VALUES (6,2,4,'512');
-INSERT INTO "DataTypeParameterValues" VALUES (7,1,5,'false');
-INSERT INTO "DataTypeParameterValues" VALUES (8,2,5,'256');
+INSERT INTO "DataTypeParameters" VALUES (12,8,'checkbox','IsRequired','Is required');
+INSERT INTO "DataTypeParameters" VALUES (13,9,'integerBox','Width','Width');
+INSERT INTO "DataTypeParameters" VALUES (14,9,'integerBox','Height','Height');
+INSERT INTO "DataTypeParameters" VALUES (15,10,'textBox','Mode','Mode');
+INSERT INTO "Members" VALUES (1,1,NULL,'Url','URL',1,1,0,1,'IsRequired=true;MaxLength=128',NULL,NULL,NULL,NULL);
+INSERT INTO "Members" VALUES (2,1,NULL,'Content','Content',10,3,1,0,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "Members" VALUES (3,1,1,'Title','Title',1000,1,1,0,'IsRequired=false;MaxLength=128',NULL,NULL,NULL,NULL);
+INSERT INTO "Members" VALUES (4,1,1,'MetaDescription','META description',1010,1,1,0,'IsRequired=false;MaxLength=512',NULL,NULL,NULL,NULL);
+INSERT INTO "Members" VALUES (5,1,1,'MetaKeywords','META keywords',1020,1,1,0,'IsRequired=false;MaxLength=256',NULL,NULL,NULL,NULL);
 INSERT INTO "Objects" VALUES (1,2);
 INSERT INTO "Objects" VALUES (2,2);
 INSERT INTO "Objects" VALUES (3,2);
